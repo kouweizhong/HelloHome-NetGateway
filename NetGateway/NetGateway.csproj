@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProjectGuid>{31C6EF44-19EC-4DF5-9768-3BFE427B22FA}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>NetHhGateway</RootNamespace>
+    <AssemblyName>NetHhGateway</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug</OutputPath>
+    <DefineConstants>DEBUG;</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <Externalconsole>true</Externalconsole>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Externalconsole>true</Externalconsole>
+    <PlatformTarget>x86</PlatformTarget>
+    <ConsolePause>false</ConsolePause>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="Castle.Windsor">
+      <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.7\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.7\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="Castle.Core">
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Configuration\IConfigurationProvider.cs" />
+    <Compile Include="Configuration\ISerialConfigurationProvider.cs" />
+    <Compile Include="Configuration\AppSettings\AppSettingsBasedSerialConfiguration.cs" />
+    <Compile Include="Configuration\AppSettings\AppSettingsBasedConfiguration.cs" />
+    <Compile Include="Entities\Node.cs" />
+    <Compile Include="Entities\Configuration\NodeConfiguration.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\CommentReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\NodeInfoReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\PulseReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\RawReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Report.cs" />
+    <Compile Include="Agents\NodeGateway\IncomingMessageEventArgs.cs" />
+    <Compile Include="Agents\NodeGateway\INodeGatewayAgent.cs" />
+    <Compile Include="Agents\NodeGateway\NodeGatewayAgent.cs" />
+    <Compile Include="Agents\NodeGateway\Parsers\CommentParser.cs" />
+    <Compile Include="Agents\NodeGateway\Parsers\NodeInfoReportParser.cs" />
+    <Compile Include="Agents\NodeGateway\Parsers\ParseAllParser.cs" />
+    <Compile Include="Agents\NodeGateway\Parsers\PulseReportParser.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Message.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\OutgoingMessage.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\NodeStartedReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\IncomingMessage.cs" />
+    <Compile Include="Agents\NodeGateway\Parsers\IMessageParser.cs" />
+    <Compile Include="Agents\NodeGateway\ConsoleNodeGatewayAgent.cs" />
+    <Compile Include="Processors\IMessageProcessor.cs" />
+    <Compile Include="Processors\MessageProcessor.cs" />
+    <Compile Include="WindsorInstallers\DefaultInstaller.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\NodeConfigCommand.cs" />
+    <Compile Include="Agents\NodeGateway\Encoders\IMessageEncoder.cs" />
+    <Compile Include="Agents\NodeGateway\Encoders\MessageEncoder.cs" />
+    <Compile Include="Agents\NodeGateway\Encoders\NodeConfigEncoder.cs" />
+    <Compile Include="Agents\NodeGateway\Parsers\NodeStartedParser.cs" />
+    <Compile Include="GatewayPipeline.cs" />
+    <Compile Include="Processors\UpdateUpTimeProcessor.cs" />
+    <Compile Include="Logic\RfNodeIdGenerationStrategy\FindHoleRfNodeIdGenerationStrategy.cs" />
+    <Compile Include="Logic\RfNodeIdGenerationStrategy\IRfNodeIdGenerationStrategy.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\PinConfig.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\PinMode.cs" />
+    <Compile Include="Agents\NodeGateway\Encoders\PinConfigEncoder.cs" />
+    <Compile Include="Entities\NodeConfiguration.cs" />
+    <Compile Include="Entities\SubNode.cs" />
+    <Compile Include="Entities\EnvironmentData.cs" />
+    <Compile Include="Entities\HelloHomeDbContext.cs" />
+    <Compile Include="Entities\PulseData.cs" />
+    <Compile Include="Processors\CommentProcessor.cs" />
+    <Compile Include="Agents\NodeGateway\ScenarioBasedNodeGateway.cs" />
+    <Compile Include="Entities\Configuration\PulseDataConfiguration.cs" />
+    <Compile Include="Entities\Configuration\SubNodeConfiguration.cs" />
+    <Compile Include="Entities\Configuration\NodeConfigurationConfiguration.cs" />
+    <Compile Include="Processors\ProcessorComparer.cs" />
+    <Compile Include="Processors\PulseReportProcessor.cs" />
+    <Compile Include="Agents\NodeGateway\Parsers\EnvironmentReportParser.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\EnvironmentalReport.cs" />
+    <Compile Include="Processors\EnvironmentReportProcessor.cs" />
+    <Compile Include="Entities\NodeLatestValues.cs" />
+    <Compile Include="Entities\Configuration\NodeLatestValuesConfiguration.cs" />
+    <Compile Include="Entities\Configuration\EnvironmentDataConfiguration.cs" />
+    <Compile Include="Processors\NodeInfoProcessor.cs" />
+    <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
+    <Compile Include="Entities\NodeInfoData.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <ItemGroup>
+    <Folder Include="Configuration\" />
+    <Folder Include="Configuration\AppSettings\" />
+    <Folder Include="Entities\" />
+    <Folder Include="Entities\Configuration\" />
+    <Folder Include="Agents\" />
+    <Folder Include="Processors\" />
+    <Folder Include="WindsorInstallers\" />
+    <Folder Include="Agents\NodeGateway\Encoders\" />
+    <Folder Include="Logic\" />
+    <Folder Include="Logic\RfNodeIdGenerationStrategy\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config" />
+    <None Include="packages.config" />
+  </ItemGroup>
+</Project>
