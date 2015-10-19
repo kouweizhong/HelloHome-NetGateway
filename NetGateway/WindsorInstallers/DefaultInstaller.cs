@@ -9,6 +9,7 @@ using NetHhGateway.Entities;
 using NetHhGateway.Agents.NodeGateway.Encoders;
 using NetHhGateway.Logic.RfNodeIdGenerationStrategy;
 using NetHhGateway.Agents.NodeGateway;
+using NetHhGateway.Agents.EmonCms;
 
 namespace NetHhGateway.WindsorInstallers
 {
@@ -38,8 +39,9 @@ namespace NetHhGateway.WindsorInstallers
 			//dbContext
 			container.Register(Component.For<HelloHomeDbContext>().LifestyleSingleton());
 
-			//NodeGateway
-			container.Register (Component.For<Agents.NodeGateway.INodeGatewayAgent> ().ImplementedBy(_gatewayAgent));
+			//Agents
+			container.Register (Component.For<INodeGatewayAgent> ().ImplementedBy(_gatewayAgent));
+			container.Register (Component.For<IEmonCmsAgent> ().ImplementedBy<EmonCmsAgent>());
 
 			//Parsers & encoders
 			container.Register(Classes.FromAssemblyContaining<IMessageParser>().BasedOn<IMessageParser>().WithServiceBase());

@@ -122,6 +122,7 @@
     <Compile Include="Entities\NodeInfoData.cs" />
     <Compile Include="Agents\EmonCms\EmonCmsAgent.cs" />
     <Compile Include="Configuration\IEmonCmsConfiguration.cs" />
+    <Compile Include="Agents\EmonCms\IEmonCmsAgent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

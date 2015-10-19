@@ -2,6 +2,7 @@
 using NUnit.Framework;
 using NetHhGateway.Agents.EmonCms;
 using NetHhGateway.Configuration.AppSettings;
+using System.Collections.Generic;
 
 namespace IntegrationTests.Agents.EmonCms
 {
@@ -16,9 +17,15 @@ namespace IntegrationTests.Agents.EmonCms
 		}
 
 		[Test]
-		public void EmonCms_SimplePass ()
+		public void EmonCms_CanSendJson ()
 		{
-			_sut.Send (null, new { Hello = 11.36 }, new DateTime (2015, 1, 1));
+			_sut.Send (new { Tst_Hello = 11.36 });
+		}
+
+		[Test]
+		public void EmonCms_CanSendCsv ()
+		{
+			_sut.Send (210, new List<float> { 1, 4, 56.67f });
 		}
 	}
 }

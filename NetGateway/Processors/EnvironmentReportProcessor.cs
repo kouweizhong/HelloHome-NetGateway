@@ -4,11 +4,20 @@ using NetHhGateway.Entities;
 using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
+using NetHhGateway.Agents.EmonCms;
 
 namespace NetHhGateway.Processors
 {
 	public class EnvironmentReportProcessor : MessageProcessor<EnvironmentalReport>
 	{
+		IEmonCmsAgent emonCmsAgent;
+
+		public EnvironmentReportProcessor (IEmonCmsAgent emonCmsAgent)
+		{
+			this.emonCmsAgent = emonCmsAgent;
+
+		}
+
 		public override System.Collections.Generic.IList<OutgoingMessage> ProcessInternal (EnvironmentalReport message)
 		{
 			using (var dbContext = new HelloHomeDbContext ()) {
@@ -25,6 +34,8 @@ namespace NetHhGateway.Processors
 				if(message.Humidity > 0) node.LatestValues.Humidity = message.Humidity;
 				if(message.Pressure > 0) node.LatestValues.Pressure = message.Pressure;
 				dbContext.SaveChanges ();
+				emonCmsAgent.Send (String.Format ("{{{0}_Temp:{1},{0}_Hum:{2}}}", node.RfAddress, message.Temperature, message.Humidity));
+
 			}
 			return null;
 		}

@@ -4,11 +4,20 @@ using NetHhGateway.Entities;
 using System.Data.Entity;
 using System.Linq;
 using System.Collections.Generic;
+using NetHhGateway.Agents.EmonCms;
 
 namespace NetHhGateway.Processors
 {
 	public class NodeInfoProcessor : MessageProcessor<NodeInfoReport>
 	{
+		IEmonCmsAgent emonCmsAgent;
+
+		public NodeInfoProcessor (IEmonCmsAgent emonCmsAgent)
+		{
+			this.emonCmsAgent = emonCmsAgent;
+			
+		}
+
 		public override System.Collections.Generic.IList<OutgoingMessage> ProcessInternal (NodeInfoReport message)
 		{
 			using (var dbContext = new HelloHomeDbContext ()) {
@@ -21,6 +30,7 @@ namespace NetHhGateway.Processors
 					};
 				}
 				dbContext.SaveChanges ();
+				emonCmsAgent.Send (String.Format ("{{{0}_Vin:{1}}}", node.RfAddress, message.Voltage));
 			}
 			return null;
 		}
