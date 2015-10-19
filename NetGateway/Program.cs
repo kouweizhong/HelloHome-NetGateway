@@ -18,7 +18,7 @@ namespace NetHhGateway
 
 		public static void Main (string[] args)
 		{
-			
+			Console.WriteLine("Starting gateway...");
 			Database.SetInitializer<NetHhGateway.Entities.HelloHomeDbContext> (null);
 
 			var container = new Castle.Windsor.WindsorContainer ();
