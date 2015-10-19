@@ -58,10 +58,13 @@
     <Compile Include="ScenarioBasedGatewayAgent\Scenario.cs" />
     <Compile Include="StartupTests.cs" />
     <Compile Include="PulseTests.cs" />
+    <Compile Include="Agents\EmonCms\EmonCmsAgentTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="ScenarioBasedGatewayAgent\" />
+    <Folder Include="Agents\" />
+    <Folder Include="Agents\EmonCms\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetGateway\NetGateway.csproj">

@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "Integra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\UnitTests.csproj", "{29AF3F31-B3A7-4A9C-B7FD-D2C63A144D1D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{5D05E63F-D6E2-462D-9086-E0C120386600}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -27,6 +29,10 @@ Global
 		{31C6EF44-19EC-4DF5-9768-3BFE427B22FA}.Debug|x86.Build.0 = Debug|x86
 		{31C6EF44-19EC-4DF5-9768-3BFE427B22FA}.Release|x86.ActiveCfg = Release|x86
 		{31C6EF44-19EC-4DF5-9768-3BFE427B22FA}.Release|x86.Build.0 = Release|x86
+		{5D05E63F-D6E2-462D-9086-E0C120386600}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{5D05E63F-D6E2-462D-9086-E0C120386600}.Debug|x86.Build.0 = Debug|Any CPU
+		{5D05E63F-D6E2-462D-9086-E0C120386600}.Release|x86.ActiveCfg = Release|Any CPU
+		{5D05E63F-D6E2-462D-9086-E0C120386600}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11E62618-0841-48E7-9A19-D54E956EBAE8} = {50F4B153-BF79-424F-A3DF-47AF5BD75676}

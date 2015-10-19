@@ -32,8 +32,7 @@ namespace NetHhGateway.WindsorInstallers
 
 			//Configuration
 			container.Register (
-				Component.For<IConfigurationProvider> ().ImplementedBy<AppSettingsBasedConfiguration> (),
-				Component.For<ISerialConfigurationProvider> ().ImplementedBy<AppSettingsBasedSerialConfiguration> ()
+				Component.For<IConfigurationProvider, ISerialConfigurationProvider, IEmonCmsConfiguration> ().ImplementedBy<AppSettingsBasedConfiguration> ()
 			);
 
 			//dbContext

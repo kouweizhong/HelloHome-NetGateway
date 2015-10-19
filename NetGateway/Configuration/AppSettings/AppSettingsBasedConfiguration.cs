@@ -1,25 +1,43 @@
 ﻿using System;
+using System.Configuration;
 
 namespace NetHhGateway.Configuration.AppSettings
 {
-	public class AppSettingsBasedConfiguration : IConfigurationProvider
+	public class AppSettingsBasedConfiguration : IConfigurationProvider, ISerialConfigurationProvider, IEmonCmsConfiguration
 	{
-		ISerialConfigurationProvider _serialConfigurationProvider;
-
-		public AppSettingsBasedConfiguration (ISerialConfigurationProvider serialConfigurationProvider)
-		{
-			this._serialConfigurationProvider = serialConfigurationProvider;
-			
-		}
-
 		#region IConfigurationProvider implementation
-		public ISerialConfigurationProvider Serial 
-		{
+
+		public ISerialConfigurationProvider Serial  { get { return this; } }
+		public IEmonCmsConfiguration EmonCms { get { return this; } }
+
+		#endregion
+
+		#region ISerialConfigurationProvider implementation
+
+		public string Port {
 			get 
 			{
-				return _serialConfigurationProvider;
+				var appSetting = ConfigurationManager.AppSettings ["Serial:port"];
+				if (appSetting == null)
+					throw new ConfigurationErrorsException ("Serial.port key not found in appSettings. Please check configuration");
+				return appSetting.ToString();
 			}
 		}
+
+		#endregion
+
+		#region IEmonCmsConfiguration implementation
+
+		public string ApiKey {
+			get 
+			{
+				var appSetting = ConfigurationManager.AppSettings ["EmonCms:ApiKey"];
+				if (appSetting == null)
+					throw new ConfigurationErrorsException ("EmonCms:ApiKey key not found in appSettings. Please check configuration");
+				return appSetting.ToString();
+			}
+		}
+
 		#endregion
 	}
 }

@@ -54,13 +54,15 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\ISerialConfigurationProvider.cs" />
-    <Compile Include="Configuration\AppSettings\AppSettingsBasedSerialConfiguration.cs" />
     <Compile Include="Configuration\AppSettings\AppSettingsBasedConfiguration.cs" />
     <Compile Include="Entities\Node.cs" />
     <Compile Include="Entities\Configuration\NodeConfiguration.cs" />
@@ -118,6 +120,8 @@
     <Compile Include="Processors\NodeInfoProcessor.cs" />
     <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
     <Compile Include="Entities\NodeInfoData.cs" />
+    <Compile Include="Agents\EmonCms\EmonCmsAgent.cs" />
+    <Compile Include="Configuration\IEmonCmsConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -131,9 +135,16 @@
     <Folder Include="Agents\NodeGateway\Encoders\" />
     <Folder Include="Logic\" />
     <Folder Include="Logic\RfNodeIdGenerationStrategy\" />
+    <Folder Include="Agents\EmonCms\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{5D05E63F-D6E2-462D-9086-E0C120386600}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
   </ItemGroup>
 </Project>
