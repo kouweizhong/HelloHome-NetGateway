@@ -1,0 +1,21 @@
+﻿using System;
+using System.Data.Entity.ModelConfiguration;
+
+namespace NetHhGateway.Entities.Configuration
+{
+	public class EnvironmentDataConfiguration : EntityTypeConfiguration<EnvironmentData>
+	{
+		public EnvironmentDataConfiguration ()
+		{
+			ToTable ("EnvironmentData");
+			HasKey (_ => _.Id);
+			Property (_ => _.Id).HasColumnName ("id");
+			Property (_ => _.NodeId).HasColumnName ("nodeId");
+			Property (_ => _.Timestamp).HasColumnName ("timestamp");
+			Property (_ => _.Temperature).HasColumnName ("temperature");
+			Property (_ => _.Humidity).HasColumnName ("humidity");
+			Property (_ => _.Pressure).HasColumnName ("pressure");
+		}
+	}
+}
+
