@@ -1,7 +1,7 @@
 using System;
 using System.Text;
 
-namespace NetHhGateway.Agents.NodeGateway.Domain
+namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
 {
 	public class RawReport : Report
 	{

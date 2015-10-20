@@ -1,9 +1,9 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
-using NetHhGateway.Entities;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.Common.Entities;
 using System.Collections.Generic;
 
-namespace NetHhGateway.Processors
+namespace HelloHome.NetGateway.Processors
 {
 	public abstract class MessageProcessor<TMessage> : IMessageProcessor where TMessage : IncomingMessage
 	{

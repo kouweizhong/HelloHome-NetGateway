@@ -1,5 +1,5 @@
 
-namespace NetHhGateway.Agents.NodeGateway.Encoders
+namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 {
 	
 	public interface IMessageEncoder

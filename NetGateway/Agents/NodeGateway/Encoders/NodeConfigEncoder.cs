@@ -1,8 +1,8 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using System.Collections.Generic;
 
-namespace NetHhGateway.Agents.NodeGateway.Encoders
+namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 {
 	public class NodeConfigEncoder : MessageEncoder<NodeConfigCommand>
 	{

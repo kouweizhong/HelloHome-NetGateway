@@ -1,8 +1,8 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Parsers;
+using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using NUnit.Framework;
 using System.Text;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 
 namespace UnitTests.Agents.NodeGateway.Parsers
 {

@@ -1,5 +1,5 @@
 ﻿
-namespace NetHhGateway.Agents.NodeGateway.Parsers
+namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 {
 	public interface IMessageParser
 	{

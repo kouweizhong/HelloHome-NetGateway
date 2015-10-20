@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetHhGateway.Agents.NodeGateway.Parsers
+namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 {
 	public class NodeInfoReportParser : IMessageParser
 	{

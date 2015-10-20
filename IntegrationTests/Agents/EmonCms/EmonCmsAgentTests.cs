@@ -1,7 +1,7 @@
 ﻿using System;
 using NUnit.Framework;
-using NetHhGateway.Agents.EmonCms;
-using NetHhGateway.Configuration.AppSettings;
+using HelloHome.NetGateway.Agents.EmonCms;
+using HelloHome.NetGateway.Configuration.AppSettings;
 using System.Collections.Generic;
 
 namespace IntegrationTests.Agents.EmonCms

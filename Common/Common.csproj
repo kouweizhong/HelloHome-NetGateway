@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{5D05E63F-D6E2-462D-9086-E0C120386600}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>Common</RootNamespace>
+    <RootNamespace>HelloHome.Common</RootNamespace>
     <AssemblyName>Common</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -29,14 +29,41 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extentions\DateTimeExtentions.cs" />
+    <Compile Include="Entities\Configuration\EnvironmentDataConfiguration.cs" />
+    <Compile Include="Entities\Configuration\NodeConfiguration.cs" />
+    <Compile Include="Entities\Configuration\NodeConfigurationConfiguration.cs" />
+    <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
+    <Compile Include="Entities\Configuration\NodeLatestValuesConfiguration.cs" />
+    <Compile Include="Entities\Configuration\PulseDataConfiguration.cs" />
+    <Compile Include="Entities\Configuration\SubNodeConfiguration.cs" />
+    <Compile Include="Entities\EnvironmentData.cs" />
+    <Compile Include="Entities\HelloHomeDbContext.cs" />
+    <Compile Include="Entities\Node.cs" />
+    <Compile Include="Entities\NodeConfiguration.cs" />
+    <Compile Include="Entities\NodeInfoData.cs" />
+    <Compile Include="Entities\NodeLatestValues.cs" />
+    <Compile Include="Entities\PulseData.cs" />
+    <Compile Include="Entities\SubNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Extentions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
 </Project>

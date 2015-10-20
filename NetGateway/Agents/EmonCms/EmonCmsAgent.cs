@@ -3,11 +3,11 @@ using Newtonsoft.Json;
 using System.Collections.Generic;
 using Common.Extentions;
 using System.Linq;
-using NetHhGateway.Configuration;
+using HelloHome.NetGateway.Configuration;
 using System.Net;
 using System.IO;
 
-namespace NetHhGateway.Agents.EmonCms
+namespace HelloHome.NetGateway.Agents.EmonCms
 {
 	public class EmonCmsAgent : IEmonCmsAgent
 	{

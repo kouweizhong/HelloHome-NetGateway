@@ -1,11 +1,11 @@
 ﻿using System;
 using NUnit.Framework;
-using NetHhGateway;
+using HelloHome.NetGateway;
 using IntegrationTests.ScenarioBasedGatewayAgent;
 using Castle.Windsor;
-using NetHhGateway.WindsorInstallers;
-using NetHhGateway.Agents.NodeGateway;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.WindsorInstallers;
+using HelloHome.NetGateway.Agents.NodeGateway;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 
 namespace IntegrationTests
 {

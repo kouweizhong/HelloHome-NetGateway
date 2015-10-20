@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Data.Entity.ModelConfiguration;
 
-namespace NetHhGateway.Entities.Configuration
+namespace HelloHome.Common.Entities.Configuration
 {
 	public class NodeConfigurationConfiguration : EntityTypeConfiguration<Entities.NodeConfiguration>
 	{

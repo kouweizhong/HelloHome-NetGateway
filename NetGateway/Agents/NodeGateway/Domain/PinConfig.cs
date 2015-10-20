@@ -1,6 +1,6 @@
 using System;
 
-namespace NetHhGateway.Agents.NodeGateway.Domain
+namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
 {
 
 	public class PinConfig 

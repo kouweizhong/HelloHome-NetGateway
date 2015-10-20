@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Configuration;
 
-namespace NetHhGateway.Configuration.AppSettings
+namespace HelloHome.NetGateway.Configuration.AppSettings
 {
 	public class AppSettingsBasedConfiguration : IConfigurationProvider, ISerialConfigurationProvider, IEmonCmsConfiguration
 	{

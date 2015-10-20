@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NetHhGateway.Logic.RfNodeIdGenerationStrategy
+namespace HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy
 {
 	public interface IRfNodeIdGenerationStrategy
 	{

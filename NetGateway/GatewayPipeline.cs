@@ -1,15 +1,15 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway;
+using HelloHome.NetGateway.Agents.NodeGateway;
 using System.Collections.Generic;
-using NetHhGateway.Processors;
+using HelloHome.NetGateway.Processors;
 using System.Linq;
 using System.Threading;
-using NetHhGateway.Entities;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.Common.Entities;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using System.Threading.Tasks;
-using NetHhGateway.Logic.RfNodeIdGenerationStrategy;
+using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 
-namespace NetHhGateway
+namespace HelloHome.NetGateway
 {
 	public class GatewayPipeline
 	{
@@ -43,7 +43,7 @@ namespace NetHhGateway
 			_mainTask.Start ();
 		}
 
-		private List<Task> processingTasks = new List<Task> ();
+		private readonly List<Task> processingTasks = new List<Task> ();
 		private bool ProcessNextIfAny() {
 			IncomingMessage incomingMessage;
 			if (_nodeGatewayAgent.TryNextMessage (out incomingMessage)) {
@@ -103,7 +103,8 @@ namespace NetHhGateway
 			_nodeGatewayAgent.Stop();
 			Task.WaitAll (_mainTask);
 			Task.WaitAll (processingTasks.ToArray());
-			while(ProcessNextIfAny());
+			while (ProcessNextIfAny ())
+				Thread.Sleep (10);
 		}
 	}
 }

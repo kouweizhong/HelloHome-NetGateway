@@ -1,17 +1,17 @@
 ﻿using System;
 using Castle.MicroKernel.Registration;
-using NetHhGateway.Configuration;
-using NetHhGateway.Configuration.AppSettings;
-using NetHhGateway.Agents.NodeGateway.Parsers;
+using HelloHome.NetGateway.Configuration;
+using HelloHome.NetGateway.Configuration.AppSettings;
+using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
-using NetHhGateway.Processors;
-using NetHhGateway.Entities;
-using NetHhGateway.Agents.NodeGateway.Encoders;
-using NetHhGateway.Logic.RfNodeIdGenerationStrategy;
-using NetHhGateway.Agents.NodeGateway;
-using NetHhGateway.Agents.EmonCms;
+using HelloHome.NetGateway.Processors;
+using HelloHome.Common.Entities;
+using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
+using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
+using HelloHome.NetGateway.Agents.NodeGateway;
+using HelloHome.NetGateway.Agents.EmonCms;
 
-namespace NetHhGateway.WindsorInstallers
+namespace HelloHome.NetGateway.WindsorInstallers
 {
 	public class DefaultInstaller : IWindsorInstaller
 	{

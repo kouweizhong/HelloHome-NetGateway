@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UnitTests", "UnitTests\Unit
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csproj", "{5D05E63F-D6E2-462D-9086-E0C120386600}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -33,6 +35,10 @@ Global
 		{5D05E63F-D6E2-462D-9086-E0C120386600}.Debug|x86.Build.0 = Debug|Any CPU
 		{5D05E63F-D6E2-462D-9086-E0C120386600}.Release|x86.ActiveCfg = Release|Any CPU
 		{5D05E63F-D6E2-462D-9086-E0C120386600}.Release|x86.Build.0 = Release|Any CPU
+		{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}.Debug|x86.ActiveCfg = Debug|x86
+		{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}.Debug|x86.Build.0 = Debug|x86
+		{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}.Release|x86.ActiveCfg = Release|x86
+		{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11E62618-0841-48E7-9A19-D54E956EBAE8} = {50F4B153-BF79-424F-A3DF-47AF5BD75676}

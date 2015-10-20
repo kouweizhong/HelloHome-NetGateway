@@ -2,7 +2,7 @@
 using System.Data.Entity.ModelConfiguration;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NetHhGateway.Entities.Configuration
+namespace HelloHome.Common.Entities.Configuration
 {
 	public class PulseDataConfiguration : EntityTypeConfiguration<PulseData>
 	{

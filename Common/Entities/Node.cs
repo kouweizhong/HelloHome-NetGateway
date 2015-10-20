@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace NetHhGateway.Entities
+namespace HelloHome.Common.Entities
 {
 	public class Node
 	{

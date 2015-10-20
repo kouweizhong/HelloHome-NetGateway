@@ -1,7 +1,7 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 
-namespace NetHhGateway.Agents.NodeGateway
+namespace HelloHome.NetGateway.Agents.NodeGateway
 {
 	public interface INodeGatewayAgent
 	{

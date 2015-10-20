@@ -1,10 +1,10 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
-using NetHhGateway.Entities;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.Common.Entities;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace NetHhGateway.Processors
+namespace HelloHome.NetGateway.Processors
 {
 	public class UpdateUpTimeProcessor : IMessageProcessor
 	{

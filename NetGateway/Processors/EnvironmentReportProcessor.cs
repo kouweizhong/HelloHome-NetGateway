@@ -1,23 +1,15 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
-using NetHhGateway.Entities;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.Common.Entities;
 using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
-using NetHhGateway.Agents.EmonCms;
+using HelloHome.NetGateway.Agents.EmonCms;
 
-namespace NetHhGateway.Processors
+namespace HelloHome.NetGateway.Processors
 {
 	public class EnvironmentReportProcessor : MessageProcessor<EnvironmentalReport>
 	{
-		IEmonCmsAgent emonCmsAgent;
-
-		public EnvironmentReportProcessor (IEmonCmsAgent emonCmsAgent)
-		{
-			this.emonCmsAgent = emonCmsAgent;
-
-		}
-
 		public override System.Collections.Generic.IList<OutgoingMessage> ProcessInternal (EnvironmentalReport message)
 		{
 			using (var dbContext = new HelloHomeDbContext ()) {

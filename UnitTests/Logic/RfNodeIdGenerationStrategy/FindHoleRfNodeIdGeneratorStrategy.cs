@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using NUnit.Framework;
-using NetHhGateway.Logic.RfNodeIdGenerationStrategy;
+using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 using System.Collections.Generic;
 
 namespace UnitTests.Logic.RfNodeIdGenerationStrategy

@@ -1,22 +1,15 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
-using NetHhGateway.Entities;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.Common.Entities;
 using System.Linq;
 using System.Collections.Generic;
-using NetHhGateway.Agents.EmonCms;
+using HelloHome.NetGateway.Agents.EmonCms;
 using System.Data.Entity;
 
-namespace NetHhGateway.Processors
+namespace HelloHome.NetGateway.Processors
 {
 	public class PulseReportProcessor : MessageProcessor<PulseReport>
 	{
-		IEmonCmsAgent emonCmsAgent;
-
-		public PulseReportProcessor (IEmonCmsAgent emonCmsAgent)
-		{
-			this.emonCmsAgent = emonCmsAgent;
-		}
-
 		public override IList<OutgoingMessage> ProcessInternal (PulseReport message)
 		{
 			using (var _dbContext = new HelloHomeDbContext ()) {

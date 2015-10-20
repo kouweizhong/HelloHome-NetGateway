@@ -3,13 +3,13 @@ using System.IO.Ports;
 using System.Threading.Tasks;
 using System.Collections.Generic;
 using System.Linq;
-using NetHhGateway.Configuration;
-using NetHhGateway.Agents.NodeGateway.Parsers;
-using NetHhGateway.Agents.NodeGateway.Encoders;
+using HelloHome.NetGateway.Configuration;
+using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
+using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
 using System.Collections.Concurrent;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 
-namespace NetHhGateway.Agents.NodeGateway
+namespace HelloHome.NetGateway.Agents.NodeGateway
 {
 
 	public class NodeGatewayAgent : INodeGatewayAgent, IDisposable
@@ -25,12 +25,12 @@ namespace NetHhGateway.Agents.NodeGateway
 		{
 			_encoders = encoders.ToList ();
 			_parsers = new List<IMessageParser> { 
-				new CommentParser(),
-				new NodeStartedParser(),
-				new PulseReportParser(),
-				new EnvironmentReportParser(),
-				new NodeInfoReportParser(),
-				new ParseAllParser(),
+				new CommentParser (),
+				new NodeStartedParser (),
+				new PulseReportParser (),
+				new EnvironmentReportParser (),
+				new NodeInfoReportParser (),
+				new ParseAllParser (),
 			};
 			_serial = new SerialPort (serialConfig.Port, 115200, Parity.None, 8, StopBits.One);
 		}
@@ -87,8 +87,7 @@ namespace NetHhGateway.Agents.NodeGateway
 
 				var parser = _parsers.First (_ => _.CanParse (byteRecord));
 				var message = parser.Parse (byteRecord);
-				if (read)
-					_incomingMessages.Enqueue (message);
+				_incomingMessages.Enqueue (message);
 			}
 		}
 

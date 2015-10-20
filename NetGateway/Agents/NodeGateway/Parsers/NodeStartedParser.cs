@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetHhGateway.Agents.NodeGateway.Parsers
+namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 {
 	public class NodeStartedParser : IMessageParser
 	{
@@ -11,7 +11,7 @@ namespace NetHhGateway.Agents.NodeGateway.Parsers
 			return record [1] == 0 + 3 << 2;
 		}
 
-		public NetHhGateway.Agents.NodeGateway.Domain.Report Parse (byte[] record)
+		public HelloHome.NetGateway.Agents.NodeGateway.Domain.Report Parse (byte[] record)
 		{
 			return new Domain.NodeStartedReport { 
 				FromNodeId = record[0],

@@ -1,7 +1,7 @@
 ﻿using System.Text;
 using System.Linq;
 
-namespace NetHhGateway.Agents.NodeGateway.Parsers
+namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 {
 	public class CommentParser : IMessageParser
 	{

@@ -1,18 +1,18 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 
-namespace NetHhGateway.Agents.NodeGateway.Encoders
+namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 {
 	public abstract class MessageEncoder<TMessage> : IMessageEncoder where TMessage : OutgoingMessage
 	{
 		#region IMessageEncoder implementation
 
-		public bool CanEncode (NetHhGateway.Agents.NodeGateway.Domain.Message message)
+		public bool CanEncode (HelloHome.NetGateway.Agents.NodeGateway.Domain.Message message)
 		{
 			return message is TMessage;
 		}
 
-		public byte[] Encode (NetHhGateway.Agents.NodeGateway.Domain.Message message)
+		public byte[] Encode (HelloHome.NetGateway.Agents.NodeGateway.Domain.Message message)
 		{
 			return EncodeInternal (message as TMessage);
 		}

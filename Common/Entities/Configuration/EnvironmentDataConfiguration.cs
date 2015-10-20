@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Data.Entity.ModelConfiguration;
+using HelloHome.Common.Entities;
 
-namespace NetHhGateway.Entities.Configuration
+namespace HelloHome.Common.Entities.Configuration
 {
 	public class EnvironmentDataConfiguration : EntityTypeConfiguration<EnvironmentData>
 	{

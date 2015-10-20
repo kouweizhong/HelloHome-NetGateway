@@ -1,6 +1,6 @@
 using System;
 
-namespace NetHhGateway.Agents.NodeGateway
+namespace HelloHome.NetGateway.Agents.NodeGateway
 {
 	public class IncomingMessageEventArgs : EventArgs
 	{

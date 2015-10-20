@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Data.Entity;
-using NetHhGateway.Entities;
+using HelloHome.Common.Entities;
 using System.Linq;
-using NetHhGateway.Agents.EmonCms;
+using HelloHome.NetGateway.Agents.EmonCms;
 using System.Collections.Generic;
 
-namespace NetHhGateway
+namespace HelloHome.NetGateway
 {
 	public class EmonCmsUpdater
 	{

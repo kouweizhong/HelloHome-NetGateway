@@ -1,17 +1,17 @@
 ﻿using System;
-using NetHhGateway.Configuration.AppSettings;
+using HelloHome.NetGateway.Configuration.AppSettings;
 using Castle.MicroKernel.Registration;
-using NetHhGateway.Configuration;
+using HelloHome.NetGateway.Configuration;
 using System.Data.Entity;
-using NetHhGateway.Entities;
+using HelloHome.Common.Entities;
 using System.Linq;
-using NetHhGateway.Agents.NodeGateway;
+using HelloHome.NetGateway.Agents.NodeGateway;
 using System.Collections.Generic;
-using NetHhGateway.Processors;
-using NetHhGateway.WindsorInstallers;
+using HelloHome.NetGateway.Processors;
+using HelloHome.NetGateway.WindsorInstallers;
 
 
-namespace NetHhGateway
+namespace HelloHome.NetGateway
 {
 	class MainClass
 	{

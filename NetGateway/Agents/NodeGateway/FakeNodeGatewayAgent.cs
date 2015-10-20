@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetHhGateway.Agents.NodeGateway
+namespace HelloHome.NetGateway.Agents.NodeGateway
 {
 	public class FakeNodeGatewayAgent : INodeGatewayAgent
 	{
@@ -20,18 +20,18 @@ namespace NetHhGateway.Agents.NodeGateway
 			
 		}
 
-		public void Send (NetHhGateway.Agents.NodeGateway.Domain.OutgoingMessage message)
+		public void Send (HelloHome.NetGateway.Agents.NodeGateway.Domain.OutgoingMessage message)
 		{
 			
 		}
 
-		public bool TryNextMessage (out NetHhGateway.Agents.NodeGateway.Domain.IncomingMessage message)
+		public bool TryNextMessage (out HelloHome.NetGateway.Agents.NodeGateway.Domain.IncomingMessage message)
 		{
 			message = null;
 			return false;
 		}
 
-		public NetHhGateway.Agents.NodeGateway.Domain.IncomingMessage WaitForNextMessage (int milliseconds = 0)
+		public HelloHome.NetGateway.Agents.NodeGateway.Domain.IncomingMessage WaitForNextMessage (int milliseconds = 0)
 		{
 			return null;
 		}

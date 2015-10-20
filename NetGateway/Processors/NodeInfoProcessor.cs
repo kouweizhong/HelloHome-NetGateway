@@ -1,23 +1,15 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
-using NetHhGateway.Entities;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.Common.Entities;
 using System.Data.Entity;
 using System.Linq;
 using System.Collections.Generic;
-using NetHhGateway.Agents.EmonCms;
+using HelloHome.NetGateway.Agents.EmonCms;
 
-namespace NetHhGateway.Processors
+namespace HelloHome.NetGateway.Processors
 {
 	public class NodeInfoProcessor : MessageProcessor<NodeInfoReport>
 	{
-		IEmonCmsAgent emonCmsAgent;
-
-		public NodeInfoProcessor (IEmonCmsAgent emonCmsAgent)
-		{
-			this.emonCmsAgent = emonCmsAgent;
-			
-		}
-
 		public override System.Collections.Generic.IList<OutgoingMessage> ProcessInternal (NodeInfoReport message)
 		{
 			using (var dbContext = new HelloHomeDbContext ()) {

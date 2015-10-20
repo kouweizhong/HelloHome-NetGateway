@@ -5,7 +5,7 @@
     <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
     <ProjectGuid>{31C6EF44-19EC-4DF5-9768-3BFE427B22FA}</ProjectGuid>
     <OutputType>Exe</OutputType>
-    <RootNamespace>NetHhGateway</RootNamespace>
+    <RootNamespace>HelloHome.NetGateway</RootNamespace>
     <AssemblyName>NetHhGateway</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
@@ -64,8 +64,6 @@
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\ISerialConfigurationProvider.cs" />
     <Compile Include="Configuration\AppSettings\AppSettingsBasedConfiguration.cs" />
-    <Compile Include="Entities\Node.cs" />
-    <Compile Include="Entities\Configuration\NodeConfiguration.cs" />
     <Compile Include="Agents\NodeGateway\Domain\CommentReport.cs" />
     <Compile Include="Agents\NodeGateway\Domain\NodeInfoReport.cs" />
     <Compile Include="Agents\NodeGateway\Domain\PulseReport.cs" />
@@ -96,21 +94,8 @@
     <Compile Include="Agents\NodeGateway\Domain\PinConfig.cs" />
     <Compile Include="Agents\NodeGateway\Domain\PinMode.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\PinConfigEncoder.cs" />
-    <Compile Include="Entities\NodeConfiguration.cs" />
-    <Compile Include="Entities\SubNode.cs" />
-    <Compile Include="Entities\EnvironmentData.cs" />
-    <Compile Include="Entities\HelloHomeDbContext.cs" />
-    <Compile Include="Entities\PulseData.cs" />
-    <Compile Include="Entities\Configuration\PulseDataConfiguration.cs" />
-    <Compile Include="Entities\Configuration\SubNodeConfiguration.cs" />
-    <Compile Include="Entities\Configuration\NodeConfigurationConfiguration.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\EnvironmentReportParser.cs" />
     <Compile Include="Agents\NodeGateway\Domain\EnvironmentalReport.cs" />
-    <Compile Include="Entities\NodeLatestValues.cs" />
-    <Compile Include="Entities\Configuration\NodeLatestValuesConfiguration.cs" />
-    <Compile Include="Entities\Configuration\EnvironmentDataConfiguration.cs" />
-    <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
-    <Compile Include="Entities\NodeInfoData.cs" />
     <Compile Include="Agents\EmonCms\EmonCmsAgent.cs" />
     <Compile Include="Configuration\IEmonCmsConfiguration.cs" />
     <Compile Include="Agents\EmonCms\IEmonCmsAgent.cs" />
@@ -129,8 +114,6 @@
   <ItemGroup>
     <Folder Include="Configuration\" />
     <Folder Include="Configuration\AppSettings\" />
-    <Folder Include="Entities\" />
-    <Folder Include="Entities\Configuration\" />
     <Folder Include="Agents\" />
     <Folder Include="Processors\" />
     <Folder Include="WindsorInstallers\" />

@@ -1,6 +1,6 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 

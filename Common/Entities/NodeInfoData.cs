@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace NetHhGateway.Entities
+namespace HelloHome.Common.Entities
 {
 	public class NodeInfoData
 	{

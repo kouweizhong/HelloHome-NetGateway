@@ -1,15 +1,15 @@
 ﻿using System;
 
-namespace NetHhGateway.Entities
+namespace HelloHome.Common.Entities
 {
-	public class EnvironmentData
+	public class NodeLatestValues
 	{
-		public virtual int Id { get; set; }
 		public virtual int NodeId { get; set; }
-		public virtual DateTime Timestamp { get; set; }
 		public virtual float? Temperature { get; set; }
 		public virtual float? Humidity { get; set; }
 		public virtual int? Pressure { get; set; }
+		public virtual float? VIn { get; set; }
+		public virtual int SendErrorCount { get; set; }
 	}
 }
 

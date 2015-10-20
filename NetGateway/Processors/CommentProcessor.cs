@@ -1,8 +1,8 @@
 ﻿using System;
-using NetHhGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using System.Collections.Generic;
 
-namespace NetHhGateway.Processors
+namespace HelloHome.NetGateway.Processors
 {
 	public class CommentProcessor :MessageProcessor<CommentReport>
 	{
