@@ -13,6 +13,7 @@ namespace NetHhGateway.Entities
 		public virtual bool ValidConfig { get; set; }
 		public virtual string Name { get; set; }
 		public virtual int RfAddress { get; set; }
+		public virtual int? EmonCmsNodeId { get; set; }
 		public virtual DateTime? LastStartupTime { get; set; }
 		public virtual float UpTime { get; set; }
 		public virtual float MaxUpTime { get; set; }

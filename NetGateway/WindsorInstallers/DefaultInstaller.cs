@@ -50,11 +50,12 @@ namespace NetHhGateway.WindsorInstallers
 				Component.For<PinConfigEncoder>()
 			);
 
-
 			//Processors
 			container.Register(Classes.FromAssemblyContaining<IMessageProcessor>().BasedOn<IMessageProcessor>().WithServiceBase().Configure(_=>_.LifestylePerThread()));
 			container.Register (Component.For<IRfNodeIdGenerationStrategy> ().ImplementedBy<FindHoleRfNodeIdGenerationStrategy> ());
 
+			//EmonCmsUpdater
+			container.Register(Component.For<EmonCmsUpdater>());
 		}
 
 		#endregion

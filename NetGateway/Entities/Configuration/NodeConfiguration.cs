@@ -13,6 +13,7 @@ namespace NetHhGateway.Entities.Configuration
 
 			Property (_ => _.NodeId).HasColumnName ("nodeId").IsRequired ().HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
 			Property (_ => _.RfAddress).HasColumnName ("RfAddress");
+			Property (_ => _.EmonCmsNodeId).HasColumnName ("emonCmsNodeId");
 			Property (_ => _.ValidConfig).HasColumnName ("validConfig");
 			Property (_ => _.Name).HasColumnName ("name").HasColumnType ("VARCHAR").HasMaxLength (50);
 			Property (_ => _.LastStartupTime).HasColumnName ("LastStartupTime");

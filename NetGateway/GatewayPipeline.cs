@@ -37,7 +37,7 @@ namespace NetHhGateway
 			_mainTask = new Task (() => {
 				while (running) {
 					ProcessNextIfAny();
-					Thread.Sleep(50);
+					Thread.Sleep(10);
 				}
 			});
 			_mainTask.Start ();

@@ -30,7 +30,6 @@ namespace NetHhGateway.Processors
 					};
 				}
 				dbContext.SaveChanges ();
-				emonCmsAgent.Send (String.Format ("{{{0}_Vin:{1}}}", node.RfAddress, message.Voltage));
 			}
 			return null;
 		}

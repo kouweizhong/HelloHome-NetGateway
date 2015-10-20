@@ -32,7 +32,6 @@ namespace NetHhGateway.Processors
 						NewValue = subNode.PulseCount
 					} };
 				_dbContext.SaveChanges ();
-				emonCmsAgent.Send (String.Format ("{{{0}_{1}:{2}}}", subNode.Node.RfAddress, subNode.Number, subNode.PulseCount));
 			}
 
 			return null;

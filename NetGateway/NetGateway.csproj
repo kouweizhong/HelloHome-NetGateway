@@ -84,8 +84,6 @@
     <Compile Include="Agents\NodeGateway\Domain\IncomingMessage.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\IMessageParser.cs" />
     <Compile Include="Agents\NodeGateway\ConsoleNodeGatewayAgent.cs" />
-    <Compile Include="Processors\IMessageProcessor.cs" />
-    <Compile Include="Processors\MessageProcessor.cs" />
     <Compile Include="WindsorInstallers\DefaultInstaller.cs" />
     <Compile Include="Agents\NodeGateway\Domain\NodeConfigCommand.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\IMessageEncoder.cs" />
@@ -93,7 +91,6 @@
     <Compile Include="Agents\NodeGateway\Encoders\NodeConfigEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\NodeStartedParser.cs" />
     <Compile Include="GatewayPipeline.cs" />
-    <Compile Include="Processors\UpdateUpTimeProcessor.cs" />
     <Compile Include="Logic\RfNodeIdGenerationStrategy\FindHoleRfNodeIdGenerationStrategy.cs" />
     <Compile Include="Logic\RfNodeIdGenerationStrategy\IRfNodeIdGenerationStrategy.cs" />
     <Compile Include="Agents\NodeGateway\Domain\PinConfig.cs" />
@@ -104,25 +101,29 @@
     <Compile Include="Entities\EnvironmentData.cs" />
     <Compile Include="Entities\HelloHomeDbContext.cs" />
     <Compile Include="Entities\PulseData.cs" />
-    <Compile Include="Processors\CommentProcessor.cs" />
-    <Compile Include="Agents\NodeGateway\ScenarioBasedNodeGateway.cs" />
     <Compile Include="Entities\Configuration\PulseDataConfiguration.cs" />
     <Compile Include="Entities\Configuration\SubNodeConfiguration.cs" />
     <Compile Include="Entities\Configuration\NodeConfigurationConfiguration.cs" />
-    <Compile Include="Processors\ProcessorComparer.cs" />
-    <Compile Include="Processors\PulseReportProcessor.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\EnvironmentReportParser.cs" />
     <Compile Include="Agents\NodeGateway\Domain\EnvironmentalReport.cs" />
-    <Compile Include="Processors\EnvironmentReportProcessor.cs" />
     <Compile Include="Entities\NodeLatestValues.cs" />
     <Compile Include="Entities\Configuration\NodeLatestValuesConfiguration.cs" />
     <Compile Include="Entities\Configuration\EnvironmentDataConfiguration.cs" />
-    <Compile Include="Processors\NodeInfoProcessor.cs" />
     <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
     <Compile Include="Entities\NodeInfoData.cs" />
     <Compile Include="Agents\EmonCms\EmonCmsAgent.cs" />
     <Compile Include="Configuration\IEmonCmsConfiguration.cs" />
     <Compile Include="Agents\EmonCms\IEmonCmsAgent.cs" />
+    <Compile Include="Processors\CommentProcessor.cs" />
+    <Compile Include="Processors\EnvironmentReportProcessor.cs" />
+    <Compile Include="Processors\IMessageProcessor.cs" />
+    <Compile Include="Processors\MessageProcessor.cs" />
+    <Compile Include="Processors\NodeInfoProcessor.cs" />
+    <Compile Include="Processors\ProcessorComparer.cs" />
+    <Compile Include="Processors\PulseReportProcessor.cs" />
+    <Compile Include="Processors\UpdateUpTimeProcessor.cs" />
+    <Compile Include="EmonCmsUpdater.cs" />
+    <Compile Include="Agents\NodeGateway\FakeNodeGatewayAgent.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

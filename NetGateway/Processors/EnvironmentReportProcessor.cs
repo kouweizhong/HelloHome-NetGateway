@@ -34,8 +34,6 @@ namespace NetHhGateway.Processors
 				if(message.Humidity > 0) node.LatestValues.Humidity = message.Humidity;
 				if(message.Pressure > 0) node.LatestValues.Pressure = message.Pressure;
 				dbContext.SaveChanges ();
-				emonCmsAgent.Send (String.Format ("{{{0}_Temp:{1},{0}_Hum:{2}}}", node.RfAddress, message.Temperature, message.Humidity));
-
 			}
 			return null;
 		}
