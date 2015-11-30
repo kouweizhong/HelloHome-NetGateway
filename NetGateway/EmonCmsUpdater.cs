@@ -30,9 +30,10 @@ namespace HelloHome.NetGateway
 					values.Add (node.LatestValues.Temperature ?? 0);
 					values.Add (node.LatestValues.Humidity ?? 0);
 					values.Add (node.UpTime);
-					foreach (var subNode in node.SubNodes) {
+					foreach (var subNode in node.SubNodes.OrderBy(_ => _.Number)) {
 						values.Add (subNode.PulseCount);
 					}
+					values.Add (node.LastRssi);
 					_emonCmsAgent.Send (node.EmonCmsNodeId.Value, values);		
 				}
 			}

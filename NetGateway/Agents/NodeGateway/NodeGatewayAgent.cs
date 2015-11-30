@@ -8,18 +8,23 @@ using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
 using System.Collections.Concurrent;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using log4net;
+using System.Threading;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway
 {
 
 	public class NodeGatewayAgent : INodeGatewayAgent, IDisposable
 	{
+		static readonly ILog log = LogManager.GetLogger(typeof(NodeGatewayAgent).FullName);
+
 		readonly SerialPort _serial;
 		List<IMessageParser> _parsers;
 		List<IMessageEncoder> _encoders;
-		readonly ConcurrentQueue<IncomingMessage> _incomingMessages = new ConcurrentQueue<IncomingMessage> ();
-
+		Task readingTask;
 		volatile bool read = false;
+
+		public MessageReceivedHandler OnMessageReceived { get; set;}
 
 		public NodeGatewayAgent (ISerialConfigurationProvider serialConfig, IEnumerable<IMessageEncoder> encoders)
 		{
@@ -37,36 +42,29 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 
 		#region INodeGatewayAgent implementation
 
+
 		public void Start ()
 		{
-			if (!_serial.IsOpen)
+			if (!_serial.IsOpen) {
+				log.DebugFormat ("Opening serial port {0}", _serial.PortName);
 				_serial.Open ();
+				log.Debug ("Serial port is now open");
+			}
 				
 			read = true;
-			var readingTask = new Task (ReadFromSerial);
+			readingTask = new Task (ListenSerial);
+			readingTask.ContinueWith (t => {
+				if(t.Exception != null)
+					log.FatalFormat("Exception : {0}", t.Exception);
+			});
 			readingTask.Start ();
 		}
 
 		public void Stop ()
 		{
 			read = false;
+			readingTask.Wait ();
 		}
-
-		public bool TryNextMessage (out IncomingMessage message)
-		{
-			return _incomingMessages.TryDequeue (out message);
-		}
-
-		public IncomingMessage WaitForNextMessage (int milliseconds = 0)
-		{
-			var endTime = DateTime.Now.AddMilliseconds (milliseconds);
-			IncomingMessage inMsg = null;
-			do {
-				_incomingMessages.TryDequeue (out inMsg);
-			} while(inMsg == null && DateTime.Now < endTime);
-			return inMsg;
-		}
-
 
 		public void Send (OutgoingMessage message)
 		{
@@ -80,14 +78,19 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 
 		#endregion
 
-		private void ReadFromSerial ()
+		private void ListenSerial ()
 		{
 			while (read) {
 				var byteRecord = ReadData (new byte[] { 0x0D, 0x0A });
+				log.DebugFormat ("Rx: {0}", BitConverter.ToString(byteRecord));
 
 				var parser = _parsers.First (_ => _.CanParse (byteRecord));
+				log.DebugFormat ("Found parser: {0}", parser.GetType().Name);
 				var message = parser.Parse (byteRecord);
-				_incomingMessages.Enqueue (message);
+				log.DebugFormat ("Message successfully parsed: {0}", message);
+
+				if (OnMessageReceived != null)
+					OnMessageReceived (this, message);
 			}
 		}
 
@@ -97,12 +100,15 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 			int eofMatchCharCount = 0;
 
 			while (eofMatchCharCount < eof.Length) {
-				var newByte = _serial.ReadByte ();
+				var newByte = _serial.ReadByte();
 				if (newByte == eof [eofMatchCharCount])
 					eofMatchCharCount++;
 				bytes.Add ((byte)newByte);
 			}
-			return bytes.ToArray ();
+			if(eofMatchCharCount == eof.Length)
+				return bytes.ToArray ();
+			log.WarnFormat("bytes found without eof {0} after timeout", BitConverter.ToString(bytes.ToArray()));
+			return null;
 		}
 
 		#region IDisposable implementation

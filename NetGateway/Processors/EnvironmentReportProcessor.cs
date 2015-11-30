@@ -5,28 +5,38 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Data.Entity;
 using HelloHome.NetGateway.Agents.EmonCms;
+using log4net;
 
 namespace HelloHome.NetGateway.Processors
 {
 	public class EnvironmentReportProcessor : MessageProcessor<EnvironmentalReport>
 	{
-		public override System.Collections.Generic.IList<OutgoingMessage> ProcessInternal (EnvironmentalReport message)
+		readonly static ILog log = LogManager.GetLogger(typeof(EnvironmentReportProcessor).Name);
+		readonly HelloHomeDbContext _dbContext;
+
+		public EnvironmentReportProcessor (HelloHomeDbContext dbContext)
 		{
-			using (var dbContext = new HelloHomeDbContext ()) {
-				var node = dbContext.Nodes.Include (_ => _.LatestValues).Single (_ => _.RfAddress == message.FromNodeId);
-				node.EnvironmentData = new List<EnvironmentData> { 
-					new EnvironmentData {
-						Timestamp = DateTime.Now,
-						Temperature = message.Temperature > 0 ? message.Temperature : (float?)null,
-						Humidity = message.Humidity > 0 ? message.Humidity : (float?)null,
-						Pressure = message.Pressure > 0 ? message.Pressure : (int?)null
-					}
-				};
-				if(message.Temperature > 0) node.LatestValues.Temperature = message.Temperature;
-				if(message.Humidity > 0) node.LatestValues.Humidity = message.Humidity;
-				if(message.Pressure > 0) node.LatestValues.Pressure = message.Pressure;
-				dbContext.SaveChanges ();
-			}
+			this._dbContext = dbContext;			
+			log.Debug ($"Injected with DbContext with hash {dbContext.ContextId}");
+		}
+
+		public override IList<OutgoingMessage> ProcessInternal (EnvironmentalReport message)
+		{
+			Node.EnvironmentData = new List<EnvironmentData> { 
+				new EnvironmentData {
+					Timestamp = DateTime.Now,
+					Temperature = message.Temperature > 0 ? message.Temperature : (float?)null,
+					Humidity = message.Humidity > 0 ? message.Humidity : (float?)null,
+					Pressure = message.Pressure > 0 ? message.Pressure : (int?)null
+				}
+			};
+			_dbContext.Entry (Node).Reference (_ => _.LatestValues).Load ();
+			if (message.Temperature > 0)
+				Node.LatestValues.Temperature = message.Temperature;
+			if (message.Humidity > 0)
+				Node.LatestValues.Humidity = message.Humidity;
+			if (message.Pressure > 0)
+				Node.LatestValues.Pressure = message.Pressure;
 			return null;
 		}
 	}

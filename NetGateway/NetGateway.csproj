@@ -18,7 +18,7 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x86</PlatformTarget>
-    <Externalconsole>true</Externalconsole>
+    <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
     <DebugType>full</DebugType>
@@ -45,17 +45,20 @@
     <Reference Include="EntityFramework.SqlServer">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="MySql.Data">
-      <HintPath>..\packages\MySql.Data.6.9.7\lib\net45\MySql.Data.dll</HintPath>
-    </Reference>
-    <Reference Include="MySql.Data.Entity.EF6">
-      <HintPath>..\packages\MySql.Data.Entity.6.9.7\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
-    </Reference>
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.7.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.9.8\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF6">
+      <HintPath>..\packages\MySql.Data.Entity.6.9.8\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="log4net">
+      <HintPath>..\packages\log4net.2.0.4\lib\net45-full\log4net.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -88,7 +91,6 @@
     <Compile Include="Agents\NodeGateway\Encoders\MessageEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\NodeConfigEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\NodeStartedParser.cs" />
-    <Compile Include="GatewayPipeline.cs" />
     <Compile Include="Logic\RfNodeIdGenerationStrategy\FindHoleRfNodeIdGenerationStrategy.cs" />
     <Compile Include="Logic\RfNodeIdGenerationStrategy\IRfNodeIdGenerationStrategy.cs" />
     <Compile Include="Agents\NodeGateway\Domain\PinConfig.cs" />
@@ -104,11 +106,27 @@
     <Compile Include="Processors\IMessageProcessor.cs" />
     <Compile Include="Processors\MessageProcessor.cs" />
     <Compile Include="Processors\NodeInfoProcessor.cs" />
-    <Compile Include="Processors\ProcessorComparer.cs" />
     <Compile Include="Processors\PulseReportProcessor.cs" />
-    <Compile Include="Processors\UpdateUpTimeProcessor.cs" />
     <Compile Include="EmonCmsUpdater.cs" />
     <Compile Include="Agents\NodeGateway\FakeNodeGatewayAgent.cs" />
+    <Compile Include="Processors\IMessageProcessorFactory.cs" />
+    <Compile Include="Processors\NodeStartedProcessor.cs" />
+    <Compile Include="Pipeline\ProcessingContext.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\ISignedMessage.cs" />
+    <Compile Include="Pipeline\GatewayPipeline.cs" />
+    <Compile Include="HelloHomeGateway.cs" />
+    <Compile Include="Pipeline\IGatewayPipeline.cs" />
+    <Compile Include="Pipeline\IGatewayPipelineFactory.cs" />
+    <Compile Include="Pipeline\Configuration\PipelineModuleCollection.cs" />
+    <Compile Include="Pipeline\Configuration\PipelineModuleElement.cs" />
+    <Compile Include="Pipeline\Configuration\PipelineConfigurationSection.cs" />
+    <Compile Include="Pipeline\Modules\UpdateStatisticsModule.cs" />
+    <Compile Include="Pipeline\Modules\LoadContextModule.cs" />
+    <Compile Include="Pipeline\Modules\ProcessMessageModule.cs" />
+    <Compile Include="Pipeline\Modules\IPipelineModule.cs" />
+    <Compile Include="Pipeline\Modules\IPipelineModuleFactory.cs" />
+    <Compile Include="WindsorInstallers\ProcessorComponentSelctor.cs" />
+    <Compile Include="WindsorInstallers\PerProcessingContextScopeAccessor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
@@ -121,6 +139,9 @@
     <Folder Include="Logic\" />
     <Folder Include="Logic\RfNodeIdGenerationStrategy\" />
     <Folder Include="Agents\EmonCms\" />
+    <Folder Include="Pipeline\" />
+    <Folder Include="Pipeline\Configuration\" />
+    <Folder Include="Pipeline\Modules\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
@@ -132,4 +153,57 @@
       <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
+  <ProjectExtensions>
+    <MonoDevelop>
+      <Properties>
+        <Policies>
+          <NameConventionPolicy>
+            <Rules>
+              <NamingRule Name="Namespaces" AffectedEntity="Namespace" VisibilityMask="VisibilityMask" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="Types" AffectedEntity="Class, Struct, Enum, Delegate" VisibilityMask="Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="Interfaces" AffectedEntity="Interface" VisibilityMask="Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True">
+                <RequiredPrefixes>
+                  <String>I</String>
+                </RequiredPrefixes>
+              </NamingRule>
+              <NamingRule Name="Attributes" AffectedEntity="CustomAttributes" VisibilityMask="Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True">
+                <RequiredSuffixes>
+                  <String>Attribute</String>
+                </RequiredSuffixes>
+              </NamingRule>
+              <NamingRule Name="Event Arguments" AffectedEntity="CustomEventArgs" VisibilityMask="Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True">
+                <RequiredSuffixes>
+                  <String>EventArgs</String>
+                </RequiredSuffixes>
+              </NamingRule>
+              <NamingRule Name="Exceptions" AffectedEntity="CustomExceptions" VisibilityMask="VisibilityMask" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True">
+                <RequiredSuffixes>
+                  <String>Exception</String>
+                </RequiredSuffixes>
+              </NamingRule>
+              <NamingRule Name="Methods" AffectedEntity="Methods" VisibilityMask="Protected, Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="Static Readonly Fields" AffectedEntity="ReadonlyField" VisibilityMask="Protected, Public" NamingStyle="PascalCase" IncludeInstanceMembers="False" IncludeStaticEntities="True" />
+              <NamingRule Name="Fields" AffectedEntity="Field" VisibilityMask="Protected, Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="ReadOnly Fields" AffectedEntity="ReadonlyField" VisibilityMask="Protected, Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="False" />
+              <NamingRule Name="Constant Fields" AffectedEntity="ConstantField" VisibilityMask="Protected, Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="Properties" AffectedEntity="Property" VisibilityMask="Protected, Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="Events" AffectedEntity="Event" VisibilityMask="Protected, Public" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="Enum Members" AffectedEntity="EnumMember" VisibilityMask="VisibilityMask" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="Parameters" AffectedEntity="Parameter" VisibilityMask="VisibilityMask" NamingStyle="CamelCase" IncludeInstanceMembers="True" IncludeStaticEntities="True" />
+              <NamingRule Name="Type Parameters" AffectedEntity="TypeParameter" VisibilityMask="VisibilityMask" NamingStyle="PascalCase" IncludeInstanceMembers="True" IncludeStaticEntities="True">
+                <RequiredPrefixes>
+                  <String>T</String>
+                </RequiredPrefixes>
+              </NamingRule>
+              <NamingRule Name="Private fields" AffectedEntity="Field, ReadonlyField" VisibilityMask="Private" NamingStyle="CamelCase" IncludeInstanceMembers="True" IncludeStaticEntities="True">
+                <RequiredPrefixes>
+                  <String>_</String>
+                </RequiredPrefixes>
+              </NamingRule>
+            </Rules>
+          </NameConventionPolicy>
+        </Policies>
+      </Properties>
+    </MonoDevelop>
+  </ProjectExtensions>
 </Project>

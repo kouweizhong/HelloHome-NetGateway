@@ -12,15 +12,16 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 
 		public bool CanParse (byte[] record)
 		{
-			return record [1] == 0 + 1 << 2;
+			return record [3] == 0 + 1 << 2;
 		}
 
 		public Domain.Report Parse (byte[] record)
 		{
 			return new Domain.PulseReport {
 				FromNodeId = record [0],
-				SubNode = record [2],
-				NewPulses = record[3],
+				Rssi = (int)BitConverter.ToInt16(record,1),
+				SubNode = record [4],
+				NewPulses = record[5],
 			};
 		}
 

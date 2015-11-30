@@ -3,6 +3,8 @@ using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway
 {
+	public delegate void MessageReceivedHandler(object sender, IncomingMessage message);
+
 	public interface INodeGatewayAgent
 	{
 		void Start ();
@@ -11,9 +13,11 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 
 		void Send (OutgoingMessage message);
 
-		bool TryNextMessage (out IncomingMessage message);
+		MessageReceivedHandler OnMessageReceived { get; set;}
 
-		IncomingMessage WaitForNextMessage (int milliseconds = 0);
+		//bool TryNextMessage (out IncomingMessage message);
+
+		//IncomingMessage WaitForNextMessage (int milliseconds = 0);
 	}
 }
 

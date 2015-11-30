@@ -4,10 +4,9 @@ namespace HelloHome.Common.Entities
 {
 	public class NodeConfiguration
 	{
-		public int NodeId { get; set; }
-		public byte Hal1Pin { get; set; }
-
-		public byte Hal2Pin { get; set; }
+		public virtual int NodeId { get; set; }
+		public virtual byte Hal1Pin { get; set; }
+		public virtual byte Hal2Pin { get; set; }
 
 		/*
 		public byte DryPin { get; set; }

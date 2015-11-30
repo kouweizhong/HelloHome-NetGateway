@@ -55,9 +55,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ScenarioBasedGatewayAgent\Scenario.cs" />
-    <Compile Include="StartupTests.cs" />
-    <Compile Include="PulseTests.cs" />
     <Compile Include="Agents\EmonCms\EmonCmsAgentTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

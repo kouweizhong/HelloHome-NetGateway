@@ -8,17 +8,28 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 
 		public bool CanParse (byte[] record)
 		{
-			return record [1] == 0 + 3 << 2;
+			return record [3] == 0 + 3 << 2;
 		}
 
 		public HelloHome.NetGateway.Agents.NodeGateway.Domain.Report Parse (byte[] record)
 		{
+			if (record.Length > 13)
+				return new Domain.NodeStartedReport { 
+					FromNodeId = record [0],
+					Rssi = (int)BitConverter.ToInt16 (record, 1),
+					Major = record [4],
+					Minor = record [5],
+					OldSignature = BitConverter.ToInt32 (record, 6),
+					Signature = BitConverter.ToInt64 (record, 10),
+					NeedNewRfAddress = BitConverter.ToBoolean (record, 18),
+				};
 			return new Domain.NodeStartedReport { 
-				FromNodeId = record[0],
-				Major = record[2],
-				Minor = record[3],
-				Signature = BitConverter.ToInt32(record, 4),
-				NeedNewRfAddress = BitConverter.ToBoolean(record, 8),
+				FromNodeId = record [0],
+				Rssi = (int)BitConverter.ToInt16 (record, 1),
+				Major = record [4],
+				Minor = record [5],
+				OldSignature = BitConverter.ToInt32 (record, 6),
+				NeedNewRfAddress = BitConverter.ToBoolean (record, 10),
 			};
 		}
 

@@ -10,6 +10,15 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 
 		#region INodeGatewayAgent implementation
 
+		public MessageReceivedHandler OnMessageReceived {
+			get {
+				throw new NotImplementedException ();
+			}
+			set {
+				throw new NotImplementedException ();
+			}
+		}
+
 		public void Start ()
 		{
 			

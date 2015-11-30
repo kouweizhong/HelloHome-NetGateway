@@ -10,6 +10,8 @@ using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
 using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Agents.EmonCms;
+using Castle.Facilities.TypedFactory;
+using HelloHome.NetGateway.Pipeline;
 
 namespace HelloHome.NetGateway.WindsorInstallers
 {
@@ -28,8 +30,8 @@ namespace HelloHome.NetGateway.WindsorInstallers
 		{
 			var kernel = container.Kernel;
 			kernel.Resolver.AddSubResolver(new CollectionResolver(kernel));
+			container.AddFacility<TypedFactoryFacility> ();
 
-			container.Register (Component.For<GatewayPipeline> ());
 
 			//Configuration
 			container.Register (
@@ -37,7 +39,8 @@ namespace HelloHome.NetGateway.WindsorInstallers
 			);
 
 			//dbContext
-			container.Register(Component.For<HelloHomeDbContext>().LifestyleSingleton());
+			container.Register(Component.For<HelloHomeDbContext>().LifestyleScoped<PerProcessingContextScopeAccessor>());
+			container.Register(Component.For<HelloHomeDbContext>().LifestyleTransient().Named("PipelineFreeDbContext"));
 
 			//Agents
 			container.Register (Component.For<INodeGatewayAgent> ().ImplementedBy(_gatewayAgent));
@@ -50,12 +53,25 @@ namespace HelloHome.NetGateway.WindsorInstallers
 				Component.For<PinConfigEncoder>()
 			);
 
-			//Processors
-			container.Register(Classes.FromAssemblyContaining<IMessageProcessor>().BasedOn<IMessageProcessor>().WithServiceBase().Configure(_=>_.LifestylePerThread()));
+			//Pipeline
+			container.Register (
+				Component.For<IGatewayPipelineFactory>().AsFactory(),
+				Component.For<IGatewayPipeline>().ImplementedBy<GatewayPipeline>().LifestyleTransient(),
+				Component.For<IPipelineModuleFactory>().AsFactory(),
+				Classes.FromAssemblyContaining<IPipelineModuleFactory>().BasedOn<IPipelineModule>().WithServiceBase().WithServiceSelf().LifestyleScoped<PerProcessingContextScopeAccessor>()
+			);
+
+			//Processors	
+			container.Register(Component.For<ProcessorComponentSelector>());
+			container.Register(Component.For<IMessageProcessorFactory>().AsFactory(typeof(ProcessorComponentSelector)));
+			container.Register(Classes.FromAssemblyContaining<IMessageProcessor>().BasedOn(typeof(MessageProcessor<>)).WithServiceBase().Configure(_=>_.LifestyleScoped<PerProcessingContextScopeAccessor>()));
 			container.Register (Component.For<IRfNodeIdGenerationStrategy> ().ImplementedBy<FindHoleRfNodeIdGenerationStrategy> ());
 
 			//EmonCmsUpdater
 			container.Register(Component.For<EmonCmsUpdater>());
+
+			//HelloHomeGateway
+			container.Register(Component.For<HelloHomeGateway>());
 		}
 
 		#endregion
