@@ -35,10 +35,10 @@ namespace HelloHome.NetGateway.Pipeline
 					if (context.Node == null)
 						_dbContext.Nodes.Add (context.Node = new Node { Signature = signedMessage.OldSignature });
 				}
-				context.Node.RfAddress = context.IncomingMessage.FromNodeId;
+				context.Node.RfId = context.IncomingMessage.FromNodeId;
 				context.Node.LastStartupTime = DateTime.Now;
 			} else {
-				context.Node = _dbContext.Nodes.SingleOrDefault (_ => _.RfAddress == context.IncomingMessage.FromNodeId);
+				context.Node = _dbContext.Nodes.SingleOrDefault (_ => _.RfId == context.IncomingMessage.FromNodeId);
 			}
 
 			if (context.Node == null) {

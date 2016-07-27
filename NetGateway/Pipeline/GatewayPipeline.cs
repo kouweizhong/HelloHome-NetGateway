@@ -30,7 +30,12 @@ namespace HelloHome.NetGateway.Pipeline
 				var next = le.Value.Process (context, le.Next?.Value);
 
 				//Ending flow
-				if (next == null || le.Next == null) {
+				if (next == null) {
+					log.Debug ($"Module {le.Value.GetType ().Name} cancelled the pipeline by returning null");
+					le = null;
+					continue;
+				}
+				if (le.Next == null) {
 					le = null;
 					continue;
 				}
@@ -42,6 +47,7 @@ namespace HelloHome.NetGateway.Pipeline
 				}
 
 				//Insert next into pipeline and continue
+				log.Debug ($"Module {le.GetType ().Name} asked for insertion of module {next.GetType ().Name} into the pipeline");
 				_modules.AddAfter (le, next);
 				le = le.Next;
 			}

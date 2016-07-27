@@ -3,10 +3,10 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{29AF3F31-B3A7-4A9C-B7FD-D2C63A144D1D}</ProjectGuid>
+    <ProjectGuid>{4E3CD4B8-2ECE-40AE-87C7-EDDD0073F5DA}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <RootNamespace>UnitTests</RootNamespace>
-    <AssemblyName>UnitTests</AssemblyName>
+    <RootNamespace>DbMigrations</RootNamespace>
+    <AssemblyName>DbMigrations</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -20,7 +20,6 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>full</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release</OutputPath>
     <ErrorReport>prompt</ErrorReport>
@@ -29,29 +28,25 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="nunit.framework">
-      <HintPath>..\packages\NUnit.3.4.1\lib\net45\nunit.framework.dll</HintPath>
+    <Reference Include="FluentMigrator">
+      <HintPath>..\packages\FluentMigrator.1.6.2\lib\40\FluentMigrator.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agents\NodeGateway\Parsers\CommentParserTests.cs" />
-    <Compile Include="Logic\RfNodeIdGenerationStrategy\FindHoleRfNodeIdGeneratorStrategy.cs" />
-  </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <ProjectReference Include="..\NetGateway\NetGateway.csproj">
-      <Project>{31C6EF44-19EC-4DF5-9768-3BFE427B22FA}</Project>
-      <Name>NetGateway</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Agents\" />
-    <Folder Include="Agents\NodeGateway\" />
-    <Folder Include="Agents\NodeGateway\Parsers\" />
-    <Folder Include="Logic\" />
-    <Folder Include="Logic\RfNodeIdGenerationStrategy\" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="201607\CreateNodeTable.cs" />
+    <Compile Include="201607\CreateNodeConfigTable.cs" />
+    <Compile Include="201607\CreateNodeFactTable.cs" />
+    <Compile Include="201607\CreateNodeDataTable.cs" />
+    <Compile Include="201607\CreatePortTable.cs" />
+    <Compile Include="201607\EnvironmentalData.cs" />
+    <Compile Include="HhMigrationAttribute.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="201607\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

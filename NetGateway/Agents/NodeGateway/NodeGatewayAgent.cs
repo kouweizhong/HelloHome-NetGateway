@@ -81,7 +81,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 		private void ListenSerial ()
 		{
 			while (read) {
-				var byteRecord = ReadData (new byte[] { 0x0D, 0x0A });
+				var byteRecord = ReadLine (new byte[] { 0x0D, 0x0A });
 				log.DebugFormat ("Rx: {0}", BitConverter.ToString(byteRecord));
 
 				var parser = _parsers.First (_ => _.CanParse (byteRecord));
@@ -94,21 +94,21 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 			}
 		}
 
-		private byte[] ReadData (byte[] eof)
-		{
+		private byte [] ReadLine (byte [] eof) {
 			List<byte> bytes = new List<byte> (100);
-			int eofMatchCharCount = 0;
 
-			while (eofMatchCharCount < eof.Length) {
-				var newByte = _serial.ReadByte();
+			int eofMatchCharCount = 0;
+			while (read && eofMatchCharCount < eof.Length) {
+				var newByte = _serial.BaseStream.ReadByte ();
+				if (newByte == -1) continue;	
 				if (newByte == eof [eofMatchCharCount])
 					eofMatchCharCount++;
 				bytes.Add ((byte)newByte);
 			}
-			if(eofMatchCharCount == eof.Length)
+			if (read)
 				return bytes.ToArray ();
-			log.WarnFormat("bytes found without eof {0} after timeout", BitConverter.ToString(bytes.ToArray()));
-			return null;
+			log.WarnFormat ("read was found false.Exiting with empty array");
+			return new byte[0];
 		}
 
 		#region IDisposable implementation

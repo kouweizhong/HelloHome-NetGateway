@@ -7,11 +7,16 @@ using System.Collections.Generic;
 
 namespace HelloHome.NetGateway
 {
-	public class EmonCmsUpdater
+	public interface IEMonCmsUpdater
+	{
+		void Update ();
+	}
+
+	public class EMonCmsUpdater : IEMonCmsUpdater
 	{
 		IEmonCmsAgent _emonCmsAgent;
 
-		public EmonCmsUpdater (IEmonCmsAgent emonCmsAgent)
+		public EMonCmsUpdater (IEmonCmsAgent emonCmsAgent)
 		{
 			_emonCmsAgent = emonCmsAgent;
 			

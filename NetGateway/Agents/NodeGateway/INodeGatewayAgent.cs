@@ -14,10 +14,6 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 		void Send (OutgoingMessage message);
 
 		MessageReceivedHandler OnMessageReceived { get; set;}
-
-		//bool TryNextMessage (out IncomingMessage message);
-
-		//IncomingMessage WaitForNextMessage (int milliseconds = 0);
 	}
 }
 

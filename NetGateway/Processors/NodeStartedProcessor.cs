@@ -25,7 +25,7 @@ namespace HelloHome.NetGateway.Processors
 
 			if (message.NeedNewRfAddress) {
 				//Find an available nodeId
-				var usedIds = _dbContext.Nodes.Select (_ => (byte)_.RfAddress).Distinct ().ToList ();
+				var usedIds = _dbContext.Nodes.Select (_ => (byte)_.RfId).Distinct ().ToList ();
 				var newRfAddress = _rfNodeIdGenerationStrategy.FindRfAddress (usedIds);
 				return new List<OutgoingMessage> { new NodeConfigCommand { NewRfAddress = newRfAddress } };
 			}

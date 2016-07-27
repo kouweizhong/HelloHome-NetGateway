@@ -17,13 +17,18 @@ namespace HelloHome.NetGateway.WindsorInstallers
 {
 	public class DefaultInstaller : IWindsorInstaller
 	{
-		readonly Type _gatewayAgent;
+		private readonly INodeGatewayAgent _nodeAgent;
 
-		public DefaultInstaller (Type gatewayAgent)
+		public DefaultInstaller ()
 		{
-			this._gatewayAgent = gatewayAgent;
 			
 		}
+
+		public DefaultInstaller (INodeGatewayAgent nodeAgent) 
+		{
+			_nodeAgent = nodeAgent;
+		}
+
 		#region IWindsorInstaller implementation
 
 		public void Install (Castle.Windsor.IWindsorContainer container, Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
@@ -43,7 +48,14 @@ namespace HelloHome.NetGateway.WindsorInstallers
 			container.Register(Component.For<HelloHomeDbContext>().LifestyleTransient().Named("PipelineFreeDbContext"));
 
 			//Agents
-			container.Register (Component.For<INodeGatewayAgent> ().ImplementedBy(_gatewayAgent));
+			if(_nodeAgent == null)
+				container.Register (Component.For<INodeGatewayAgent> ()
+				                    .ImplementedBy<NodeGatewayAgent>()
+				                    .LifestyleSingleton());
+			else
+				container.Register (Component.For<INodeGatewayAgent> ()
+				                    .Instance(_nodeAgent));
+			
 			container.Register (Component.For<IEmonCmsAgent> ().ImplementedBy<EmonCmsAgent>());
 
 			//Parsers & encoders
@@ -68,7 +80,7 @@ namespace HelloHome.NetGateway.WindsorInstallers
 			container.Register (Component.For<IRfNodeIdGenerationStrategy> ().ImplementedBy<FindHoleRfNodeIdGenerationStrategy> ());
 
 			//EmonCmsUpdater
-			container.Register(Component.For<EmonCmsUpdater>());
+			container.Register(Component.For<IEMonCmsUpdater>().ImplementedBy<EMonCmsUpdater>());
 
 			//HelloHomeGateway
 			container.Register(Component.For<HelloHomeGateway>());

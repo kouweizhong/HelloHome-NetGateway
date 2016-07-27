@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "Common\Common.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebApi", "WebApi\WebApi.csproj", "{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler", "Scheduler\Scheduler.csproj", "{80261CF2-F1F5-4A02-A637-7978CD64DBD2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DbMigrations", "DbMigrations\DbMigrations.csproj", "{4E3CD4B8-2ECE-40AE-87C7-EDDD0073F5DA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -39,6 +43,14 @@ Global
 		{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}.Debug|x86.Build.0 = Debug|x86
 		{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}.Release|x86.ActiveCfg = Release|x86
 		{ABED9D8F-0BC5-49C5-B9CC-6E3EC6F3B2AD}.Release|x86.Build.0 = Release|x86
+		{80261CF2-F1F5-4A02-A637-7978CD64DBD2}.Debug|x86.ActiveCfg = Debug|x86
+		{80261CF2-F1F5-4A02-A637-7978CD64DBD2}.Debug|x86.Build.0 = Debug|x86
+		{80261CF2-F1F5-4A02-A637-7978CD64DBD2}.Release|x86.ActiveCfg = Release|x86
+		{80261CF2-F1F5-4A02-A637-7978CD64DBD2}.Release|x86.Build.0 = Release|x86
+		{4E3CD4B8-2ECE-40AE-87C7-EDDD0073F5DA}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{4E3CD4B8-2ECE-40AE-87C7-EDDD0073F5DA}.Debug|x86.Build.0 = Debug|Any CPU
+		{4E3CD4B8-2ECE-40AE-87C7-EDDD0073F5DA}.Release|x86.ActiveCfg = Release|Any CPU
+		{4E3CD4B8-2ECE-40AE-87C7-EDDD0073F5DA}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{11E62618-0841-48E7-9A19-D54E956EBAE8} = {50F4B153-BF79-424F-A3DF-47AF5BD75676}
@@ -54,12 +66,16 @@ Global
 		$0.NameConventionPolicy = $3
 		$3.Rules = $4
 		$4.NamingRule = $5
-		$5.Name = Namespaces
-		$5.AffectedEntity = Namespace
-		$5.VisibilityMask = VisibilityMask
-		$5.NamingStyle = PascalCase
+		$5.Name = Private fields
+		$5.AffectedEntity = Field, ReadonlyField
+		$5.VisibilityMask = Private
+		$5.NamingStyle = CamelCase
 		$5.IncludeInstanceMembers = True
-		$5.IncludeStaticEntities = True
+		$5.IncludeStaticEntities = False
+		$5.RequiredPrefixes = $28
+		$28.String = _
+		$5.RequiredSuffixes = $29
+		$29.String = Exception
 		$4.NamingRule = $6
 		$6.Name = Types
 		$6.AffectedEntity = Class, Struct, Enum, Delegate

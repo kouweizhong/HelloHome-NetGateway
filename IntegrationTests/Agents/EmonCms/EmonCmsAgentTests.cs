@@ -1,5 +1,4 @@
-﻿using System;
-using NUnit.Framework;
+﻿using NUnit.Framework;
 using HelloHome.NetGateway.Agents.EmonCms;
 using HelloHome.NetGateway.Configuration.AppSettings;
 using System.Collections.Generic;

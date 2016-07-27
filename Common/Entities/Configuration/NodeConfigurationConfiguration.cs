@@ -9,10 +9,16 @@ namespace HelloHome.Common.Entities.Configuration
 		public NodeConfigurationConfiguration ()
 		{
 			ToTable ("Node");
-			HasKey (_ => _.NodeId);
-			Property (_ => _.NodeId).HasColumnName ("nodeId").IsRequired ().HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);;
-			Property (_ => _.Hal1Pin).HasColumnName ("confHal1");
-			Property (_ => _.Hal2Pin).HasColumnName ("confHal2");
+			HasKey (x => x.NodeId);
+			Property (x => x.NodeId)
+				.HasColumnName ("nodeId")
+				.IsRequired ();
+			Property (x => x.Name)
+				.HasColumnName ("Name")
+				.IsOptional ();
+			Property (x => x.EmonCmsNodeId)
+				.HasColumnName ("EmonCmdNodeId")
+				.IsOptional();
 		}
 	}
 }

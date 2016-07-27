@@ -8,12 +8,15 @@ namespace HelloHome.NetGateway.WindsorInstallers
 {
 	public class PerProcessingContextScopeAccessor : IScopeAccessor
 	{
-		static readonly ConcurrentDictionary<Guid, ILifetimeScope> collection = new ConcurrentDictionary<Guid, ILifetimeScope>();
+		private readonly ConcurrentDictionary<Guid, ILifetimeScope> collection = new ConcurrentDictionary<Guid, ILifetimeScope>();
+		private readonly DefaultLifetimeScope Default = new DefaultLifetimeScope ();
 
 		#region IScopeAccessor implementation
 		public ILifetimeScope GetScope (Castle.MicroKernel.Context.CreationContext context)
 		{
-			return collection.GetOrAdd(ProcessingContext.ContextId, id => new DefaultLifetimeScope());
+			if (ProcessingContext.Current == null)
+				return Default;
+			return collection.GetOrAdd(ProcessingContext.Current.ContextId, id => new DefaultLifetimeScope());
 		}
 		#endregion
 

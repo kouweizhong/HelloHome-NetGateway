@@ -13,7 +13,7 @@ namespace HelloHome.NetGateway
 		readonly INodeGatewayAgent _nodeGatewayAgent;
 		readonly IGatewayPipelineFactory _pipelineFactory;
 
-		public HelloHomeGateway (INodeGatewayAgent nodeGatewayAgent, IGatewayPipelineFactory pipelineFactory)
+		public HelloHomeGateway (IEMonCmsUpdater emonCmsUpdater, INodeGatewayAgent nodeGatewayAgent, IGatewayPipelineFactory pipelineFactory)
 		{
 			_pipelineFactory = pipelineFactory;
 			_nodeGatewayAgent = nodeGatewayAgent;

@@ -7,17 +7,19 @@ namespace HelloHome.NetGateway.Pipeline
 {
 	public class ProcessingContext
 	{
+		[ThreadStatic]
+		private static ProcessingContext _current;
+
 		public ProcessingContext (IncomingMessage incomingMessage)
 		{
 			IncomingMessage = incomingMessage;
 			Responses = new List<OutgoingMessage> ();
-			_contextId = Guid.NewGuid ();
+			ContextId = Guid.NewGuid ();
 		}
 
-		[ThreadStatic]
-		static Guid _contextId;
+		public static ProcessingContext Current { get { return _current; } }
 
-		public static Guid ContextId { get { return _contextId; } }
+		public Guid ContextId { get; private set; }
 
 		public Node Node { get; set; }
 

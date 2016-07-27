@@ -25,14 +25,14 @@ namespace HelloHome.NetGateway
 			Database.SetInitializer<HelloHomeDbContext> (null);
 
 			var container = new Castle.Windsor.WindsorContainer ();
-			container.Install (new DefaultInstaller (typeof(NodeGatewayAgent)));
+			container.Install (new DefaultInstaller());
 
 			var dbContext = container.Resolve<HelloHomeDbContext> ("PipelineFreeDbContext");
 			Console.WriteLine ($"Node count : {dbContext.Nodes.Count()}");
 
 			container.Resolve<HelloHomeGateway> ();
 
-			var emonCmsUpdater = container.Resolve<EmonCmsUpdater> ();
+			var emonCmsUpdater = container.Resolve<IEMonCmsUpdater> ();
 			var timer = new System.Timers.Timer (20000) { AutoReset = true };
 			timer.Elapsed += (sender, e) => emonCmsUpdater.Update ();
 			//timer.Enabled = true;
