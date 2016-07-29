@@ -1,43 +1,47 @@
 ﻿using System;
-using HelloHome.NetGateway.Pipeline;
+using System.ComponentModel;
 using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.Common.Entities;
-using log4net;
+using HelloHome.NetGateway.Handlers;
+using NLog;
 
 namespace HelloHome.NetGateway
 {
-	public class HelloHomeGateway
-	{
-		static readonly ILog log = LogManager.GetLogger(typeof(HelloHomeGateway).Name);
-		readonly INodeGatewayAgent _nodeGatewayAgent;
-		readonly IGatewayPipelineFactory _pipelineFactory;
+    public class HelloHomeGateway
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-		public HelloHomeGateway (IEMonCmsUpdater emonCmsUpdater, INodeGatewayAgent nodeGatewayAgent, IGatewayPipelineFactory pipelineFactory)
-		{
-			_pipelineFactory = pipelineFactory;
-			_nodeGatewayAgent = nodeGatewayAgent;
+        readonly INodeGatewayAgent _nodeGatewayAgent;
+        private readonly IMessageHandlerFactory _handlerFactory;
 
-			nodeGatewayAgent.OnMessageReceived += MessageReceived; 
-			nodeGatewayAgent.Start ();
-		}
+        public HelloHomeGateway(IEMonCmsUpdater emonCmsUpdater, INodeGatewayAgent nodeGatewayAgent, IMessageHandlerFactory handlerFactory)
+        {
+            _handlerFactory = handlerFactory;
+            _nodeGatewayAgent = nodeGatewayAgent;
 
-		public void MessageReceived(object sender, IncomingMessage message)
-		{
-			var processingContext = new ProcessingContext (message);
-			var pipeline = _pipelineFactory.Create ();
-			try {
-				pipeline.Process (processingContext);
-				foreach (var om in processingContext.Responses)
-					_nodeGatewayAgent.Send (om);				
-			}
-			catch(Exception ex){
-				log.Error (ex.Message);
-			}
-			finally{
-				_pipelineFactory.Release (pipeline);
-			}
-		}
-	}
+            nodeGatewayAgent.OnMessageReceived += MessageReceived;
+            nodeGatewayAgent.Start();
+        }
+
+        public void MessageReceived(object sender, IncomingMessage message)
+        {
+            var handler = _handlerFactory.Create(message);
+            try
+            {
+                var outMessages = handler.Handle(message);
+                if(outMessages != null)
+                    foreach (var om in outMessages)
+                        _nodeGatewayAgent.Send(om);
+            }
+            catch (Exception ex)
+            {
+                Logger.Error(ex.Message);
+            }
+            finally
+            {
+                _handlerFactory.Dispose(handler);
+            }
+        }
+    }
 }
 

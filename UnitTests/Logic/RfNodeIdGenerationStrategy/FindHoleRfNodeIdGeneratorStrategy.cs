@@ -9,11 +9,11 @@ namespace UnitTests.Logic.RfNodeIdGenerationStrategy
 	[TestFixture]
 	public class FindHoleRfNodeIdGeneratorStrategyTests
 	{
-		readonly FindHoleRfNodeIdGenerationStrategy _sut;
+		readonly FindHoleRfIdGenerationStrategy _sut;
 
 		public FindHoleRfNodeIdGeneratorStrategyTests ()
 		{
-			_sut = new FindHoleRfNodeIdGenerationStrategy ();
+			_sut = new FindHoleRfIdGenerationStrategy ();
 			_sut.MaxSupportedConcurrentRequest = 3;
 		}
 

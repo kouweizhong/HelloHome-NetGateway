@@ -7,42 +7,47 @@ using System.Collections.Generic;
 
 namespace HelloHome.NetGateway
 {
-	public interface IEMonCmsUpdater
-	{
-		void Update ();
-	}
+    public interface IEMonCmsUpdater
+    {
+        void Update();
+    }
 
-	public class EMonCmsUpdater : IEMonCmsUpdater
-	{
-		IEmonCmsAgent _emonCmsAgent;
+    public class EMonCmsUpdater : IEMonCmsUpdater
+    {
+        readonly IEmonCmsAgent _emonCmsAgent;
 
-		public EMonCmsUpdater (IEmonCmsAgent emonCmsAgent)
-		{
-			_emonCmsAgent = emonCmsAgent;
-			
-		}
+        public EMonCmsUpdater(IEmonCmsAgent emonCmsAgent)
+        {
+            _emonCmsAgent = emonCmsAgent;
 
-		public void Update ()
-		{
-			using (var dbContext = new HelloHomeDbContext ()) {
-				var nodes = dbContext.Nodes
-					.Include (_ => _.SubNodes)
-					.Include (_ => _.LatestValues)
-					.Where (_ => _.EmonCmsNodeId != null);
-				foreach (var node in nodes) {
-					var values = new List<float> ();
-					values.Add (node.LatestValues.VIn ?? 0);
-					values.Add (node.LatestValues.Temperature ?? 0);
-					values.Add (node.LatestValues.Humidity ?? 0);
-					values.Add (node.UpTime);
-					foreach (var subNode in node.SubNodes.OrderBy(_ => _.Number)) {
-						values.Add (subNode.PulseCount);
-					}
-					values.Add (node.LastRssi);
-					_emonCmsAgent.Send (node.EmonCmsNodeId.Value, values);		
-				}
-			}
-		}
-	}
+        }
+
+        public void Update()
+        {
+            using (var dbContext = new HelloHomeDbContext())
+            {
+                var nodes = dbContext.Nodes
+                    .Include(_ => _.Ports)
+                    .Include(_ => _.LatestValues)
+                    .Where(_ => _.Configuration.EmonCmsNodeId.HasValue);
+                foreach (var node in nodes)
+                {
+                    var values = new List<float>
+                    {
+                        node.LatestValues.VIn ?? 0,
+                        node.LatestValues.Temperature ?? 0,
+                        node.LatestValues.Humidity ?? 0,
+                        node.LastSeen.HasValue ? (float) (DateTime.Now - node.LastSeen.Value).TotalDays : 0
+                    };
+                    foreach (var port in node.Ports.OrderBy(_ => _.Number))
+                    {
+                        values.Add(port.PulseCount);
+                    }
+                    values.Add(node.LastRssi);
+                    _emonCmsAgent.Send(node.Configuration.EmonCmsNodeId.Value, values);
+                }
+            }
+        }
+    }
 }
 

@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace HelloHome.Common.Entities.Configuration
 {
-	public class SubNodeConfiguration : EntityTypeConfiguration<SubNode>
+	public class SubNodeConfiguration : EntityTypeConfiguration<NodePort>
 	{
 		public SubNodeConfiguration ()
 		{

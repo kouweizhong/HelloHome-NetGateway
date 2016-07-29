@@ -56,21 +56,36 @@
     <Reference Include="Moq">
       <HintPath>..\packages\Moq.4.5.16\lib\net45\Moq.dll</HintPath>
     </Reference>
+    <Reference Include="FizzWare.NBuilder">
+      <HintPath>..\packages\NBuilder.3.0.1.1\lib\FizzWare.NBuilder.dll</HintPath>
+    </Reference>
+    <Reference Include="Faker.NET4">
+      <HintPath>..\packages\Faker.Net.1.0.3\lib\net40\Faker.NET4.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agents\EmonCms\EmonCmsAgentTests.cs" />
     <Compile Include="NodeStartupTests.cs" />
+    <Compile Include="Common\Entities\Configuration\EntityConfigurationTest.cs" />
+    <Compile Include="Common\Entities\Configuration\NodeConfigurartionTests.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
     <Folder Include="Agents\" />
     <Folder Include="Agents\EmonCms\" />
     <Folder Include="Pipeline\" />
+    <Folder Include="Common\" />
+    <Folder Include="Common\Entities\" />
+    <Folder Include="Common\Entities\Configuration\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetGateway\NetGateway.csproj">
       <Project>{31C6EF44-19EC-4DF5-9768-3BFE427B22FA}</Project>
       <Name>NetGateway</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{5D05E63F-D6E2-462D-9086-E0C120386600}</Project>
+      <Name>Common</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

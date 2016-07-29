@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -31,6 +31,10 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.4.3.6\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Configuration" />
     <Reference Include="Castle.Windsor">
@@ -48,9 +52,6 @@
     <Reference Include="Castle.Core">
       <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="log4net">
-      <HintPath>..\packages\log4net.2.0.5\lib\net45-full\log4net.dll</HintPath>
-    </Reference>
     <Reference Include="MySql.Data">
       <HintPath>..\packages\MySql.Data.6.9.9\lib\net45\MySql.Data.dll</HintPath>
     </Reference>
@@ -62,6 +63,15 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Commands\CreateNodeCommand.cs" />
+    <Compile Include="Handlers\CommentHandler.cs" />
+    <Compile Include="Handlers\IMessageHandler.cs" />
+    <Compile Include="Handlers\IMessageHandlerFactory.cs" />
+    <Compile Include="Handlers\MessageHandler.cs" />
+    <Compile Include="Handlers\NodeInfoHandler.cs" />
+    <Compile Include="Handlers\NodeStartedHandler.cs" />
+    <Compile Include="Logic\TimeProvider.cs" />
+    <Compile Include="Logic\TouchNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
@@ -84,14 +94,16 @@
     <Compile Include="Agents\NodeGateway\Domain\NodeStartedReport.cs" />
     <Compile Include="Agents\NodeGateway\Domain\IncomingMessage.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\IMessageParser.cs" />
+    <Compile Include="Queries\FindNodeQuery.cs" />
+    <Compile Include="Queries\ListRfIds.cs" />
     <Compile Include="WindsorInstallers\DefaultInstaller.cs" />
     <Compile Include="Agents\NodeGateway\Domain\NodeConfigCommand.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\IMessageEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\MessageEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\NodeConfigEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\NodeStartedParser.cs" />
-    <Compile Include="Logic\RfNodeIdGenerationStrategy\FindHoleRfNodeIdGenerationStrategy.cs" />
-    <Compile Include="Logic\RfNodeIdGenerationStrategy\IRfNodeIdGenerationStrategy.cs" />
+    <Compile Include="Logic\RfNodeIdGenerationStrategy\FindHoleRfIdGenerationStrategy.cs" />
+    <Compile Include="Logic\RfNodeIdGenerationStrategy\IRfIdGenerationStrategy.cs" />
     <Compile Include="Agents\NodeGateway\Domain\PinConfig.cs" />
     <Compile Include="Agents\NodeGateway\Domain\PinMode.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\PinConfigEncoder.cs" />
@@ -100,50 +112,21 @@
     <Compile Include="Agents\EmonCms\EmonCmsAgent.cs" />
     <Compile Include="Configuration\IEmonCmsConfiguration.cs" />
     <Compile Include="Agents\EmonCms\IEmonCmsAgent.cs" />
-    <Compile Include="Processors\CommentProcessor.cs" />
-    <Compile Include="Processors\EnvironmentReportProcessor.cs" />
-    <Compile Include="Processors\IMessageProcessor.cs" />
-    <Compile Include="Processors\MessageProcessor.cs" />
-    <Compile Include="Processors\NodeInfoProcessor.cs" />
-    <Compile Include="Processors\PulseReportProcessor.cs" />
     <Compile Include="EmonCmsUpdater.cs" />
     <Compile Include="Agents\NodeGateway\FakeNodeGatewayAgent.cs" />
-    <Compile Include="Processors\IMessageProcessorFactory.cs" />
-    <Compile Include="Processors\NodeStartedProcessor.cs" />
-    <Compile Include="Pipeline\ProcessingContext.cs" />
     <Compile Include="Agents\NodeGateway\Domain\ISignedMessage.cs" />
-    <Compile Include="Pipeline\GatewayPipeline.cs" />
     <Compile Include="HelloHomeGateway.cs" />
-    <Compile Include="Pipeline\IGatewayPipeline.cs" />
-    <Compile Include="Pipeline\IGatewayPipelineFactory.cs" />
-    <Compile Include="Pipeline\Configuration\PipelineModuleCollection.cs" />
-    <Compile Include="Pipeline\Configuration\PipelineModuleElement.cs" />
-    <Compile Include="Pipeline\Configuration\PipelineConfigurationSection.cs" />
-    <Compile Include="Pipeline\Modules\UpdateStatisticsModule.cs" />
-    <Compile Include="Pipeline\Modules\LoadContextModule.cs" />
-    <Compile Include="Pipeline\Modules\ProcessMessageModule.cs" />
-    <Compile Include="Pipeline\Modules\IPipelineModule.cs" />
-    <Compile Include="Pipeline\Modules\IPipelineModuleFactory.cs" />
-    <Compile Include="WindsorInstallers\ProcessorComponentSelctor.cs" />
-    <Compile Include="WindsorInstallers\PerProcessingContextScopeAccessor.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Configuration\" />
-    <Folder Include="Configuration\AppSettings\" />
-    <Folder Include="Agents\" />
-    <Folder Include="Processors\" />
-    <Folder Include="WindsorInstallers\" />
-    <Folder Include="Agents\NodeGateway\Encoders\" />
-    <Folder Include="Logic\" />
-    <Folder Include="Logic\RfNodeIdGenerationStrategy\" />
-    <Folder Include="Agents\EmonCms\" />
-    <Folder Include="Pipeline\" />
-    <Folder Include="Pipeline\Configuration\" />
-    <Folder Include="Pipeline\Modules\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
+    <Content Include="NLog.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <None Include="NLog.xsd">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>

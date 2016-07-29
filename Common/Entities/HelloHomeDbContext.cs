@@ -1,14 +1,19 @@
 ﻿using System;
 using System.Data.Entity;
-using log4net;
+using NLog;
 
 namespace HelloHome.Common.Entities
 {
-	public class HelloHomeDbContext : DbContext
-	{
-		static readonly ILog log = LogManager.GetLogger(typeof(HelloHomeDbContext).Name);
+    public interface IHelloHomeDbContext
+    {
+        IDbSet<Node> Nodes { get; }
+    }
 
-		public HelloHomeDbContext ()
+    public class HelloHomeDbContext : DbContext, IHelloHomeDbContext
+    {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public HelloHomeDbContext ()
 		{
 			//Database.Log = Console.Write;
 		}
@@ -21,9 +26,9 @@ namespace HelloHome.Common.Entities
 
 		public Guid ContextId { get; } = Guid.NewGuid();
 
-		public DbSet<Node> Nodes { get; set; }
-		public DbSet<SubNode> SubNodes { get; set; }
-		public DbSet<PulseData> PulseData { get; set; }
+		public IDbSet<Node> Nodes { get; set; }
+		public IDbSet<NodePort> SubNodes { get; set; }
+		public IDbSet<PulseData> PulseData { get; set; }
 	}
 }
 

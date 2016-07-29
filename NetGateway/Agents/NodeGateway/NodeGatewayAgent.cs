@@ -8,21 +8,20 @@ using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
 using System.Collections.Concurrent;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using log4net;
-using System.Threading;
+using NLog;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway
 {
 
 	public class NodeGatewayAgent : INodeGatewayAgent, IDisposable
 	{
-		static readonly ILog log = LogManager.GetLogger(typeof(NodeGatewayAgent).FullName);
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-		readonly SerialPort _serial;
-		List<IMessageParser> _parsers;
-		List<IMessageEncoder> _encoders;
-		Task readingTask;
-		volatile bool read = false;
+	    private readonly SerialPort _serial;
+	    private readonly List<IMessageParser> _parsers;
+	    private readonly List<IMessageEncoder> _encoders;
+	    private Task _readingTask;
+	    private volatile bool _read = false;
 
 		public MessageReceivedHandler OnMessageReceived { get; set;}
 
@@ -46,31 +45,31 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 		public void Start ()
 		{
 			if (!_serial.IsOpen) {
-				log.DebugFormat ("Opening serial port {0}", _serial.PortName);
+				Logger.Debug("Opening serial port {0}", _serial.PortName);
 				_serial.Open ();
-				log.Debug ("Serial port is now open");
+                Logger.Debug ("Serial port is now open");
 			}
 				
-			read = true;
-			readingTask = new Task (ListenSerial);
-			readingTask.ContinueWith (t => {
+			_read = true;
+			_readingTask = new Task (ListenSerial);
+			_readingTask.ContinueWith (t => {
 				if(t.Exception != null)
-					log.FatalFormat("Exception : {0}", t.Exception);
+                    Logger.Fatal("Exception : {0}", t.Exception);
 			});
-			readingTask.Start ();
+			_readingTask.Start ();
 		}
 
 		public void Stop ()
 		{
-			read = false;
-			readingTask.Wait ();
+			_read = false;
+			_readingTask.Wait ();
 		}
 
 		public void Send (OutgoingMessage message)
 		{
 			var encoder = _encoders.FirstOrDefault (_ => _.CanEncode (message));
 			if (encoder == null)
-				throw new ApplicationException (String.Format ("No encoder found for {0}", message.GetType ().Name));
+				throw new ApplicationException ($"No encoder found for {message.GetType().Name}");
 			var bytes = encoder.Encode (message);
 			_serial.Write (bytes, 0, bytes.Length);
 			_serial.WriteLine ("");
@@ -80,34 +79,33 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 
 		private void ListenSerial ()
 		{
-			while (read) {
+			while (_read) {
 				var byteRecord = ReadLine (new byte[] { 0x0D, 0x0A });
-				log.DebugFormat ("Rx: {0}", BitConverter.ToString(byteRecord));
+				Logger.Debug("Rx: {0}", BitConverter.ToString(byteRecord));
 
 				var parser = _parsers.First (_ => _.CanParse (byteRecord));
-				log.DebugFormat ("Found parser: {0}", parser.GetType().Name);
+                Logger.Debug("Found parser: {0}", parser.GetType().Name);
 				var message = parser.Parse (byteRecord);
-				log.DebugFormat ("Message successfully parsed: {0}", message);
+                Logger.Debug("Message successfully parsed: {0}", message);
 
-				if (OnMessageReceived != null)
-					OnMessageReceived (this, message);
-			}
+                OnMessageReceived?.Invoke(this, message);
+            }
 		}
 
 		private byte [] ReadLine (byte [] eof) {
 			List<byte> bytes = new List<byte> (100);
 
 			int eofMatchCharCount = 0;
-			while (read && eofMatchCharCount < eof.Length) {
+			while (_read && eofMatchCharCount < eof.Length) {
 				var newByte = _serial.BaseStream.ReadByte ();
 				if (newByte == -1) continue;	
 				if (newByte == eof [eofMatchCharCount])
 					eofMatchCharCount++;
 				bytes.Add ((byte)newByte);
 			}
-			if (read)
+			if (_read)
 				return bytes.ToArray ();
-			log.WarnFormat ("read was found false.Exiting with empty array");
+			Logger.Warn("read was found false.Exiting with empty array");
 			return new byte[0];
 		}
 
@@ -115,7 +113,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 
 		public void Dispose ()
 		{
-			read = false;
+			_read = false;
 			if (_serial.IsOpen)
 				_serial.Close ();
 		}

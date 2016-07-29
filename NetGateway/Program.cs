@@ -1,27 +1,20 @@
 ﻿using System;
-using HelloHome.NetGateway.Configuration.AppSettings;
-using Castle.MicroKernel.Registration;
-using HelloHome.NetGateway.Configuration;
 using System.Data.Entity;
 using HelloHome.Common.Entities;
 using System.Linq;
-using HelloHome.NetGateway.Agents.NodeGateway;
-using System.Collections.Generic;
-using HelloHome.NetGateway.Processors;
 using HelloHome.NetGateway.WindsorInstallers;
-using log4net;
-using HelloHome.NetGateway.Pipeline;
+using NLog;
 
 
 namespace HelloHome.NetGateway
 {
 	class MainClass
 	{
-		static readonly ILog log = LogManager.GetLogger(typeof(MainClass).FullName);
-			
-		public static void Main (string[] args)
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+
+        public static void Main (string[] args)
 		{
-			log.Info ("Starting gateway...");
+			Logger.Info ("Starting gateway...");
 			Database.SetInitializer<HelloHomeDbContext> (null);
 
 			var container = new Castle.Windsor.WindsorContainer ();

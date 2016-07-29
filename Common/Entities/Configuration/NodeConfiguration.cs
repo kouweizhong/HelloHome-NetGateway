@@ -14,7 +14,7 @@ namespace HelloHome.Common.Entities.Configuration
 			Property (_ => _.RfId).HasColumnName ("RfId");
 
 			HasRequired (_ => _.Configuration).WithRequiredPrincipal ();
-			HasMany (_ => _.NodeInfoData).WithRequired ().HasForeignKey (_ => _.NodeId);
+			HasMany (_ => _.NodeInfoData).WithRequired ().HasForeignKey (_ => _.Id);
 			HasMany (_ => _.EnvironmentData).WithRequired ().HasForeignKey (_ => _.NodeId);
 		}
 	}
