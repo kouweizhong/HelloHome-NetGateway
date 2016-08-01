@@ -31,8 +31,20 @@
     <ConsolePause>false</ConsolePause>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Loggly, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\loggly-csharp.4.5.1.6\lib\net45\Loggly.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Loggly.Config, Version=4.5.1.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\loggly-csharp-config.4.5.1.6\lib\net45\Loggly.Config.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="NLog, Version=4.0.0.0, Culture=neutral, PublicKeyToken=5120e14c03d0593c, processorArchitecture=MSIL">
       <HintPath>..\packages\NLog.4.3.6\lib\net45\NLog.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="NLog.Targets.Loggly, Version=4.5.2.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\NLog.Targets.Loggly.4.5.2.5\lib\net45\NLog.Targets.Loggly.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />

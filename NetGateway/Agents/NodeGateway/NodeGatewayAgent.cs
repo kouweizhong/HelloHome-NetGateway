@@ -15,13 +15,13 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 
 	public class NodeGatewayAgent : INodeGatewayAgent, IDisposable
 	{
-        private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-	    private readonly SerialPort _serial;
-	    private readonly List<IMessageParser> _parsers;
-	    private readonly List<IMessageEncoder> _encoders;
-	    private Task _readingTask;
-	    private volatile bool _read = false;
+		private readonly SerialPort _serial;
+		private readonly List<IMessageParser> _parsers;
+		private readonly List<IMessageEncoder> _encoders;
+		private Task _readingTask;
+		private volatile bool _read = false;
 
 		public MessageReceivedHandler OnMessageReceived { get; set;}
 
@@ -47,14 +47,14 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 			if (!_serial.IsOpen) {
 				Logger.Debug("Opening serial port {0}", _serial.PortName);
 				_serial.Open ();
-                Logger.Debug ("Serial port is now open");
+				Logger.Debug ("Serial port is now open");
 			}
 				
 			_read = true;
 			_readingTask = new Task (ListenSerial);
 			_readingTask.ContinueWith (t => {
 				if(t.Exception != null)
-                    Logger.Fatal("Exception : {0}", t.Exception);
+					Logger.Fatal("Exception : {0}", t.Exception);
 			});
 			_readingTask.Start ();
 		}
@@ -84,12 +84,12 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 				Logger.Debug("Rx: {0}", BitConverter.ToString(byteRecord));
 
 				var parser = _parsers.First (_ => _.CanParse (byteRecord));
-                Logger.Debug("Found parser: {0}", parser.GetType().Name);
+				Logger.Debug("Found parser: {0}", parser.GetType().Name);
 				var message = parser.Parse (byteRecord);
-                Logger.Debug("Message successfully parsed: {0}", message);
+				Logger.Debug("Message successfully parsed: {0}", message);
 
-                OnMessageReceived?.Invoke(this, message);
-            }
+				OnMessageReceived?.Invoke(this, message);
+			}
 		}
 
 		private byte [] ReadLine (byte [] eof) {
