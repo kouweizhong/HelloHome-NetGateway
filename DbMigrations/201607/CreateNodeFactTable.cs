@@ -8,19 +8,19 @@ namespace DbMigrations
 	{
 		public override void Down ()
 		{
-			Delete.ForeignKey ("FK_NodeFact_Node").OnTable ("NodeFact");
-			Delete.Table ("NodeFact");
+			Delete.ForeignKey ("FK_NodeFact_Node").OnTable ("NodeFacts");
+			Delete.Table ("NodeFacts");
 		}
 
 		public override void Up ()
 		{
-			Create.Table ("NodeFact")
+			Create.Table ("NodeFacts")
 				  .WithColumn ("NodeId").AsInt32 ().PrimaryKey ()
 				  .WithColumn ("LastStartup").AsDateTime ().NotNullable ()
-				  .WithColumn ("MaxUpTime").AsFloat ().Nullable ()
+				  .WithColumn ("MaxUpTime").AsFloat ().NotNullable ()
 				  .WithColumn ("Version").AsString (10).NotNullable ();
 			Create.ForeignKey ("FK_NodeFact_Node")
-				  .FromTable ("NodeFact").ForeignColumn ("NodeId")
+				  .FromTable ("NodeFacts").ForeignColumn ("NodeId")
 				  .ToTable ("Node").PrimaryColumn ("Id");
 		}
 	}

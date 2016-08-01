@@ -10,11 +10,20 @@ namespace HelloHome.Common.Entities.Configuration
 		{
 			ToTable ("Node");
 			HasKey (_ => _.Id);
-			Property (_ => _.Signature).HasColumnName ("signature");
-			Property (_ => _.RfId).HasColumnName ("RfId");
+			Property (_ => _.Signature)
+				.HasColumnName ("signature")
+				.IsRequired ();
+			Property (_ => _.RfId)
+				.HasColumnName ("RfId")
+				.IsRequired();
+			Property (x => x.LastRssi)
+				.HasColumnName ("LastRssi")
+				.IsRequired ();
 
-			HasRequired (_ => _.Configuration).WithRequiredPrincipal ();
-			HasMany (_ => _.NodeInfoData).WithRequired ().HasForeignKey (_ => _.Id);
+			HasOptional (x => x.LatestValues).WithRequired ();
+			HasOptional (_ => _.Configuration).WithRequired ();
+			HasOptional (x => x.NodeFacts).WithRequired();
+			HasMany (_ => _.NodeInfoData).WithRequired ().HasForeignKey(x=>x.NodeId);
 			HasMany (_ => _.EnvironmentData).WithRequired ().HasForeignKey (_ => _.NodeId);
 		}
 	}

@@ -25,10 +25,11 @@ namespace HelloHome.NetGateway
 
         public void MessageReceived(object sender, IncomingMessage message)
         {
-            var handler = _handlerFactory.Create(message);
+			IMessageHandler handler = null;
             try
             {
-                var outMessages = handler.Handle(message);
+				handler = _handlerFactory.Create (message);
+				var outMessages = handler.Handle(message);
                 if(outMessages != null)
                     foreach (var om in outMessages)
                         _nodeGatewayAgent.Send(om);
@@ -39,7 +40,8 @@ namespace HelloHome.NetGateway
             }
             finally
             {
-                _handlerFactory.Dispose(handler);
+				if(handler != null)
+                	_handlerFactory.Dispose(handler);
             }
         }
     }

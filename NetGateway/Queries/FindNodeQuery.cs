@@ -3,7 +3,7 @@ using HelloHome.Common.Entities;
 
 namespace HelloHome.NetGateway.Queries
 {
-    public interface IFindNodeQuery
+    public interface IFindNodeQuery : IQuery
     {
         Node BySignature(long signature);
         Node ByRfId(int rfId);

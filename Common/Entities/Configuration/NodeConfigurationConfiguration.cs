@@ -8,7 +8,7 @@ namespace HelloHome.Common.Entities.Configuration
 	{
 		public NodeConfigurationConfiguration ()
 		{
-			ToTable ("Node");
+			ToTable ("NodeConfig");
 			HasKey (x => x.NodeId);
 			Property (x => x.NodeId)
 				.HasColumnName ("nodeId")

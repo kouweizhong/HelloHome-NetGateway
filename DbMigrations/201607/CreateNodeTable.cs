@@ -15,9 +15,10 @@ namespace DbMigrations
 		{
 			Create.Table ("Node")
 				  .WithColumn ("Id").AsInt32 ().PrimaryKey ().Identity ()
-			      .WithColumn ("Signature").AsCustom ("BIGINT(20) unsigned").NotNullable ()
+				  .WithColumn ("Signature").AsCustom ("BIGINT(20) unsigned").NotNullable ()
 				  .WithColumn ("RfId").AsInt16 ().NotNullable ()
-				  .WithColumn ("LastSeen").AsDateTime ().NotNullable ();
+				  .WithColumn ("LastSeen").AsDateTime ().NotNullable ()
+				  .WithColumn ("LastRssi").AsInt32 ().NotNullable ();
 		}
 	}
 }

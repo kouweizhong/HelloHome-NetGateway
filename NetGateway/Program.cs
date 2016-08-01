@@ -20,9 +20,6 @@ namespace HelloHome.NetGateway
 			var container = new Castle.Windsor.WindsorContainer ();
 			container.Install (new DefaultInstaller());
 
-			var dbContext = container.Resolve<HelloHomeDbContext> ("PipelineFreeDbContext");
-			Console.WriteLine ($"Node count : {dbContext.Nodes.Count()}");
-
 			container.Resolve<HelloHomeGateway> ();
 
 			var emonCmsUpdater = container.Resolve<IEMonCmsUpdater> ();

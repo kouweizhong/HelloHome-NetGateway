@@ -53,7 +53,7 @@
     <Compile Include="Entities\Configuration\NodeConfiguration.cs" />
     <Compile Include="Entities\Configuration\NodeConfigurationConfiguration.cs" />
     <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
-    <Compile Include="Entities\Configuration\NodeLatestValuesConfiguration.cs" />
+    <Compile Include="Entities\Configuration\LatestValuesConfiguration.cs" />
     <Compile Include="Entities\Configuration\PulseDataConfiguration.cs" />
     <Compile Include="Entities\Configuration\SubNodeConfiguration.cs" />
     <Compile Include="Entities\EnvironmentData.cs" />
@@ -61,9 +61,9 @@
     <Compile Include="Entities\Node.cs" />
     <Compile Include="Entities\NodeConfiguration.cs" />
     <Compile Include="Entities\NodeInfoData.cs" />
-    <Compile Include="Entities\NodeLatestValues.cs" />
     <Compile Include="Entities\PulseData.cs" />
     <Compile Include="Entities\NodePort.cs" />
+    <Compile Include="NodeFactConfiguration.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

@@ -4,7 +4,7 @@ using HelloHome.NetGateway.Queries;
 
 namespace HelloHome.NetGateway.Commands
 {
-    public interface ICreateNodeCommand
+    public interface ICreateNodeCommand : ICommand
     {
         Node Execute(long signature);
     }

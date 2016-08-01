@@ -116,6 +116,10 @@
     <Compile Include="Agents\NodeGateway\FakeNodeGatewayAgent.cs" />
     <Compile Include="Agents\NodeGateway\Domain\ISignedMessage.cs" />
     <Compile Include="HelloHomeGateway.cs" />
+    <Compile Include="WindsorInstallers\MessageHandlerComponentSelector.cs" />
+    <Compile Include="Queries\IQuery.cs" />
+    <Compile Include="Commands\ICommand.cs" />
+    <Compile Include="Handlers\PulseHandler.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

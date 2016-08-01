@@ -10,6 +10,10 @@ using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Agents.EmonCms;
 using Castle.Facilities.TypedFactory;
+using HelloHome.NetGateway.Handlers;
+using HelloHome.NetGateway.Queries;
+using HelloHome.NetGateway.Commands;
+using HelloHome.NetGateway.Logic;
 
 namespace HelloHome.NetGateway.WindsorInstallers
 {
@@ -42,7 +46,7 @@ namespace HelloHome.NetGateway.WindsorInstallers
 			);
 
 			//dbContext
-			container.Register(Component.For<HelloHomeDbContext>().LifestyleTransient().Named("PipelineFreeDbContext"));
+			container.Register (Component.For<IHelloHomeDbContext> ().ImplementedBy<HelloHomeDbContext>() .LifestyleBoundTo<IMessageHandler> ());
 
 			//Agents
 			if(_nodeAgent == null)
@@ -67,6 +71,29 @@ namespace HelloHome.NetGateway.WindsorInstallers
 
 			//HelloHomeGateway
 			container.Register(Component.For<HelloHomeGateway>());
+
+			//MessageHandlers
+			container.Register (
+				Classes.FromAssemblyContaining<IMessageHandler> ()
+					.BasedOn (typeof (MessageHandler<>))
+					.WithServiceSelf ()
+					.LifestyleTransient (),
+				Component.For<MessageHandlerComponentSelector> ()
+					.LifestyleSingleton(),
+				Component.For<IMessageHandlerFactory> ()
+					.AsFactory(typeof(MessageHandlerComponentSelector))
+			);
+
+			//Queries
+			container.Register (Classes.FromAssemblyContaining<IQuery> ().BasedOn<IQuery> ().WithServiceFirstInterface ().LifestyleBoundTo<IMessageHandler> ());
+			container.Register (Classes.FromAssemblyContaining<ICommand> ().BasedOn<ICommand> ().WithServiceFirstInterface ().LifestyleBoundTo<IMessageHandler> ());
+
+			//Logic
+			container.Register (
+				Component.For<ITimeProvider>().ImplementedBy<TimeProvider>().LifestyleBoundTo<IMessageHandler>(),
+				Component.For<ITouchNode> ().ImplementedBy<TouchNode> ().LifestyleBoundTo<IMessageHandler> (),
+				Component.For<IRfIdGenerationStrategy> ().ImplementedBy<FindHoleRfIdGenerationStrategy> ().LifestyleBoundTo<IMessageHandler> ()
+			);
 		}
 
 		#endregion

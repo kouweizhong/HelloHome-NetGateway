@@ -1,6 +1,7 @@
 ﻿using System;
 using HelloHome.Common.Entities;
 using NUnit.Framework;
+using Xunit;
 
 namespace IntegrationTests.Common.Entities.Configuration
 {
@@ -14,7 +15,7 @@ namespace IntegrationTests.Common.Entities.Configuration
 		}
 
 		[Test]
-		public void CanCreateEntity ()
+		public virtual void CanCreateEntity ()
 		{
 			var e = CreateEntity ();
 			ctx.Set<T> ().Add (e);
