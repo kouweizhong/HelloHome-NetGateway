@@ -13,6 +13,16 @@ namespace IntegrationTests.Common.Entities.Configuration
 					.With (x => x.Signature = Faker.RandomNumber.Next ())
 					.Build ();		
 		}
+
+		protected override Func<Node, bool> GetPredicateToRetrieve (Node e)
+		{
+			return x => x.Id == e.Id;
+		}
+
+		protected override void AssertEquals (Node expected, Node actual)
+		{
+			
+		}
 	}
 }
 
