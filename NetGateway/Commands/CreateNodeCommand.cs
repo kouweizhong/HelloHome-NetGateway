@@ -14,10 +14,12 @@ namespace HelloHome.NetGateway.Commands
         private readonly IHelloHomeDbContext _ctx;
         private readonly IRfIdGenerationStrategy _rfIdGenerationStrategy;
         private readonly IListRfIdsQuery _listRfIdsQuery;
+		private readonly IFindNodeQuery _findNodeQuery;
 
-        public CreateNodeCommand(IHelloHomeDbContext ctx, IRfIdGenerationStrategy rfIdGenerationStrategy, IListRfIdsQuery listRfIdsQuery)
+		public CreateNodeCommand(IHelloHomeDbContext ctx, IRfIdGenerationStrategy rfIdGenerationStrategy, IListRfIdsQuery listRfIdsQuery, IFindNodeQuery findNodeQuery)
         {
-            _ctx = ctx;
+			this._findNodeQuery = findNodeQuery;
+			_ctx = ctx;
             _rfIdGenerationStrategy = rfIdGenerationStrategy;
             _listRfIdsQuery = listRfIdsQuery;
         }

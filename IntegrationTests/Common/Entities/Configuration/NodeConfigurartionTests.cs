@@ -1,31 +1,18 @@
 ﻿using System;
 using FizzWare.NBuilder;
 using HelloHome.Common.Entities;
-using IntegrationTests.Common.Entities.Configuration;
-using NUnit.Framework;
 using Xunit;
 
 namespace IntegrationTests.Common.Entities.Configuration
 {
-	public class NodeConfigurartionTests 
+	public class NodeConfigurartionTests : ConfigurationTest<Node>
 	{
-		HelloHomeDbContext ctx;
-
-		public NodeConfigurartionTests ()
+		protected override Node CreateEntity ()
 		{
-			ctx = new HelloHomeDbContext ();
+			return Builder<Node>.CreateNew ()
+					.With (x => x.Signature = Faker.RandomNumber.Next ())
+					.Build ();		
 		}
-
-		[Test]
-		public void CanCreateEntity ()
-		{
-			var node = Builder<Node>.CreateNew ()
-			                        .With( x=>x.Signature = Faker.RandomNumber.Next())
-			                        .Build ();
-			ctx.Nodes.Add (node);
-			ctx.SaveChanges ();
-		}
-
 	}
 }
 

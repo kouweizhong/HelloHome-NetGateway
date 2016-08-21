@@ -17,7 +17,7 @@ namespace HelloHome.NetGateway.Handlers
         private readonly ICreateNodeCommand _createNodeCommand;
         private readonly ITouchNode _touchNode;
 
-        public NodeStartedHandler(IFindNodeQuery findNodeQuery, ICreateNodeCommand createNodeCommand, ITouchNode touchNode)
+		public NodeStartedHandler(IHelloHomeDbContext dbCtx, IFindNodeQuery findNodeQuery, ICreateNodeCommand createNodeCommand, ITouchNode touchNode) : base(dbCtx)
         {
             _findNodeQuery = findNodeQuery;
             _createNodeCommand = createNodeCommand;
@@ -33,8 +33,7 @@ namespace HelloHome.NetGateway.Handlers
                 outgoingMessages.Add(new NodeConfigCommand
                 {
                     signature = request.Signature,
-                    NewRfAddress = node.RfId
-                
+                    NewRfAddress = node.RfId                
                 });
             }
             node.NodeFacts.Version = $"{request.Major}.{request.Minor}";

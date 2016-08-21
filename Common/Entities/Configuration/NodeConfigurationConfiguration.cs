@@ -17,7 +17,7 @@ namespace HelloHome.Common.Entities.Configuration
 				.HasColumnName ("Name")
 				.IsOptional ();
 			Property (x => x.EmonCmsNodeId)
-				.HasColumnName ("EmonCmdNodeId")
+				.HasColumnName ("EmonCmsNodeId")
 				.IsOptional();
 		}
 	}

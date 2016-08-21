@@ -1,13 +1,19 @@
 ﻿using System;
 
-namespace Common.Exceptions
+namespace HelloHome.Common.Exceptions
 {
-    public class NodeNotFoundException : Exception
+    [Serializable]
+    public class NodeNotFoundException : HelloHomeException
     {
         public NodeNotFoundException(int rfId)
-            :base($"Node with rfId {rfId} not found.")
+            : base("NODE_NOT_FOUND", $"Node with rfId {rfId} not found.")
         {
-            
+
+        }
+        public NodeNotFoundException(long signature)
+            : base("NODE_NOT_FOUND", $"Node with signature {signature} not found.")
+        {
+
         }
     }
 }

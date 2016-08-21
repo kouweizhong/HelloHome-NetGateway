@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using Common.Exceptions;
 using HelloHome.Common.Entities;
+using HelloHome.Common.Exceptions;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using HelloHome.NetGateway.Logic;
 using HelloHome.NetGateway.Queries;
@@ -15,7 +15,7 @@ namespace HelloHome.NetGateway.Handlers
         private readonly IFindNodeQuery _findNodeQuery;
         private readonly ITouchNode _touchNode;
 
-        public NodeInfoHandler(IFindNodeQuery findNodeQuery, ITouchNode touchNode)
+		public NodeInfoHandler(IHelloHomeDbContext dbCtx, IFindNodeQuery findNodeQuery, ITouchNode touchNode) : base(dbCtx)
         {
             _findNodeQuery = findNodeQuery;
             _touchNode = touchNode;

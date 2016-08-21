@@ -19,12 +19,14 @@ namespace HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy
 
 		public byte FindRfAddress (System.Collections.Generic.IList<byte> exisitingRfAddresses)
 		{
+			if (!exisitingRfAddresses.Any ())
+				return (byte)1;
 			var maxExisting = exisitingRfAddresses.Max ();
 			var holes = Enumerable.Range(1, maxExisting).Select(i => (byte)i).Where (i => !exisitingRfAddresses.Contains(i)).ToList ();
 			if (holes.Count >= MaxSupportedConcurrentRequest) {
 				return (byte)holes [_rnd.Next(holes.Count - 1)];
 			}
-			return (byte)(_rnd.Next(maxExisting+1, Math.Min(maxExisting+1+MaxSupportedConcurrentRequest, byte.MaxValue)));
+			return (byte)(_rnd.Next(maxExisting+1, Math.Min(maxExisting+1+MaxSupportedConcurrentRequest, 250)));
 		}
 
 		#endregion	

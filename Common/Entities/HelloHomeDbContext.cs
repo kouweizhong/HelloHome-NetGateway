@@ -7,6 +7,7 @@ namespace HelloHome.Common.Entities
     public interface IHelloHomeDbContext
     {
         IDbSet<Node> Nodes { get; }
+		int Commit ();
     }
 
     public class HelloHomeDbContext : DbContext, IHelloHomeDbContext
@@ -22,6 +23,11 @@ namespace HelloHome.Common.Entities
 		{
 			modelBuilder.Configurations.AddFromAssembly (typeof(HelloHomeDbContext).Assembly);
 			Configuration.LazyLoadingEnabled = false;	
+		}
+
+		public int Commit ()
+		{
+			return SaveChanges ();
 		}
 
 		public Guid ContextId { get; } = Guid.NewGuid();

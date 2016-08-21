@@ -1,11 +1,10 @@
-﻿using NUnit.Framework;
-using HelloHome.NetGateway.Agents.EmonCms;
+﻿using HelloHome.NetGateway.Agents.EmonCms;
 using HelloHome.NetGateway.Configuration.AppSettings;
 using System.Collections.Generic;
+using Xunit;
 
 namespace IntegrationTests.Agents.EmonCms
 {
-	[TestFixture]
 	public class EmonCmsAgentTests
 	{
 		EmonCmsAgent _sut;
@@ -15,13 +14,13 @@ namespace IntegrationTests.Agents.EmonCms
 			_sut = new EmonCmsAgent (new AppSettingsBasedConfiguration ());	
 		}
 
-		[Test]
+		[Fact]
 		public void EmonCms_CanSendJson ()
 		{
 			_sut.Send (new { Tst_Hello = 11.36 });
 		}
 
-		[Test]
+		[Fact]
 		public void EmonCms_CanSendCsv ()
 		{
 			_sut.Send (210, new List<float> { 1, 4, 56.67f });

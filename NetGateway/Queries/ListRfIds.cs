@@ -4,7 +4,7 @@ using HelloHome.Common.Entities;
 
 namespace HelloHome.NetGateway.Queries
 {
-    public interface IListRfIdsQuery
+    public interface IListRfIdsQuery : IQuery
     {
         IList<byte> Execute();
     }

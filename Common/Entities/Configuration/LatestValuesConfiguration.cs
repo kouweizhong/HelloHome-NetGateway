@@ -9,11 +9,11 @@ namespace HelloHome.Common.Entities.Configuration
 		{
 			ToTable ("NodeLatestValues");
 			HasKey (x => x.NodeId);
-			Property (_ => _.Temperature).HasColumnName ("currentTemperature");
-			Property (_ => _.Humidity).HasColumnName ("currentHumidity");
-			Property (_ => _.AtmosphericPressure).HasColumnName ("currentPressure");
-			Property (_ => _.VIn).HasColumnName ("currentVIn");
-			Property (_ => _.SendErrorCount).HasColumnName ("currentSendErrorCount");
+			Property (_ => _.Temperature).HasColumnName ("Temperature");
+			Property (_ => _.Humidity).HasColumnName ("Humidity");
+			Property (_ => _.AtmosphericPressure).HasColumnName ("Pressure");
+			Property (_ => _.VIn).HasColumnName ("VIn");
+			Property (_ => _.SendErrorCount).HasColumnName ("SendErrorCount");
 		}
 	}
 }

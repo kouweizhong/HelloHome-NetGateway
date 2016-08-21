@@ -36,7 +36,7 @@ namespace HelloHome.NetGateway
             }
             catch (Exception ex)
             {
-                Logger.Error(ex.Message);
+                Logger.Error(ex);
             }
             finally
             {
