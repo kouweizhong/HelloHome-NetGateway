@@ -1,34 +1,33 @@
-﻿using System;
-using Castle.MicroKernel.Registration;
+﻿using Castle.MicroKernel.Registration;
 using HelloHome.NetGateway.Configuration;
 using HelloHome.NetGateway.Configuration.AppSettings;
 using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
-using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
+using HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy;
 using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Agents.EmonCms;
 using Castle.Facilities.TypedFactory;
 using HelloHome.NetGateway.Handlers;
 using HelloHome.NetGateway.Queries;
 using HelloHome.NetGateway.Commands;
-using HelloHome.NetGateway.Logic;
+using System;
 
 namespace HelloHome.NetGateway.WindsorInstallers
 {
 	public class DefaultInstaller : IWindsorInstaller
 	{
-		private readonly INodeGatewayAgent _nodeAgent;
-
 		public DefaultInstaller ()
 		{
-			
+
 		}
 
-		public DefaultInstaller (INodeGatewayAgent nodeAgent) 
+		readonly ComponentRegistration<object> [] _overrides;
+
+		public DefaultInstaller (params ComponentRegistration<object>[] overrides)
 		{
-			_nodeAgent = nodeAgent;
+			_overrides = overrides;
 		}
 
 		#region IWindsorInstaller implementation
@@ -36,7 +35,7 @@ namespace HelloHome.NetGateway.WindsorInstallers
 		public void Install (Castle.Windsor.IWindsorContainer container, Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
 		{
 			var kernel = container.Kernel;
-			kernel.Resolver.AddSubResolver(new CollectionResolver(kernel));
+			kernel.Resolver.AddSubResolver (new CollectionResolver (kernel));
 			container.AddFacility<TypedFactoryFacility> ();
 
 
@@ -46,31 +45,28 @@ namespace HelloHome.NetGateway.WindsorInstallers
 			);
 
 			//dbContext
-			container.Register (Component.For<IHelloHomeDbContext> ().ImplementedBy<HelloHomeDbContext>() .LifestyleBoundTo<IMessageHandler> ());
+			container.Register (Component.For<IHelloHomeDbContext> ().ImplementedBy<HelloHomeDbContext> ().LifestyleBoundTo<IMessageHandler> ());
+			container.Register (Component.For<HelloHomeDbContext> ().LifestyleTransient().Named("TransientDbContext"));
 
 			//Agents
-			if(_nodeAgent == null)
-				container.Register (Component.For<INodeGatewayAgent> ()
-				                    .ImplementedBy<NodeGatewayAgent>()
-				                    .LifestyleSingleton());
-			else
-				container.Register (Component.For<INodeGatewayAgent> ()
-				                    .Instance(_nodeAgent));
-			
-			container.Register (Component.For<IEmonCmsAgent> ().ImplementedBy<EmonCmsAgent>());
+			container.Register (Component.For<INodeGatewayAgent> ()
+									.ImplementedBy<NodeGatewayAgent> ()
+									.LifestyleSingleton ());
+
+			container.Register (Component.For<IEmonCmsAgent> ().ImplementedBy<EmonCmsAgent> ());
 
 			//Parsers & encoders
-			container.Register(Classes.FromAssemblyContaining<IMessageParser>().BasedOn<IMessageParser>().WithServiceBase());
-			container.Register(
-				Classes.FromAssemblyContaining<IMessageEncoder>().BasedOn<IMessageEncoder>().WithServiceBase(),
-				Component.For<PinConfigEncoder>()
+			container.Register (Classes.FromAssemblyContaining<IMessageParser> ().BasedOn<IMessageParser> ().WithServiceBase ());
+			container.Register (
+				Classes.FromAssemblyContaining<IMessageEncoder> ().BasedOn<IMessageEncoder> ().WithServiceBase (),
+				Component.For<PinConfigEncoder> ()
 			);
 
 			//EmonCmsUpdater
-			container.Register(Component.For<IEMonCmsUpdater>().ImplementedBy<EMonCmsUpdater>());
+			container.Register (Component.For<IEMonCmsUpdater> ().ImplementedBy<EMonCmsUpdater> ());
 
 			//HelloHomeGateway
-			container.Register(Component.For<HelloHomeGateway>());
+			container.Register (Component.For<HelloHomeGateway> ());
 
 			//MessageHandlers
 			container.Register (
@@ -79,21 +75,23 @@ namespace HelloHome.NetGateway.WindsorInstallers
 					.WithServiceSelf ()
 					.LifestyleTransient (),
 				Component.For<MessageHandlerComponentSelector> ()
-					.LifestyleSingleton(),
+					.LifestyleSingleton (),
 				Component.For<IMessageHandlerFactory> ()
-					.AsFactory(typeof(MessageHandlerComponentSelector))
+					.AsFactory (typeof (MessageHandlerComponentSelector))
 			);
 
-			//Queries
-			container.Register (Classes.FromAssemblyContaining<IQuery> ().BasedOn<IQuery> ().WithServiceFirstInterface ().LifestyleBoundTo<IMessageHandler> ());
-			container.Register (Classes.FromAssemblyContaining<ICommand> ().BasedOn<ICommand> ().WithServiceFirstInterface ().LifestyleBoundTo<IMessageHandler> ());
+			//Queries & Commands
+			container.Register (Classes.FromAssemblyContaining<IQuery> ().BasedOn<IQuery> ().WithServiceAllInterfaces ().LifestyleBoundTo<IMessageHandler> ());
+			container.Register (Classes.FromAssemblyContaining<ICommand> ().BasedOn<ICommand> ().WithServiceAllInterfaces ().LifestyleBoundTo<IMessageHandler> ());
 
 			//Logic
 			container.Register (
-				Component.For<ITimeProvider>().ImplementedBy<TimeProvider>().LifestyleBoundTo<IMessageHandler>(),
-				Component.For<ITouchNode> ().ImplementedBy<TouchNode> ().LifestyleBoundTo<IMessageHandler> (),
+				Component.For<ITimeProvider> ().ImplementedBy<TimeProvider> ().LifestyleBoundTo<IMessageHandler> (),
 				Component.For<IRfIdGenerationStrategy> ().ImplementedBy<FindHoleRfIdGenerationStrategy> ().LifestyleBoundTo<IMessageHandler> ()
 			);
+
+			foreach (var r in _overrides)
+				container.Register (r.Named (Guid.NewGuid ().ToString ()).IsDefault ());
 		}
 
 		#endregion

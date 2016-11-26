@@ -2,9 +2,9 @@
 using System.CodeDom;
 using HelloHome.Common.Entities;
 
-namespace HelloHome.NetGateway.Logic
+namespace HelloHome.NetGateway.Commands
 {
-    public interface ITouchNode
+    public interface ITouchNode : ICommand
     {
         void Touch(Node node, int rssi);
     }
@@ -22,7 +22,7 @@ namespace HelloHome.NetGateway.Logic
         {
             if(node.NodeFacts == default(NodeFacts))
                 throw new ArgumentException("node should be loaded with its facts for Touch to work");
-            node.LastSeen = DateTime.Now;
+            node.LastSeen = _timeProvider.UtcNow;
             node.LastRssi = rssi;
             node.NodeFacts.MaxUpTime = Math.Max(
                 node.NodeFacts.MaxUpTime,

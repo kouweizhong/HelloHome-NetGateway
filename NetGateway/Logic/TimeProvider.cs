@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HelloHome.NetGateway.Logic
+namespace HelloHome.NetGateway.Commands
 {
     public interface ITimeProvider
     {

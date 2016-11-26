@@ -83,7 +83,6 @@
     <Compile Include="Handlers\NodeInfoHandler.cs" />
     <Compile Include="Handlers\NodeStartedHandler.cs" />
     <Compile Include="Logic\TimeProvider.cs" />
-    <Compile Include="Logic\TouchNode.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />
@@ -132,6 +131,7 @@
     <Compile Include="Queries\IQuery.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Handlers\PulseHandler.cs" />
+    <Compile Include="Commands\TouchNode.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

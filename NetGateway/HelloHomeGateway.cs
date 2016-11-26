@@ -14,7 +14,7 @@ namespace HelloHome.NetGateway
         readonly INodeGatewayAgent _nodeGatewayAgent;
         private readonly IMessageHandlerFactory _handlerFactory;
 
-        public HelloHomeGateway(IEMonCmsUpdater emonCmsUpdater, INodeGatewayAgent nodeGatewayAgent, IMessageHandlerFactory handlerFactory)
+        public HelloHomeGateway(INodeGatewayAgent nodeGatewayAgent, IMessageHandlerFactory handlerFactory)
         {
             _handlerFactory = handlerFactory;
             _nodeGatewayAgent = nodeGatewayAgent;
@@ -26,23 +26,18 @@ namespace HelloHome.NetGateway
         public void MessageReceived(object sender, IncomingMessage message)
         {
 			IMessageHandler handler = null;
-            try
-            {
+			try {
 				handler = _handlerFactory.Create (message);
-				var outMessages = handler.Handle(message);
-                if(outMessages != null)
-                    foreach (var om in outMessages)
-                        _nodeGatewayAgent.Send(om);
-            }
-            catch (Exception ex)
-            {
-                Logger.Error(ex);
-            }
-            finally
-            {
-				if(handler != null)
-                	_handlerFactory.Dispose(handler);
-            }
+				var outMessages = handler.Handle (message);
+				if (outMessages != null)
+					foreach (var om in outMessages)
+						_nodeGatewayAgent.Send (om);
+			} catch (Exception) {
+				throw;
+			} finally {
+				if (handler != null)
+					_handlerFactory.Dispose (handler);
+			}
         }
     }
 }

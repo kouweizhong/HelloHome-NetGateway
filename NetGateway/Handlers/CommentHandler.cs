@@ -3,7 +3,7 @@ using System.Diagnostics;
 using Castle.Components.DictionaryAdapter;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Logic;
+using HelloHome.NetGateway.Commands;
 using HelloHome.NetGateway.Queries;
 using NLog;
 

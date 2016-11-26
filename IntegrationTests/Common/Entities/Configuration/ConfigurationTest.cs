@@ -18,7 +18,7 @@ namespace IntegrationTests.Common.Entities.Configuration
 		{
 			var newE = CreateEntity ();
 			ctx.Set<T> ().Add (newE);
-			ctx.SaveChanges ();
+			ctx.SaveChanges ();  
 			foreach (var e in ctx.ChangeTracker.Entries ())
 				e.State = System.Data.Entity.EntityState.Detached;
 			var eFromDb = ctx.Set<T> ().Single (GetPredicateToRetrieve (newE));

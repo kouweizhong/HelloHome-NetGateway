@@ -87,7 +87,13 @@
       <HintPath>..\packages\xunit.assert.2.1.0\lib\dotnet\xunit.assert.dll</HintPath>
     </Reference>
     <Reference Include="Moq">
-      <HintPath>..\packages\Moq.4.5.21\lib\net45\Moq.dll</HintPath>
+      <HintPath>..\packages\Moq.4.5.28\lib\net45\Moq.dll</HintPath>
+    </Reference>
+    <Reference Include="NLog">
+      <HintPath>..\packages\NLog.4.2.2\lib\net45\NLog.dll</HintPath>
+    </Reference>
+    <Reference Include="xunit.NLog">
+      <HintPath>..\packages\xunit.NLog.1.1.1\lib\net\xunit.NLog.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -97,9 +103,6 @@
     <Compile Include="Common\Entities\Configuration\ConfigurationTest.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup>
-    <Folder Include="Pipeline\" />
-  </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetGateway\NetGateway.csproj">
       <Project>{31C6EF44-19EC-4DF5-9768-3BFE427B22FA}</Project>

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 
-namespace HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy
+namespace HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy
 {
 	public class FindHoleRfIdGenerationStrategy : IRfIdGenerationStrategy
 	{

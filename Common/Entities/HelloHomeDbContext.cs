@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Data.Entity;
+using System.Data.Entity.Migrations.History;
 using NLog;
 
 namespace HelloHome.Common.Entities

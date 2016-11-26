@@ -73,7 +73,6 @@
     <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
     <Compile Include="Entities\Configuration\LatestValuesConfiguration.cs" />
     <Compile Include="Entities\Configuration\PulseDataConfiguration.cs" />
-    <Compile Include="Entities\Configuration\SubNodeConfiguration.cs" />
     <Compile Include="Entities\EnvironmentData.cs" />
     <Compile Include="Entities\HelloHomeDbContext.cs" />
     <Compile Include="Entities\Node.cs" />
@@ -82,6 +81,11 @@
     <Compile Include="Entities\PulseData.cs" />
     <Compile Include="Entities\NodePort.cs" />
     <Compile Include="NodeFactConfiguration.cs" />
+    <Compile Include="Entities\Configuration\NodePortConfiguration.cs" />
+    <Compile Include="Entities\MySqlHistoryContext.cs" />
+    <Compile Include="Entities\MySqlConfiguration.cs" />
+    <Compile Include="Entities\MySqlInitializer.cs" />
+    <Compile Include="Entities\Includes\NodeInclude.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -94,5 +98,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Entities\Includes\" />
   </ItemGroup>
 </Project>

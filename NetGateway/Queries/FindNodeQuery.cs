@@ -1,12 +1,13 @@
 ﻿using System.Linq;
 using HelloHome.Common.Entities;
+using HelloHome.Common.Entities.Includes;
 
 namespace HelloHome.NetGateway.Queries
 {
     public interface IFindNodeQuery : IQuery
     {
-        Node BySignature(long signature);
-        Node ByRfId(int rfId);
+        Node BySignature(long signature, NodeInclude includes = NodeInclude.None);
+        Node ByRfId(int rfId, NodeInclude includes = NodeInclude.None);
     }
 
     public class FindNodeQuery : IFindNodeQuery
@@ -18,14 +19,18 @@ namespace HelloHome.NetGateway.Queries
             _ctx = ctx;
         }
 
-        public Node BySignature(long signature)
+        public Node BySignature(long signature, NodeInclude includes = NodeInclude.None)
         {
-            return _ctx.Nodes.FirstOrDefault(x => x.Signature == signature);
+			return _ctx.Nodes
+				       .Include(includes)
+				       .FirstOrDefault(x => x.Signature == signature);
         }
 
-        public Node ByRfId(int rfId)
+        public Node ByRfId(int rfId, NodeInclude includes = NodeInclude.None)
         {
-            return _ctx.Nodes.FirstOrDefault(x => x.RfId == rfId);
+            return _ctx.Nodes
+				       .Include(includes)
+				       .FirstOrDefault(x => x.RfId == rfId);
         }
     }
 }
