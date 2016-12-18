@@ -83,15 +83,35 @@
       <HintPath>..\packages\MySql.Data.Entity.6.9.9\lib\net45\MySql.Data.Entity.EF6.dll</HintPath>
     </Reference>
     <Reference Include="System.Transactions" />
+    <Reference Include="TechTalk.SpecFlow">
+      <HintPath>..\packages\SpecFlow.2.1.0\lib\net45\TechTalk.SpecFlow.dll</HintPath>
+    </Reference>
+    <Reference Include="nunit.framework">
+      <HintPath>..\packages\NUnit.3.0.0\lib\net45\nunit.framework.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Scenario.cs" />
+    <Compile Include="TestableGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="NodeStartTests.cs" />
+    <Compile Include="NodeStartup\NodeStartingSteps.cs" />
+    <Compile Include="NodeStartup\NodeStartup.feature.cs">
+      <DependentUpon>NodeStartup.feature</DependentUpon>
+    </Compile>
+    <Compile Include="NodeInfo\NodeInfo.feature.cs">
+      <DependentUpon>NodeInfo.feature</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
     <None Include="App.config" />
+    <None Include="NodeStartup\NodeStartup.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NodeStartup.feature.cs</LastGenOutput>
+    </None>
+    <None Include="NodeInfo\NodeInfo.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>NodeInfo.feature.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NetGateway\NetGateway.csproj">
@@ -102,6 +122,10 @@
       <Project>{5D05E63F-D6E2-462D-9086-E0C120386600}</Project>
       <Name>Common</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="NodeStartup\" />
+    <Folder Include="NodeInfo\" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

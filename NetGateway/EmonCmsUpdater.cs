@@ -39,11 +39,11 @@ namespace HelloHome.NetGateway
                         node.LatestValues.Humidity ?? 0,
                         node.LastSeen.HasValue ? (float) (DateTime.Now - node.LastSeen.Value).TotalDays : 0
                     };
-                    foreach (var port in node.Ports.OrderBy(_ => _.Number))
+                    foreach (var port in node.Ports.OfType<PulsePort>() .OrderBy(_ => _.Number))
                     {
                         values.Add(port.PulseCount);
                     }
-                    values.Add(node.LastRssi);
+                    values.Add(node.LatestValues.Rssi);
                     _emonCmsAgent.Send(node.Configuration.EmonCmsNodeId.Value, values);
                 }
             }

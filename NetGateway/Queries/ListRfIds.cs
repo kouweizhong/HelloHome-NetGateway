@@ -20,7 +20,7 @@ namespace HelloHome.NetGateway.Queries
 
         public IList<byte> Execute()
         {
-            return _ctx.Nodes.Select(x => x.RfId).ToList();
+            return _ctx.Nodes.Select(x => x.RfAddress).ToList();
         }
     }
 }

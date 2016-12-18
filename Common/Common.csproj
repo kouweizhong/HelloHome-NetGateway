@@ -58,34 +58,48 @@
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
     <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="FluentMigrator">
+      <HintPath>..\packages\FluentMigrator.1.6.2\lib\40\FluentMigrator.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Entities\LatestValues.cs" />
-    <Compile Include="Entities\NodeFacts.cs" />
     <Compile Include="Exceptions\HelloHomeException.cs" />
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
-    <Compile Include="MyClass.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extentions\DateTimeExtentions.cs" />
     <Compile Include="Entities\Configuration\EnvironmentDataConfiguration.cs" />
-    <Compile Include="Entities\Configuration\NodeConfiguration.cs" />
-    <Compile Include="Entities\Configuration\NodeConfigurationConfiguration.cs" />
+    <Compile Include="Entities\Configuration\NodeConfig.cs" />
+    <Compile Include="Entities\Configuration\NodeConfigurationConfig.cs" />
     <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
     <Compile Include="Entities\Configuration\LatestValuesConfiguration.cs" />
     <Compile Include="Entities\Configuration\PulseDataConfiguration.cs" />
-    <Compile Include="Entities\EnvironmentData.cs" />
+    <Compile Include="Entities\EnvironmentDataHistory.cs" />
     <Compile Include="Entities\HelloHomeDbContext.cs" />
     <Compile Include="Entities\Node.cs" />
     <Compile Include="Entities\NodeConfiguration.cs" />
-    <Compile Include="Entities\NodeInfoData.cs" />
-    <Compile Include="Entities\PulseData.cs" />
+    <Compile Include="Entities\NodeHealthHistory.cs" />
+    <Compile Include="Entities\PulseHistory.cs" />
     <Compile Include="Entities\NodePort.cs" />
-    <Compile Include="NodeFactConfiguration.cs" />
-    <Compile Include="Entities\Configuration\NodePortConfiguration.cs" />
+    <Compile Include="Entities\Configuration\NodePortConfig.cs" />
     <Compile Include="Entities\MySqlHistoryContext.cs" />
     <Compile Include="Entities\MySqlConfiguration.cs" />
     <Compile Include="Entities\MySqlInitializer.cs" />
     <Compile Include="Entities\Includes\NodeInclude.cs" />
+    <Compile Include="FluentMigration\2016-12\Initial.cs" />
+    <Compile Include="FluentMigration\HhMigrationAttribute.cs" />
+    <Compile Include="FluentMigration\2016-12\SplitNodeConfig.cs" />
+    <Compile Include="FluentMigration\2016-12\SplitLatestValues.cs" />
+    <Compile Include="FluentMigration\2016-12\CleanNode.cs" />
+    <Compile Include="FluentMigration\2016-12\RefactorSubNodeIntoPort.cs" />
+    <Compile Include="FluentMigration\2016-12\CommunicationHistory.cs" />
+    <Compile Include="FluentMigration\2016-12\AddLogs.cs" />
+    <Compile Include="Entities\NodeLog.cs" />
+    <Compile Include="Entities\CommunicationHistory.cs" />
+    <Compile Include="FluentMigration\2016-12\AddLastSeenToNode.cs" />
+    <Compile Include="FluentMigration\2016-12\RemovePortDirection.cs" />
+    <Compile Include="FluentMigration\2016-12\AddNodeSignature.cs" />
+    <Compile Include="TaskQueue.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />
@@ -98,8 +112,11 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
+    <None Include="RunMigration-Mig" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Entities\Includes\" />
+    <Folder Include="FluentMigration\" />
+    <Folder Include="FluentMigration\2016-12\" />
   </ItemGroup>
 </Project>

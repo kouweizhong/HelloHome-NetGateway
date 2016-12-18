@@ -75,6 +75,15 @@ namespace UnitTests.Agents.NodeGateway
         }
 
         [Fact]
+        public async void can_read_node_started()
+        {
+            _sut.EnqueueBytes(new byte[] { 0x12, 0X00, 0x0A, 0 + 1 << 2, 0x02, 0x01 });
+            _sut.EnqueueBytes(new byte[] { 0x0D, 0x0A, 40, 41 });
+            var msg = await _sut.ReadAsync(new CancellationToken());
+            Assert.True(msg is PulseReport);
+        }
+
+        [Fact]
         public async void can_read_node_started_twice()
         {
             _sut.EnqueueBytes(new byte[] { 0x12, 0X00, 0x0A, 0 + 1 << 2, 0x02, 0x01 });
@@ -86,14 +95,6 @@ namespace UnitTests.Agents.NodeGateway
             var msg2 = await _sut.ReadAsync(new CancellationToken());
             Assert.True(msg2 is PulseReport);
             Assert.Equal(3, ((PulseReport)msg2).SubNode);
-        }
-        [Fact]
-        public async void can_read_node_started()
-        {
-            _sut.EnqueueBytes(new byte[] { 0x12, 0X00, 0x0A, 0 + 1 << 2, 0x02, 0x01 });
-            _sut.EnqueueBytes(new byte[] { 0x0D, 0x0A, 40, 41 });
-            var msg = await _sut.ReadAsync(new CancellationToken());
-            Assert.True(msg is PulseReport);
         }
     }
 }

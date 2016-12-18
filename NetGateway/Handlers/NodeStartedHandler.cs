@@ -14,10 +14,18 @@ namespace HelloHome.NetGateway.Handlers
 
 		private readonly IFindNodeQuery _findNodeQuery;
 		private readonly ICreateNodeCommand _createNodeCommand;
-		private readonly ITouchNode _touchNode;
+		readonly ITouchNode _touchNode;
+		readonly ITimeProvider _timeProvider;
 
-		public NodeStartedHandler (IHelloHomeDbContext dbCtx, IFindNodeQuery findNodeQuery, ICreateNodeCommand createNodeCommand, ITouchNode touchNode) : base (dbCtx)
+		public NodeStartedHandler (
+			IHelloHomeDbContext dbCtx,
+			IFindNodeQuery findNodeQuery,
+			ICreateNodeCommand createNodeCommand,
+			ITouchNode touchNode,
+			ITimeProvider timeProvider)
+			: base (dbCtx)
 		{
+			this._timeProvider = timeProvider;
 			_findNodeQuery = findNodeQuery;
 			_createNodeCommand = createNodeCommand;
 			_touchNode = touchNode;
@@ -27,15 +35,17 @@ namespace HelloHome.NetGateway.Handlers
 		{
 			var node = _findNodeQuery.BySignature (request.Signature, NodeInclude.Facts);
 			if (node == default (Node)) {
-				node = _createNodeCommand.Execute (request.Signature, request.NeedNewRfAddress?(byte)0:request.FromNodeId);
-				if(node.RfId != request.FromNodeId)
+				node = _createNodeCommand.Execute (request.Signature, request.NeedNewRfAddress ? (byte)0 : request.FromNodeId);
+				if (node.RfAddress != request.FromNodeId)
 					outgoingMessages.Add (new NodeConfigCommand {
 						signature = request.Signature,
-						NewRfAddress = node.RfId
-				});
+						NewRfAddress = node.RfAddress
+					});
 			}
-			node.NodeFacts.Version = $"{request.Major}.{request.Minor}";
+			node.Configuration.Version = $"{request.Major}.{request.Minor}";
+			node.LatestValues.StartupTime = _timeProvider.UtcNow;
 			_touchNode.Touch (node, request.Rssi);
+
 		}
 	}
 }

@@ -10,7 +10,7 @@ namespace IntegrationTests.Common.Entities.Configuration
 		protected override Node CreateEntity ()
 		{
 			return Builder<Node>.CreateNew ()
-					.With (x => x.Signature = Faker.RandomNumber.Next ())
+					.With (x => x.Id = Faker.RandomNumber.Next ())
 					.Build ();		
 		}
 

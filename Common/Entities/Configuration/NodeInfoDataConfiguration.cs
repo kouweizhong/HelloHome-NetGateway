@@ -3,7 +3,7 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace HelloHome.Common.Entities.Configuration
 {
-	public class NodeInfoDataConfiguration : EntityTypeConfiguration<NodeInfoData>
+	public class NodeInfoDataConfiguration : EntityTypeConfiguration<NodeHealthHistory>
 	{
 		public NodeInfoDataConfiguration ()
 		{

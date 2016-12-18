@@ -90,8 +90,9 @@ namespace HelloHome.NetGateway.WindsorInstallers
 				Component.For<IRfIdGenerationStrategy> ().ImplementedBy<FindHoleRfIdGenerationStrategy> ().LifestyleBoundTo<IMessageHandler> ()
 			);
 
-			foreach (var r in _overrides)
-				container.Register (r.Named (Guid.NewGuid ().ToString ()).IsDefault ());
+			if(_overrides != null)
+				foreach (var r in _overrides)
+					container.Register (r.Named (Guid.NewGuid ().ToString ()).IsDefault ());
 		}
 
 		#endregion

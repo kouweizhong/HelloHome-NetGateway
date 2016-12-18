@@ -2,12 +2,12 @@
 
 namespace HelloHome.Common.Entities
 {
-	public class PulseData
+	public class PulseHistory : CommunicationHistory
 	{
-		public virtual int PulseDataId { get; set; }
-		public virtual DateTime Timestamp { get; set; }
+		public virtual int PulsePortId { get; set; }
 		public virtual int NewPulses { get; set; }
 		public virtual int NewValue { get; set; }
+		public virtual bool IsOffset { get; set; }
 	}
 }
 

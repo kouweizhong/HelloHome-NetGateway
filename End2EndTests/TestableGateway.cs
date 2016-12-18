@@ -13,16 +13,16 @@ using Xunit.Abstractions;
 
 namespace End2EndTests
 {
-	public abstract class Scenario : IDisposable
+	public class TestableGateway : IDisposable
 	{
-		protected Mock<INodeGatewayAgent> NodeAgent;
-		protected HelloHomeGateway Gateway;
+		public Mock<INodeGatewayAgent> NodeAgent;
+		public HelloHomeGateway Gateway;
 
-		protected readonly HelloHomeDbContext DbContext;
+		public readonly HelloHomeDbContext DbContext;
 
-		private readonly WindsorContainer _IoCcontainer;
+		readonly WindsorContainer _IoCcontainer;
 
-		public Scenario ()
+		public TestableGateway ()
 		{
 			//Database.SetInitializer (new MySqlInitializer ());
 			Database.SetInitializer (new DropCreateDatabaseAlways<HelloHomeDbContext>());
@@ -38,7 +38,7 @@ namespace End2EndTests
 			DbContext = _IoCcontainer.Resolve<HelloHomeDbContext> ("TransientDbContext");
 		}
 
-		protected Mock<T> Mock<T> () where T : class
+		public Mock<T> Mock<T> () where T : class
 		{			
 			var mock = new Mock<T> ();
 			_IoCcontainer.Register (

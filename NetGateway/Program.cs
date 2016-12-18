@@ -7,13 +7,13 @@ using Castle.Windsor;
 using HelloHome.NetGateway.WindsorInstallers;
 using NLog;
 using Timer = System.Timers.Timer;
-
+using System.Collections.Generic;
 
 namespace HelloHome.NetGateway
 {
 	class MainClass
 	{
-		private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+		static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
 		public static void Main (string[] args)
 		{
@@ -25,16 +25,25 @@ namespace HelloHome.NetGateway
 		        var container = new WindsorContainer();
 		        container.Install(new DefaultInstaller());
 
-		        container.Resolve<HelloHomeGateway>();
+				var dbContext = container.Resolve<HelloHomeDbContext> ("TransientDbContext");
+				dbContext.SaveChanges ();
+				Logger.Info ($"{dbContext.Nodes.Count ()} nodes found in the database");
+				container.Release (dbContext);
 
+				try {
+					container.Resolve<HelloHomeGateway> ();
+				} catch (Exception ex) { 
+					Logger.Error (ex.Message);
+					return;
+				}
+				  
 		        var emonCmsUpdater = container.Resolve<IEMonCmsUpdater>();
 		        var timer = new Timer(20000) {AutoReset = true};
 		        timer.Elapsed += (sender, e) => emonCmsUpdater.Update();
 		        //timer.Enabled = true;
 
-		        while (true)
-		            Thread.Sleep(100);
-		    }
+				Console.ReadLine ();
+			}
 		    catch (Exception e)
 		    {
 		        Logger.Fatal(e);		        

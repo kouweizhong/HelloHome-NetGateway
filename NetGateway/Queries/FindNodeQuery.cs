@@ -23,14 +23,14 @@ namespace HelloHome.NetGateway.Queries
         {
 			return _ctx.Nodes
 				       .Include(includes)
-				       .FirstOrDefault(x => x.Signature == signature);
+				       .FirstOrDefault(x => x.Id == signature);
         }
 
         public Node ByRfId(int rfId, NodeInclude includes = NodeInclude.None)
         {
             return _ctx.Nodes
 				       .Include(includes)
-				       .FirstOrDefault(x => x.RfId == rfId);
+				       .FirstOrDefault(x => x.RfAddress == rfId);
         }
     }
 }

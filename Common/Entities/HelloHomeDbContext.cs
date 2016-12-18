@@ -17,7 +17,7 @@ namespace HelloHome.Common.Entities
 
         public HelloHomeDbContext ()
 		{
-			//Database.Log = Console.Write;
+			Database.Log = Console.Write;
 		}
 
 		protected override void OnModelCreating (DbModelBuilder modelBuilder)
@@ -28,14 +28,18 @@ namespace HelloHome.Common.Entities
 
 		public int Commit ()
 		{
-			return SaveChanges ();
+			try {
+				return SaveChanges ();
+			} catch (Exception e) {
+				throw e;
+			}
 		}
 
 		public Guid ContextId { get; } = Guid.NewGuid();
 
 		public IDbSet<Node> Nodes { get; set; }
 		public IDbSet<NodePort> SubNodes { get; set; }
-		public IDbSet<PulseData> PulseData { get; set; }
+		public IDbSet<PulseHistory> PulseData { get; set; }
 	}
 }
 

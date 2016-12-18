@@ -1,4 +1,6 @@
-﻿namespace HelloHome.Common.Entities
+﻿using System;
+
+namespace HelloHome.Common.Entities
 {
     public class LatestValues
     {
@@ -8,5 +10,8 @@
         public virtual float? Temperature { get; set; }
         public virtual float? Humidity { get; set; }
         public virtual float? AtmosphericPressure { get; set; }
+		public virtual int Rssi { get; set; }
+		public virtual DateTime StartupTime { get; set; }
+		public virtual float MaxUpTime { get; set; }
     }
 }

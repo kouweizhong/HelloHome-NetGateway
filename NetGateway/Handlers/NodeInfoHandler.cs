@@ -29,10 +29,10 @@ namespace HelloHome.NetGateway.Handlers
             _touchNode.Touch(node, request.Rssi);
 
             node.LatestValues.SendErrorCount = request.SendErrorCount;
-            var nodeInfo = new NodeInfoData { SendErrorCount = request.SendErrorCount };
+            var nodeInfo = new NodeHealthHistory { SendErrorCount = request.SendErrorCount };
             node.LatestValues.VIn = request.Voltage;
             nodeInfo.VIn = request.Voltage;
-            node.NodeInfoData.Add(nodeInfo);
+            node.NodeHealthHistory.Add(nodeInfo);
         }
     }
 }

@@ -20,13 +20,13 @@ namespace HelloHome.NetGateway.Commands
 
         public void Touch(Node node, int rssi)
         {
-            if(node.NodeFacts == default(NodeFacts))
-                throw new ArgumentException("node should be loaded with its facts for Touch to work");
+            if(node.LatestValues == default(LatestValues))
+                throw new ArgumentException("node should be loaded with its latestValues for Touch to work");
             node.LastSeen = _timeProvider.UtcNow;
-            node.LastRssi = rssi;
-            node.NodeFacts.MaxUpTime = Math.Max(
-                node.NodeFacts.MaxUpTime,
-                (float) (_timeProvider.UtcNow - node.NodeFacts.LastStartupTime).TotalDays);
-        }
+            node.LatestValues.Rssi = rssi;
+            node.LatestValues.MaxUpTime = Math.Max(
+                node.LatestValues.MaxUpTime,
+                (float) (_timeProvider.UtcNow - node.LatestValues.StartupTime).TotalDays);
+		}
     }
 }

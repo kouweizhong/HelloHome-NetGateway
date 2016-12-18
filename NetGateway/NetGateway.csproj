@@ -132,6 +132,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Handlers\PulseHandler.cs" />
     <Compile Include="Commands\TouchNode.cs" />
+    <Compile Include="Agents\NodeGateway\NodeMessageReader.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

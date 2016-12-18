@@ -1,0 +1,2 @@
+﻿#!/bin/bash 
+mono ~/Dropbox/Projects/HelloHome/NetGateway/packages/FluentMigrator.Tools.1.6.2/tools/AnyCPU/40/Migrate.exe -c='server=localhost;database=HelloHome_Dev;User Id=root;Password=@Preo89;' --db=MySql -a=bin/x86/Debug/Common.dll -verbose=true -t=migrate -tps

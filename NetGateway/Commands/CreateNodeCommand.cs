@@ -36,20 +36,16 @@ namespace HelloHome.NetGateway.Commands
             var node = new Node
             {
                 Signature = signature,
-                RfId = rfId,
+                RfAddress = rfId,
                 Configuration = new NodeConfiguration
                 {
                     Name = "Newly created",
                 },
                 LatestValues = new LatestValues
                 {
-
-                },
-                NodeFacts = new NodeFacts
-                {
-					LastStartupTime = _timeProvider.UtcNow,
-					MaxUpTime = 0,					                               
-                }
+					StartupTime = _timeProvider.UtcNow,
+					MaxUpTime = 0,
+				}
             };
             _ctx.Nodes.Add(node);
 

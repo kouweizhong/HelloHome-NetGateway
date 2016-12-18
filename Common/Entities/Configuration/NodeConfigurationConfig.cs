@@ -4,9 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace HelloHome.Common.Entities.Configuration
 {
-	public class NodeConfigurationConfiguration : EntityTypeConfiguration<Entities.NodeConfiguration>
+	public class NodeConfigurationConfig : EntityTypeConfiguration<Entities.NodeConfiguration>
 	{
-		public NodeConfigurationConfiguration ()
+		public NodeConfigurationConfig ()
 		{
 			ToTable ("NodeConfig");
 			HasKey (x => x.NodeId);

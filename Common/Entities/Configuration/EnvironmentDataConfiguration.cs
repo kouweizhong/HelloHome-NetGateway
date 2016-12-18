@@ -4,7 +4,7 @@ using HelloHome.Common.Entities;
 
 namespace HelloHome.Common.Entities.Configuration
 {
-	public class EnvironmentDataConfiguration : EntityTypeConfiguration<EnvironmentData>
+	public class EnvironmentDataConfiguration : EntityTypeConfiguration<EnvironmentDataHistory>
 	{
 		public EnvironmentDataConfiguration ()
 		{

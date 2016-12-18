@@ -19,8 +19,6 @@ namespace HelloHome.Common.Entities.Includes
 	{
 		public static IQueryable<Node> Include (this IQueryable<Node> query, NodeInclude include)
 		{
-			if (include.HasFlag (NodeInclude.Facts))
-				query = query.Include (_ => _.NodeFacts);
 			if (include.HasFlag (NodeInclude.Config))
 				query = query.Include (_ => _.Configuration);
 			if (include.HasFlag (NodeInclude.Ports))
