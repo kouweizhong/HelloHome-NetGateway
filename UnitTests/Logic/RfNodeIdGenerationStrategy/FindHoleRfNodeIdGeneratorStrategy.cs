@@ -1,5 +1,6 @@
 ﻿using HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy;
 using System.Collections.Generic;
+using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 using Xunit;
 
 namespace UnitTests.Logic.RfNodeIdGenerationStrategy

@@ -19,9 +19,10 @@ namespace HelloHome.NetGateway.Handlers
 
 		}
 
-		protected override void Handle(CommentReport request, IList<OutgoingMessage> outgoingMessages)
+		protected override async Task HandleAsync(CommentReport request, IList<OutgoingMessage> outgoingMessages)
         {
             Logger.Info(request.Comment);
+            await Task.Yield();
         }
     }
 }

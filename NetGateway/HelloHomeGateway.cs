@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.NetGateway.Agents.NodeGateway;
@@ -43,7 +44,7 @@ namespace HelloHome.NetGateway
             var handler = _handlerFactory.Create(msg);
             try
             {
-                var responses = handler.Handle(msg);
+                var responses = await handler.HandleAsync(msg);
                 if (responses == null)
                     return;
 

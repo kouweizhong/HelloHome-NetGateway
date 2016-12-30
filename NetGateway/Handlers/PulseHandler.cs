@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using HelloHome.Common.Entities;
 using HelloHome.Common.Exceptions;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
@@ -15,17 +16,17 @@ namespace HelloHome.NetGateway.Handlers
 
 		public PulseHandler (IHelloHomeDbContext dbCtx, IFindNodeQuery findNodeQuery, ITouchNode touchNode) : base(dbCtx)
 		{
-			this._touchNode = touchNode;
-			this._findNodeQuery = findNodeQuery;
+			_touchNode = touchNode;
+			_findNodeQuery = findNodeQuery;
 		}
 
-		protected override void Handle (PulseReport request, IList<OutgoingMessage> outgoingMessages)
-		{
-			var node = _findNodeQuery.ByRfId (request.FromNodeId);
-            if(node == null)
-                throw new NodeNotFoundException(request.FromNodeId);
-			_touchNode.Touch (node, request.Rssi);
-		}
+	    protected override async Task HandleAsync(PulseReport request, IList<OutgoingMessage> outgoingMessages)
+	    {
+	        var node = await _findNodeQuery.ByRfIdAsync (request.FromNodeId);
+	        if(node == null)
+	            throw new NodeNotFoundException(request.FromNodeId);
+	        await _touchNode.TouchAsync (node, request.Rssi);
+	    }
 	}
 }
 

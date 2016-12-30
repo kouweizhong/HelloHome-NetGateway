@@ -1,11 +1,12 @@
 ﻿using System;
 using System.Linq;
+using HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy;
 
-namespace HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy
+namespace HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy
 {
 	public class FindHoleRfIdGenerationStrategy : IRfIdGenerationStrategy
 	{
-		Random _rnd;
+	    readonly Random _rnd;
 
 		public FindHoleRfIdGenerationStrategy ()
 		{

@@ -13,6 +13,7 @@ using HelloHome.NetGateway.Handlers;
 using HelloHome.NetGateway.Queries;
 using HelloHome.NetGateway.Commands;
 using System;
+using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 
 namespace HelloHome.NetGateway.WindsorInstallers
 {

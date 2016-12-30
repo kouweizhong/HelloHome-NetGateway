@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using HelloHome.Common.Entities;
 using HelloHome.Common.Exceptions;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
@@ -21,12 +22,12 @@ namespace HelloHome.NetGateway.Handlers
             _touchNode = touchNode;
         }
 
-        protected override void Handle(NodeInfoReport request, IList<OutgoingMessage> outgoingMessages)
+        protected override async Task HandleAsync(NodeInfoReport request, IList<OutgoingMessage> outgoingMessages)
         {
-            var node = _findNodeQuery.ByRfId(request.FromNodeId);
+            var node = await _findNodeQuery.ByRfIdAsync(request.FromNodeId);
             if (node == null)
                 throw new NodeNotFoundException(request.FromNodeId);
-            _touchNode.Touch(node, request.Rssi);
+            await _touchNode.TouchAsync(node, request.Rssi);
 
             node.LatestValues.SendErrorCount = request.SendErrorCount;
             var nodeInfo = new NodeHealthHistory { SendErrorCount = request.SendErrorCount };

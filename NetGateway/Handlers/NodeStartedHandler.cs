@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using HelloHome.Common.Entities;
 using HelloHome.Common.Entities.Includes;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
@@ -25,17 +26,17 @@ namespace HelloHome.NetGateway.Handlers
 			ITimeProvider timeProvider)
 			: base (dbCtx)
 		{
-			this._timeProvider = timeProvider;
+			_timeProvider = timeProvider;
 			_findNodeQuery = findNodeQuery;
 			_createNodeCommand = createNodeCommand;
 			_touchNode = touchNode;
 		}
 
-		protected override void Handle (NodeStartedReport request, IList<OutgoingMessage> outgoingMessages)
+		protected override async Task HandleAsync (NodeStartedReport request, IList<OutgoingMessage> outgoingMessages)
 		{
-			var node = _findNodeQuery.BySignature (request.Signature, NodeInclude.Facts);
+			var node = await _findNodeQuery.BySignatureAsync (request.Signature, NodeInclude.Facts);
 			if (node == default (Node)) {
-				node = _createNodeCommand.Execute (request.Signature, request.NeedNewRfAddress ? (byte)0 : request.FromNodeId);
+				node = await _createNodeCommand.ExecuteAsync (request.Signature, request.NeedNewRfAddress ? (byte)0 : request.FromNodeId);
 				if (node.RfAddress != request.FromNodeId)
 					outgoingMessages.Add (new NodeConfigCommand {
 						signature = request.Signature,
@@ -44,7 +45,7 @@ namespace HelloHome.NetGateway.Handlers
 			}
 			node.Configuration.Version = $"{request.Major}.{request.Minor}";
 			node.LatestValues.StartupTime = _timeProvider.UtcNow;
-			_touchNode.Touch (node, request.Rssi);
+			await _touchNode.TouchAsync (node, request.Rssi);
 
 		}
 	}

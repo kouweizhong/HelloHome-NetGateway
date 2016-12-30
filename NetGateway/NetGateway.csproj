@@ -86,7 +86,6 @@
     <Compile Include="Agents\NodeGateway\SerialPortByteStream.cs" />
     <Compile Include="Commands\CreateNodeCommand.cs" />
     <Compile Include="Handlers\CommentHandler.cs" />
-    <Compile Include="Handlers\IMessageHandler.cs" />
     <Compile Include="Handlers\IMessageHandlerFactory.cs" />
     <Compile Include="Handlers\MessageHandler.cs" />
     <Compile Include="Handlers\NodeInfoHandler.cs" />

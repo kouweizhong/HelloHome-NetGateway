@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations.History;
+using System.Threading.Tasks;
 using NLog;
 
 namespace HelloHome.Common.Entities
@@ -9,6 +10,7 @@ namespace HelloHome.Common.Entities
     {
         IDbSet<Node> Nodes { get; }
 		int Commit ();
+        Task<int> CommitAsync();
     }
 
     public class HelloHomeDbContext : DbContext, IHelloHomeDbContext
@@ -35,11 +37,20 @@ namespace HelloHome.Common.Entities
 			}
 		}
 
-		public Guid ContextId { get; } = Guid.NewGuid();
+        public async Task<int> CommitAsync()
+        {
+            try {
+                return await SaveChangesAsync();
+            } catch (Exception e) {
+                throw e;
+            }
+        }
+
+        public Guid ContextId { get; } = Guid.NewGuid();
 
 		public IDbSet<Node> Nodes { get; set; }
 		public IDbSet<NodePort> SubNodes { get; set; }
 		public IDbSet<PulseHistory> PulseData { get; set; }
-	}
+    }
 }
 

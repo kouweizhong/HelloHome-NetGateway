@@ -6,25 +6,30 @@ using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 
 namespace HelloHome.NetGateway.Handlers
 {
+    public interface IMessageHandler
+    {
+        Task<IList<OutgoingMessage>> HandleAsync(IncomingMessage request);
+    }
+
     public abstract class MessageHandler<T> : IMessageHandler where T : IncomingMessage
     {
 		readonly IHelloHomeDbContext _dbCtx;
 
         protected MessageHandler (IHelloHomeDbContext dbCtx)
 		{
-			this._dbCtx = dbCtx;
+			_dbCtx = dbCtx;
 		}
 
-		public IList<OutgoingMessage> Handle(IncomingMessage request)
+        public async Task<IList<OutgoingMessage>> HandleAsync(IncomingMessage request)
         {
             if(request.GetType() != typeof(T))
                 throw new ArgumentException($"request of type {request.GetType().Name} cannot be processed by {this.GetType().Name}");
             var outgoigMessages = new List<OutgoingMessage>();
-            Handle((T) request, outgoigMessages);
-			_dbCtx.Commit ();
+            await HandleAsync((T) request, outgoigMessages);
+            await _dbCtx.CommitAsync();
             return outgoigMessages;
         }
 
-        protected abstract void Handle(T request, IList<OutgoingMessage> outgoingMessages);
+        protected abstract Task HandleAsync(T request, IList<OutgoingMessage> outgoingMessages);
     }
 }
