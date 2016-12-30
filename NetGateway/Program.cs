@@ -33,7 +33,7 @@ namespace HelloHome.NetGateway
 				try {
 					var gateway  = container.Resolve<NodeGateway> ();
 				    var cts = new CancellationTokenSource();
-				    gateway.RunLoop(cts.Token).Wait(cts.Token);
+				    gateway.RunLoopAsync(cts.Token).Wait(cts.Token);
 				} catch (Exception ex) { 
 					Logger.Error (ex.Message);
 				}

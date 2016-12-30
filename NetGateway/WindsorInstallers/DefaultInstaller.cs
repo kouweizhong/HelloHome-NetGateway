@@ -18,18 +18,6 @@ namespace HelloHome.NetGateway.WindsorInstallers
 {
 	public class DefaultInstaller : IWindsorInstaller
 	{
-		public DefaultInstaller ()
-		{
-
-		}
-
-		readonly ComponentRegistration<object> [] _overrides;
-
-		public DefaultInstaller (params ComponentRegistration<object>[] overrides)
-		{
-			_overrides = overrides;
-		}
-
 		#region IWindsorInstaller implementation
 
 		public void Install (Castle.Windsor.IWindsorContainer container, Castle.MicroKernel.SubSystems.Configuration.IConfigurationStore store)
@@ -90,10 +78,6 @@ namespace HelloHome.NetGateway.WindsorInstallers
 				Component.For<ITimeProvider> ().ImplementedBy<TimeProvider> ().LifestyleBoundTo<IMessageHandler> (),
 				Component.For<IRfIdGenerationStrategy> ().ImplementedBy<FindHoleRfIdGenerationStrategy> ().LifestyleBoundTo<IMessageHandler> ()
 			);
-
-			if(_overrides != null)
-				foreach (var r in _overrides)
-					container.Register (r.Named (Guid.NewGuid ().ToString ()).IsDefault ());
 		}
 
 		#endregion

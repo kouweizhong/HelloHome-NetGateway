@@ -20,17 +20,25 @@ namespace HelloHome.NetGateway
             _handlerFactory = handlerFactory;
         }
 
-        public async Task RunLoop(CancellationToken cToken)
+        public async Task RunLoopAsync(CancellationToken cToken)
         {
             while (!cToken.IsCancellationRequested)
+                await RunOnceAsync(cToken);
+        }
+
+        public async Task RunOnceAsync(CancellationToken cToken, bool awaitProcess = false)
+        {
+            var msg = await _nodeMessageChannel.ReadAsync(cToken);
+            if (msg != null)
             {
-                var msg = await _nodeMessageChannel.ReadAsync(cToken);
-                if (msg != null)
-                    Process(msg, cToken);
+                Logger.Debug("Message of type {0} received from node {1}", msg.GetType().Name, msg.FromNodeId);
+                var pt = ProcessAsync(msg, cToken);
+                if (awaitProcess)
+                    await pt;
             }
         }
 
-        private async void Process(IncomingMessage msg, CancellationToken cToken)
+        private async Task ProcessAsync(IncomingMessage msg, CancellationToken cToken)
         {
             var handler = _handlerFactory.Create(msg);
             try
@@ -53,4 +61,3 @@ namespace HelloHome.NetGateway
         }
     }
 }
-
