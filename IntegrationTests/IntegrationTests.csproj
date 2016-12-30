@@ -98,7 +98,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Agents\EmonCms\EmonCmsAgentTests.cs" />
     <Compile Include="Common\Entities\CreateNodeTestsFixture.cs" />
     <Compile Include="Common\Entities\EntityTestFixture.cs" />
   </ItemGroup>
