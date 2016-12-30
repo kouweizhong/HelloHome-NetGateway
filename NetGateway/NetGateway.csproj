@@ -53,6 +53,11 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Threading.Tasks, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>..\..\..\..\..\..\..\Library\Frameworks\Mono.framework\Versions\4.8.0\lib\mono\4.5\Facades\System.Threading.Tasks.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="EntityFramework">
@@ -75,6 +80,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agents\NodeGateway\IByteStream.cs" />
+    <Compile Include="Agents\NodeGateway\INodeMessageChannel.cs" />
+    <Compile Include="Agents\NodeGateway\NodeMessageWcfChannel.cs" />
+    <Compile Include="Agents\NodeGateway\SerialPortByteStream.cs" />
     <Compile Include="Commands\CreateNodeCommand.cs" />
     <Compile Include="Handlers\CommentHandler.cs" />
     <Compile Include="Handlers\IMessageHandler.cs" />
@@ -124,7 +133,6 @@
     <Compile Include="Configuration\IEmonCmsConfiguration.cs" />
     <Compile Include="Agents\EmonCms\IEmonCmsAgent.cs" />
     <Compile Include="EmonCmsUpdater.cs" />
-    <Compile Include="Agents\NodeGateway\FakeNodeGatewayAgent.cs" />
     <Compile Include="Agents\NodeGateway\Domain\ISignedMessage.cs" />
     <Compile Include="HelloHomeGateway.cs" />
     <Compile Include="WindsorInstallers\MessageHandlerComponentSelector.cs" />
@@ -132,7 +140,7 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Handlers\PulseHandler.cs" />
     <Compile Include="Commands\TouchNode.cs" />
-    <Compile Include="Agents\NodeGateway\NodeMessageReader.cs" />
+    <Compile Include="Agents\NodeGateway\NodeMessageSerialChannel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

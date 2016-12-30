@@ -13,8 +13,6 @@ namespace HelloHome.Common.Entities.Configuration
 			Property (_ => _.NodeId).HasColumnName ("nodeId").IsRequired ();
 			Property (_ => _.Number).HasColumnName ("number").IsRequired ();
 			Property (_ => _.Name).HasColumnName ("name");
-//			Map<SensorPort> (m => m.Requires ("type").HasValue ("I"));
-//			Map<ActuatorPort> (m => m.Requires ("type").HasValue ("O"));
 			Map<PulsePort> (m => m.Requires ("type").HasValue ("P"));
 			Map<SwitchPort> (m => m.Requires ("type").HasValue ("S"));
 			Map<VarioPort> (m => m.Requires ("type").HasValue ("V"));

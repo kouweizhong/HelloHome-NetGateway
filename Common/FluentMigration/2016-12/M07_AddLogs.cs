@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Data;
 using FluentMigrator;
 
 namespace HelloHome.Common.FluentMigration
 {
 	[HhMigration(2016,12,10,22,11)]
-	public class AddLogs : ForwardOnlyMigration
+	public class M07_AddLogs : ForwardOnlyMigration
 	{
 		public override void Up ()
 		{
@@ -14,7 +15,12 @@ namespace HelloHome.Common.FluentMigration
 			      .WithColumn ("time").AsDate ().NotNullable ()
 			      .WithColumn ("type").AsFixedLengthAnsiString (4).NotNullable ()
 			      .WithColumn ("data").AsAnsiString (255);
-			Create.ForeignKey ("Log_Node").FromTable ("Log").ForeignColumn ("nodeId").ToTable ("Node").PrimaryColumn ("nodeId");			
+		    Create.ForeignKey("Log_Node")
+		        .FromTable("Log")
+		        .ForeignColumn("nodeId")
+		        .ToTable("Node")
+		        .PrimaryColumn("nodeId")
+		        .OnUpdate(Rule.Cascade);
 		}
 	}
 }

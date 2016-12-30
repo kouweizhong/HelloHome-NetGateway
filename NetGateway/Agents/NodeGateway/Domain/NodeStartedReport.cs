@@ -1,14 +1,21 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
 {
-	public class NodeStartedReport : Report, ISignedMessage
+    [DataContract]
+    public class NodeStartedReport : Report, ISignedMessage
 	{
-		public int Major { get; set; }
-		public int Minor { get; set; }
-		public int OldSignature  { get; set; }
-		public long Signature { get; set; }
-		public bool NeedNewRfAddress { get; set; }
+	    [DataMember]
+	    public int Major { get; set; }
+	    [DataMember]
+	    public int Minor { get; set; }
+	    [DataMember]
+	    public int OldSignature  { get; set; }
+	    [DataMember]
+	    public long Signature { get; set; }
+	    [DataMember]
+	    public bool NeedNewRfAddress { get; set; }
 
 		public override string ToString ()
 		{

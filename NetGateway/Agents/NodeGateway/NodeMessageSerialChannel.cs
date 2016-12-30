@@ -13,16 +13,17 @@ using NLog;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway
 {
-    public class NodeMessageReader
+    public class NodeMessageSerialChannel : INodeMessageChannel
     {
+        private readonly IByteStream _byteStream;
         static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        readonly SerialPort _serial;
         readonly List<IMessageParser> _parsers;
         readonly List<IMessageEncoder> _encoders;
 
-        public NodeMessageReader(ISerialConfigurationProvider serialConfig, IEnumerable<IMessageEncoder> encoders)
+        public NodeMessageSerialChannel(IByteStream byteStream, IEnumerable<IMessageEncoder> encoders)
         {
+            _byteStream = byteStream;
             _encoders = encoders.ToList();
             _parsers = new List<IMessageParser>
             {
@@ -33,7 +34,6 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
                 new NodeInfoReportParser(),
                 new ParseAllParser(),
             };
-            _serial = new SerialPort(serialConfig.Port, 115200, Parity.None, 8, StopBits.One);
         }
 
         public async Task SendAsync(OutgoingMessage message, CancellationToken cancellationToken)
@@ -42,9 +42,8 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
             if (encoder == null)
                 throw new ApplicationException($"No encoder found for {message.GetType().Name}");
             var bytes = encoder.Encode(message);
-            await _serial.BaseStream.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
-            cancellationToken.ThrowIfCancellationRequested();
-            await _serial.BaseStream.WriteAsync(new byte[] {0x0D, 0x0A}, 0, 2, cancellationToken);
+            await _byteStream.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
+            await _byteStream.WriteAsync(new byte[] {0x0D, 0x0A}, 0, 2, cancellationToken);
         }
 
         private const int BufferSize = 100;
@@ -65,7 +64,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
             var eofMatchCharCount = 0;
             while (eofMatchCharCount < eof.Length)
             {
-                var byteCount = await ReadAsync(_buffer, _currentBufferIndex, BufferSize - _currentBufferIndex, cancelationToken);
+                var byteCount = await _byteStream.ReadAsync(_buffer, _currentBufferIndex, BufferSize - _currentBufferIndex, cancelationToken);
                 if (byteCount <= 0)
                     return null;
 
@@ -94,17 +93,6 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
                 return msg;
             }
             return null;
-        }
-
-        protected virtual async Task<int> ReadAsync(byte[] buffer, int offset, int count,
-            CancellationToken cancellationToken)
-        {
-            if (!_serial.IsOpen)
-            {
-                _serial.Open();
-                _serial.BaseStream.ReadTimeout = 10;
-            }
-            return await _serial.BaseStream.ReadAsync(buffer, offset, count, cancellationToken);
         }
     }
 }

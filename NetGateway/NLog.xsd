@@ -448,7 +448,7 @@
         </xs:attribute>
         <xs:attribute name="includeSourceInfo" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include source info (file name and line number) in the information sent over the network.</xs:documentation>
+            <xs:documentation>Indicates whether to include source info (file name and line number) in the information sent over the RfNetwork.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="ndcItemSeparator" type="xs:string">
@@ -463,7 +463,7 @@
         </xs:attribute>
         <xs:attribute name="includeCallSite" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include call site (class and method name) in the information sent over the network.</xs:documentation>
+            <xs:documentation>Indicates whether to include call site (class and method name) in the information sent over the RfNetwork.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="appInfo" type="xs:string">
@@ -1034,7 +1034,7 @@
           <xs:element name="concurrentWrites" minOccurs="0" maxOccurs="1" type="xs:boolean" />
           <xs:element name="concurrentWriteAttemptDelay" minOccurs="0" maxOccurs="1" type="xs:integer" />
           <xs:element name="maxLogFilenames" minOccurs="0" maxOccurs="1" type="xs:integer" />
-          <xs:element name="networkWrites" minOccurs="0" maxOccurs="1" type="xs:boolean" />
+          <xs:element name="RfNetworkWrites" minOccurs="0" maxOccurs="1" type="xs:boolean" />
           <xs:element name="openFileCacheSize" minOccurs="0" maxOccurs="1" type="xs:integer" />
           <xs:element name="openFileCacheTimeout" minOccurs="0" maxOccurs="1" type="xs:integer" />
           <xs:element name="bufferSize" minOccurs="0" maxOccurs="1" type="xs:integer" />
@@ -1167,9 +1167,9 @@
             <xs:documentation>Maximum number of log filenames that should be stored as existing.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
-        <xs:attribute name="networkWrites" type="xs:boolean">
+        <xs:attribute name="RfNetworkWrites" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether concurrent writes to the log file by multiple processes on different network hosts.</xs:documentation>
+            <xs:documentation>Indicates whether concurrent writes to the log file by multiple processes on different RfNetwork hosts.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="openFileCacheSize" type="xs:integer">
@@ -1863,7 +1863,7 @@
         </xs:attribute>
         <xs:attribute name="includeSourceInfo" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include source info (file name and line number) in the information sent over the network.</xs:documentation>
+            <xs:documentation>Indicates whether to include source info (file name and line number) in the information sent over the RfNetwork.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="ndcItemSeparator" type="xs:string">
@@ -1878,7 +1878,7 @@
         </xs:attribute>
         <xs:attribute name="includeCallSite" type="xs:boolean">
           <xs:annotation>
-            <xs:documentation>Indicates whether to include call site (class and method name) in the information sent over the network.</xs:documentation>
+            <xs:documentation>Indicates whether to include call site (class and method name) in the information sent over the RfNetwork.</xs:documentation>
           </xs:annotation>
         </xs:attribute>
         <xs:attribute name="appInfo" type="xs:string">

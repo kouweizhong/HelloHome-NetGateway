@@ -14,16 +14,20 @@ namespace HelloHome.Common.Entities.Configuration
 			Property (_ => _.Signature)
 				.HasColumnName ("signature")
 				.IsRequired ();
-			Property (_ => _.RfAddress)
-				.HasColumnName ("RfAddress")
-				.IsRequired ();
+		    Property (_ => _.RfAddress)
+		        .HasColumnName ("rfAddress")
+		        .IsRequired ();
+		    Property (_ => _.RfNetwork)
+		        .HasColumnName ("rfNetwork")
+		        .IsRequired ();
+		    Property (_ => _.LastSeen)
+		        .HasColumnName ("lastSeen");
 
-			HasOptional (_ => _.LatestValues).WithRequired ();
+		    HasOptional (_ => _.LatestValues).WithRequired ();
 			HasOptional (_ => _.Configuration).WithRequired ();
 			HasMany (_ => _.Ports).WithRequired ().HasForeignKey (_ => _.NodeId);
 			HasMany (_ => _.Logs).WithRequired ().HasForeignKey (_ => _.NodeId);
-			HasMany (_ => _.NodeHealthHistory).WithRequired ().HasForeignKey (x => x.NodeId);
-			HasMany (_ => _.EnvironmentData).WithRequired ().HasForeignKey (_ => _.NodeId);
+		    HasMany(_ => _.CommunicationHistory).WithRequired().HasForeignKey(_ => _.NodeId);
 		}
 	}
 }

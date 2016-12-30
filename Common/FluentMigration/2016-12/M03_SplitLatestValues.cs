@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Data;
 using FluentMigrator;
 
 namespace HelloHome.Common.FluentMigration
 {
 	[HhMigration(2016,12,8,21,45)]
-	public class SplitLatestValues : ForwardOnlyMigration
+	public class M03_SplitLatestValues : ForwardOnlyMigration
 	{
 		public override void Up ()
 		{
@@ -18,7 +19,12 @@ namespace HelloHome.Common.FluentMigration
 				  .WithColumn ("rssi").AsInt32 ().Nullable ()
 			      .WithColumn ("startupTime").AsDateTime ().Nullable ()
 				  .WithColumn ("maxUpTime").AsFloat ().Nullable ();
-			Create.ForeignKey ("NodeLatestValue_Node").FromTable ("NodeLatestValues").ForeignColumn ("nodeId").ToTable ("Node").PrimaryColumn ("nodeId");
+		    Create.ForeignKey("NodeLatestValue_Node")
+		        .FromTable("NodeLatestValues")
+		        .ForeignColumn("nodeId")
+		        .ToTable("Node")
+		        .PrimaryColumn("nodeId")
+		        .OnUpdate(Rule.Cascade);
 			Execute.Sql ("INSERT NodeLatestValues (nodeId, vIn, sendErrorCount, temperature, humidity, pressure, rssi, startupTime, maxUpTime) SELECT nodeId, currentVin, currentSendErrorCount, currentTemperature, currentHumidity, currentPressure, lastRssi, lastStartupTime, maxUpTime FROM Node; ");
 			Delete.Column ("currentVin").FromTable ("Node");
 			Delete.Column ("currentSendErrorCount").FromTable ("Node");

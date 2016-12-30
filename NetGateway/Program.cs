@@ -31,18 +31,12 @@ namespace HelloHome.NetGateway
 				container.Release (dbContext);
 
 				try {
-					container.Resolve<HelloHomeGateway> ();
+					var gateway  = container.Resolve<NodeGateway> ();
+				    var cts = new CancellationTokenSource();
+				    gateway.RunLoop(cts.Token).Wait(cts.Token);
 				} catch (Exception ex) { 
 					Logger.Error (ex.Message);
-					return;
 				}
-				  
-		        var emonCmsUpdater = container.Resolve<IEMonCmsUpdater>();
-		        var timer = new Timer(20000) {AutoReset = true};
-		        timer.Elapsed += (sender, e) => emonCmsUpdater.Update();
-		        //timer.Enabled = true;
-
-				Console.ReadLine ();
 			}
 		    catch (Exception e)
 		    {

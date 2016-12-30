@@ -1,11 +1,15 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
 {
+    [DataContract]
 	public class IncomingMessage : Message
 	{
-		public byte FromNodeId { get; set; }
-		public int Rssi { get; set; }
+		[DataMember]
+	    public byte FromNodeId { get; set; }
+	    [DataMember]
+	    public int Rssi { get; set; }
 	}
 }
 

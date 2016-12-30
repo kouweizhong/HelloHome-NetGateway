@@ -5,9 +5,9 @@ namespace HelloHome.Common.Entities
 {
 	public abstract class NodePort
 	{
-		public virtual int NodePortId { get; set; } 
+		public virtual int NodePortId { get; set; }
 		public virtual Node Node { get; set; }
-		public virtual int NodeId { get; set; } 
+		public virtual int NodeId { get; set; }
 		public virtual int Number { get; set; }  
 		public virtual string Name { get; set; }
 	}

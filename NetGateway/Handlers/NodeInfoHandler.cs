@@ -32,7 +32,7 @@ namespace HelloHome.NetGateway.Handlers
             var nodeInfo = new NodeHealthHistory { SendErrorCount = request.SendErrorCount };
             node.LatestValues.VIn = request.Voltage;
             nodeInfo.VIn = request.Voltage;
-            node.NodeHealthHistory.Add(nodeInfo);
+            node.CommunicationHistory.Add(nodeInfo);
         }
     }
 }

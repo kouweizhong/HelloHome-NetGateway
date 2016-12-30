@@ -13,7 +13,10 @@ namespace HelloHome.Common.Entities.Configuration
 			Property (_ => _.Humidity).HasColumnName ("Humidity");
 			Property (_ => _.AtmosphericPressure).HasColumnName ("Pressure");
 			Property (_ => _.VIn).HasColumnName ("VIn");
-			Property (_ => _.SendErrorCount).HasColumnName ("SendErrorCount");
+		    Property (_ => _.SendErrorCount).HasColumnName ("SendErrorCount");
+		    Property (_ => _.MaxUpTimeRaw).HasColumnName ("maxUpTime");
+
+		    Ignore(_ => _.MaxUpTime);
 		}
 	}
 }

@@ -16,9 +16,9 @@ namespace HelloHome.Common.Entities
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
         public HelloHomeDbContext ()
-		{
-			Database.Log = Console.Write;
-		}
+        {
+            Database.Log = Logger.Debug;
+        }
 
 		protected override void OnModelCreating (DbModelBuilder modelBuilder)
 		{

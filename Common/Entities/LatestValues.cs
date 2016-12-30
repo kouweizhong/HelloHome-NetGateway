@@ -12,6 +12,18 @@ namespace HelloHome.Common.Entities
         public virtual float? AtmosphericPressure { get; set; }
 		public virtual int Rssi { get; set; }
 		public virtual DateTime StartupTime { get; set; }
-		public virtual float MaxUpTime { get; set; }
+        internal virtual float MaxUpTimeRaw { get; set; }
+
+        public virtual TimeSpan MaxUpTime
+        {
+            get
+            {
+                return TimeSpan.FromDays(MaxUpTimeRaw);
+            }
+            set
+            {
+                MaxUpTimeRaw = (float)value.TotalDays;
+            }
+        }
     }
 }

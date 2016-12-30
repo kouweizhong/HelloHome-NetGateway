@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using Castle.Components.DictionaryAdapter;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
@@ -20,7 +21,7 @@ namespace HelloHome.NetGateway.Handlers
 
 		protected override void Handle(CommentReport request, IList<OutgoingMessage> outgoingMessages)
         {
-            Logger.Info(request.Comment);            
+            Logger.Info(request.Comment);
         }
     }
 }

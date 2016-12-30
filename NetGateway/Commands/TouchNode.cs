@@ -24,9 +24,10 @@ namespace HelloHome.NetGateway.Commands
                 throw new ArgumentException("node should be loaded with its latestValues for Touch to work");
             node.LastSeen = _timeProvider.UtcNow;
             node.LatestValues.Rssi = rssi;
-            node.LatestValues.MaxUpTime = Math.Max(
-                node.LatestValues.MaxUpTime,
-                (float) (_timeProvider.UtcNow - node.LatestValues.StartupTime).TotalDays);
+            node.LatestValues.MaxUpTime = TimeSpan.FromDays(Math.Max(
+                node.LatestValues.MaxUpTime.TotalDays,
+                (_timeProvider.UtcNow - node.LatestValues.StartupTime).TotalDays
+            ));
 		}
     }
 }

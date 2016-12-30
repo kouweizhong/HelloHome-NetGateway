@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 
@@ -9,7 +10,7 @@ namespace HelloHome.NetGateway.Handlers
     {
 		readonly IHelloHomeDbContext _dbCtx;
 
-		public MessageHandler (IHelloHomeDbContext dbCtx)
+        protected MessageHandler (IHelloHomeDbContext dbCtx)
 		{
 			this._dbCtx = dbCtx;
 		}

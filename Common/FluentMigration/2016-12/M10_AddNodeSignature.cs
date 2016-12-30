@@ -4,7 +4,7 @@ using FluentMigrator;
 namespace HelloHome.Common.FluentMigration
 {
 	[HhMigration (2016, 12, 13, 10, 02)]
-	public class AddNodeSignature : ForwardOnlyMigration
+	public class M10_AddNodeSignature : ForwardOnlyMigration
 	{
 		public override void Up ()
 		{

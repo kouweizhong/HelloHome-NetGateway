@@ -83,11 +83,11 @@ namespace End2EndTests
 		public void WhenIStart ()
 		{
 			Assert.True (_signature.HasValue);
-			testableGateway.Gateway.MessageReceived (this, new NodeStartedReport {
-				FromNodeId = _rfId ?? (byte)0,
-				Signature = _signature.Value,
-				NeedNewRfAddress = _needNewRf
-			});
+//			testableGateway.Gateway.MessageReceived (this, new NodeStartedReport {
+//				FromNodeId = _rfId ?? (byte)0,
+//				Signature = _signature.Value,
+//				NeedNewRfAddress = _needNewRf
+
 		}
 
 		[Then ("A new node is created with my signature and rfId (.*)")]

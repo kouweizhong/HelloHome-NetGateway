@@ -5,6 +5,6 @@ namespace HelloHome.NetGateway.Handlers
     public interface IMessageHandlerFactory
     {
         IMessageHandler Create(IncomingMessage request);
-        void Dispose(IMessageHandler messageHandler);
+        void Release(IMessageHandler messageHandler);
     }
 }

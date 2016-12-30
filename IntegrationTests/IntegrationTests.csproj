@@ -54,6 +54,7 @@
       <HintPath>..\packages\Castle.Windsor.3.3.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Transactions" />
     <Reference Include="System.Xml" />
     <Reference Include="EntityFramework">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
@@ -98,9 +99,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Agents\EmonCms\EmonCmsAgentTests.cs" />
-    <Compile Include="NetGateway\NodeStartupTests.cs" />
-    <Compile Include="Common\Entities\Configuration\NodeConfigurartionTests.cs" />
-    <Compile Include="Common\Entities\Configuration\ConfigurationTest.cs" />
+    <Compile Include="Common\Entities\CreateNodeTestsFixture.cs" />
+    <Compile Include="Common\Entities\EntityTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

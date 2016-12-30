@@ -13,12 +13,12 @@ using Xunit;
 
 namespace UnitTests.Agents.NodeGateway
 {
-    public class TestableNodeMessageReader : NodeMessageReader
+    public class TestableNodeMessageSerialChannel : NodeMessageSerialChannel
     {
         private readonly Queue<byte[]> _byteSeries = new Queue<byte[]>();
         private static readonly Mock<ISerialConfigurationProvider> ConfigMock = new Mock<ISerialConfigurationProvider>();
 
-        public TestableNodeMessageReader(IEnumerable<IMessageEncoder> encoders)
+        public TestableNodeMessageSerialChannel(IEnumerable<IMessageEncoder> encoders)
             : base(ConfigMock.Object, encoders)
         {
         }
@@ -39,13 +39,37 @@ namespace UnitTests.Agents.NodeGateway
         }
     }
 
+    public class ByteStreamMock : IByteStream
+    {
+        private readonly Queue<byte[]> _byteSeries = new Queue<byte[]>();
+
+        public void EnqueueBytes(byte[] bytes)
+        {
+            _byteSeries.Enqueue(bytes);
+        }
+
+        public Task<int> ReadAsync(byte[] buffer, int offset, int cout, CancellationToken cToken)
+        {
+            if(_byteSeries.Count > 0)
+        }
+
+        public Task WriteAsync(byte[] buffer, int offset, int cout, CancellationToken cToken)
+        {
+            throw new NotImplementedException();
+        }
+
+        public int ReadTimeout { get; set; }
+    }
+
     public class NodeMessageReaderTests
     {
-        private readonly TestableNodeMessageReader _sut;
+        private readonly NodeMessageSerialChannel _sut;
+        private Mock<IByteStream> _byteStream;
 
         public NodeMessageReaderTests()
         {
-            _sut = new TestableNodeMessageReader(new List<IMessageEncoder>());
+            _byteStream = new Mock<IByteStream>();
+            _sut = new NodeMessageSerialChannel(byteStream.Object, new List<IMessageEncoder>());
 
         }
 

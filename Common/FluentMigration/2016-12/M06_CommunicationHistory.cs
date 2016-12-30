@@ -1,10 +1,11 @@
 ﻿using System;
+using System.Data;
 using FluentMigrator;
 
 namespace HelloHome.Common.FluentMigration
 {
 	[HhMigration (2016, 12, 10, 19, 16)]
-	public class CommunicationHistory : ForwardOnlyMigration
+	public class M06_CommunicationHistory : ForwardOnlyMigration
 	{
 		public override void Up ()
 		{
@@ -15,18 +16,24 @@ namespace HelloHome.Common.FluentMigration
 				  .WithColumn ("nodeId").AsInt32 ().NotNullable ()
 				  .WithColumn ("time").AsDateTime ().NotNullable ()
 				  .WithColumn ("rssi").AsInt16 ().NotNullable ();
-			Create.ForeignKey ("CommunicationHistory_Node")
-				.FromTable ("CommunicationHistory").ForeignColumn ("nodeId")
-				.ToTable ("Node").PrimaryColumn ("nodeId");
+		    Create.ForeignKey("CommunicationHistory_Node")
+		        .FromTable("CommunicationHistory")
+		        .ForeignColumn("nodeId")
+		        .ToTable("Node")
+		        .PrimaryColumn("nodeId")
+		        .OnUpdate(Rule.Cascade);
 			Execute.Sql ("INSERT INTO CommunicationHistory (type, extId, nodeId, time, rssi)\n\tSELECT 'E', id, nodeId, timestamp, 0 FROM EnvironmentData\n\tUNION ALL\n\tSELECT 'I', id, nodeId, timestamp, 0 FROM NodeInfoData\n\tUNION ALL\n\tSELECT 'P', id, nodeId, timestamp, 0 FROM PulseData INNER JOIN Port ON PulseData.SubNodeId = Port.portId;");
 
 			Create.Table ("NodeHealthHistory")
 				  .WithColumn ("communicationHistoryId").AsInt32 ().PrimaryKey ()
 				  .WithColumn ("vIn").AsFloat ().Nullable ()
 				  .WithColumn ("sendErrorCount").AsInt16 ().NotNullable ();
-			Create.ForeignKey ("NodeHealthHistory_CommunicationHostory")
-				  .FromTable ("NodeHealthHistory").ForeignColumn ("communicationHistoryId")
-				  .ToTable ("CommunicationHistory").PrimaryColumn ("communicationHistoryId");
+		    Create.ForeignKey("NodeHealthHistory_CommunicationHostory")
+		        .FromTable("NodeHealthHistory")
+		        .ForeignColumn("communicationHistoryId")
+		        .ToTable("CommunicationHistory")
+		        .PrimaryColumn("communicationHistoryId")
+		        .OnUpdate(Rule.Cascade);
 			Execute.Sql ("INSERT INTO NodeHealthHistory (communicationHistoryId, vIn, sendErrorCount)\n\tSELECT communicationHistoryId, vIn, sendErrorCount FROM NodeInfoData I INNER JOIN CommunicationHistory H ON I.id=H.extId AND H.type='I';");
 
 			Create.Table ("EnvironmentDataHistory")
@@ -34,9 +41,12 @@ namespace HelloHome.Common.FluentMigration
 				  .WithColumn ("temperature").AsFloat ().Nullable ()
 				  .WithColumn ("humidity").AsFloat ().Nullable ()
 				  .WithColumn ("pressure").AsInt16 ().Nullable ();
-			Create.ForeignKey ("EnvironmentDataHistory_CommunicationHistory")
-				  .FromTable ("EnvironmentDataHistory").ForeignColumn ("communicationHistoryId")
-				  .ToTable ("CommunicationHistory").PrimaryColumn ("communicationHistoryId");
+		    Create.ForeignKey("EnvironmentDataHistory_CommunicationHistory")
+		        .FromTable("EnvironmentDataHistory")
+		        .ForeignColumn("communicationHistoryId")
+		        .ToTable("CommunicationHistory")
+		        .PrimaryColumn("communicationHistoryId")
+		        .OnUpdate(Rule.Cascade);
 			Execute.Sql ("INSERT INTO EnvironmentDataHistory (communicationHistoryId, temperature, humidity, pressure)\n\tSELECT communicationHistoryId, temperature, humidity, pressure FROM EnvironmentData E INNER JOIN CommunicationHistory H ON E.id=H.extId AND H.type='E';");
 
 			Create.Table ("PulseHistory")
@@ -45,12 +55,18 @@ namespace HelloHome.Common.FluentMigration
 				  .WithColumn ("newPulses").AsInt16 ().NotNullable ()
 				  .WithColumn ("total").AsInt32 ().NotNullable ()
 				  .WithColumn ("isOffset").AsBoolean ().NotNullable ();
-			Create.ForeignKey ("PulseHistory_CommunicationHistory")
-				  .FromTable ("PulseHistory").ForeignColumn ("communicationHistoryId")
-				  .ToTable ("CommunicationHistory").PrimaryColumn ("communicationHistoryId");
-			Create.ForeignKey ("PulseHistory_Port")
-				  .FromTable ("PulseHistory").ForeignColumn ("portId")
-				  .ToTable ("Port").PrimaryColumn ("portId");
+		    Create.ForeignKey("PulseHistory_CommunicationHistory")
+		        .FromTable("PulseHistory")
+		        .ForeignColumn("communicationHistoryId")
+		        .ToTable("CommunicationHistory")
+		        .PrimaryColumn("communicationHistoryId")
+		        .OnUpdate(Rule.Cascade);
+		    Create.ForeignKey("PulseHistory_Port")
+		        .FromTable("PulseHistory")
+		        .ForeignColumn("portId")
+		        .ToTable("Port")
+		        .PrimaryColumn("portId")
+		        .OnUpdate(Rule.Cascade);
 			Execute.Sql ("INSERT INTO PulseHistory (communicationHistoryId, portId, newPulses, total)\n\tSELECT communicationHistoryId, subNodeId, newPulses, newValue FROM PulseData P INNER JOIN CommunicationHistory H ON P.id=H.extId AND H.type='P';");
 
 			Delete.Table ("EnvironmentData");

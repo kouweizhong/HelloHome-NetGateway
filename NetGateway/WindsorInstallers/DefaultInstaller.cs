@@ -66,7 +66,8 @@ namespace HelloHome.NetGateway.WindsorInstallers
 			container.Register (Component.For<IEMonCmsUpdater> ().ImplementedBy<EMonCmsUpdater> ());
 
 			//HelloHomeGateway
-			container.Register (Component.For<HelloHomeGateway> ());
+			container.Register (Component.For<NodeGateway> ());
+		    container.Register(Component.For<NodeMessageSerialChannel>());
 
 			//MessageHandlers
 			container.Register (

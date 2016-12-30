@@ -63,17 +63,19 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Entities\Configuration\CommunicationHistoryConfig.cs" />
+    <Compile Include="Entities\Configuration\NodeLogConfig.cs" />
     <Compile Include="Entities\LatestValues.cs" />
     <Compile Include="Exceptions\HelloHomeException.cs" />
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
+    <Compile Include="FluentMigration\2016-12\M11_AddCascadeUpdateToFk.cs" />
+    <Compile Include="FluentMigration\2016-12\M12_RenameNodeNetworkId.cs" />
+    <Compile Include="FluentMigration\2016-12\M13_MakesRfFieldsTinyInts.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extentions\DateTimeExtentions.cs" />
-    <Compile Include="Entities\Configuration\EnvironmentDataConfiguration.cs" />
     <Compile Include="Entities\Configuration\NodeConfig.cs" />
     <Compile Include="Entities\Configuration\NodeConfigurationConfig.cs" />
-    <Compile Include="Entities\Configuration\NodeInfoDataConfiguration.cs" />
     <Compile Include="Entities\Configuration\LatestValuesConfiguration.cs" />
-    <Compile Include="Entities\Configuration\PulseDataConfiguration.cs" />
     <Compile Include="Entities\EnvironmentDataHistory.cs" />
     <Compile Include="Entities\HelloHomeDbContext.cs" />
     <Compile Include="Entities\Node.cs" />
@@ -86,19 +88,19 @@
     <Compile Include="Entities\MySqlConfiguration.cs" />
     <Compile Include="Entities\MySqlInitializer.cs" />
     <Compile Include="Entities\Includes\NodeInclude.cs" />
-    <Compile Include="FluentMigration\2016-12\Initial.cs" />
+    <Compile Include="FluentMigration\2016-12\M01_Initial.cs" />
     <Compile Include="FluentMigration\HhMigrationAttribute.cs" />
-    <Compile Include="FluentMigration\2016-12\SplitNodeConfig.cs" />
-    <Compile Include="FluentMigration\2016-12\SplitLatestValues.cs" />
-    <Compile Include="FluentMigration\2016-12\CleanNode.cs" />
-    <Compile Include="FluentMigration\2016-12\RefactorSubNodeIntoPort.cs" />
-    <Compile Include="FluentMigration\2016-12\CommunicationHistory.cs" />
-    <Compile Include="FluentMigration\2016-12\AddLogs.cs" />
+    <Compile Include="FluentMigration\2016-12\M02_SplitNodeConfig.cs" />
+    <Compile Include="FluentMigration\2016-12\M03_SplitLatestValues.cs" />
+    <Compile Include="FluentMigration\2016-12\M04_CleanNode.cs" />
+    <Compile Include="FluentMigration\2016-12\M05_RefactorSubNodeIntoPort.cs" />
+    <Compile Include="FluentMigration\2016-12\M06_CommunicationHistory.cs" />
+    <Compile Include="FluentMigration\2016-12\M07_AddLogs.cs" />
     <Compile Include="Entities\NodeLog.cs" />
     <Compile Include="Entities\CommunicationHistory.cs" />
-    <Compile Include="FluentMigration\2016-12\AddLastSeenToNode.cs" />
-    <Compile Include="FluentMigration\2016-12\RemovePortDirection.cs" />
-    <Compile Include="FluentMigration\2016-12\AddNodeSignature.cs" />
+    <Compile Include="FluentMigration\2016-12\M08_AddLastSeenToNode.cs" />
+    <Compile Include="FluentMigration\2016-12\M09_RemovePortDirection.cs" />
+    <Compile Include="FluentMigration\2016-12\M10_AddNodeSignature.cs" />
     <Compile Include="TaskQueue.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

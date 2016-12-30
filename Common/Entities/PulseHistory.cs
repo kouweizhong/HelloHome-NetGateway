@@ -1,12 +1,14 @@
 ﻿using System;
+using System.Reflection;
 
 namespace HelloHome.Common.Entities
 {
 	public class PulseHistory : CommunicationHistory
 	{
-		public virtual int PulsePortId { get; set; }
+		public virtual PulsePort Port { get; set; }
+	    public virtual int PortId { get; set; }
 		public virtual int NewPulses { get; set; }
-		public virtual int NewValue { get; set; }
+		public virtual int Total { get; set; }
 		public virtual bool IsOffset { get; set; }
 	}
 }

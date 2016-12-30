@@ -16,7 +16,7 @@ namespace End2EndTests
 	public class TestableGateway : IDisposable
 	{
 		public Mock<INodeGatewayAgent> NodeAgent;
-		public HelloHomeGateway Gateway;
+		public NodeGateway Gateway;
 
 		public readonly HelloHomeDbContext DbContext;
 
@@ -34,7 +34,7 @@ namespace End2EndTests
 				Component.For (typeof (INodeGatewayAgent)).Instance (NodeAgent.Object)
 			));
 
-			Gateway = _IoCcontainer.Resolve<HelloHomeGateway> ();
+			Gateway = _IoCcontainer.Resolve<NodeGateway> ();
 			DbContext = _IoCcontainer.Resolve<HelloHomeDbContext> ("TransientDbContext");
 		}
 

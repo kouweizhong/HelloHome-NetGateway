@@ -4,7 +4,7 @@ using FluentMigrator;
 namespace HelloHome.Common.FluentMigration
 {
 	[HhMigration (2016, 12, 2, 18, 41)]
-	public class Initial : ForwardOnlyMigration
+	public class M01_Initial : ForwardOnlyMigration
 	{
 		public override void Up ()
 		{

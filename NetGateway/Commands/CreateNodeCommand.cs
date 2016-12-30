@@ -1,4 +1,5 @@
-﻿using HelloHome.Common.Entities;
+﻿using System;
+using HelloHome.Common.Entities;
 using HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy;
 using HelloHome.NetGateway.Queries;
 
@@ -44,7 +45,7 @@ namespace HelloHome.NetGateway.Commands
                 LatestValues = new LatestValues
                 {
 					StartupTime = _timeProvider.UtcNow,
-					MaxUpTime = 0,
+					MaxUpTime = TimeSpan.Zero,
 				}
             };
             _ctx.Nodes.Add(node);

@@ -4,7 +4,7 @@ using FluentMigrator;
 namespace HelloHome.Common.FluentMigration
 {
 	[HhMigration(2016,12,10,19,13)]
-	public class RefactorSubNodeIntoPort : ForwardOnlyMigration
+	public class M05_RefactorSubNodeIntoPort : ForwardOnlyMigration
 	{
 		public override void Up ()
 		{

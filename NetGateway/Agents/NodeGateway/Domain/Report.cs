@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Runtime.Serialization;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
 {
-	public abstract class Report : IncomingMessage
+	[DataContract]
+    public abstract class Report : IncomingMessage
 	{
 	}
 }
