@@ -90,7 +90,6 @@
     <Compile Include="Handlers\MessageHandler.cs" />
     <Compile Include="Handlers\NodeInfoHandler.cs" />
     <Compile Include="Handlers\NodeStartedHandler.cs" />
-    <Compile Include="Logic\TimeProvider.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Configuration\IConfigurationProvider.cs" />

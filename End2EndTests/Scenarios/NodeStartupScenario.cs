@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Threading;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway;
@@ -9,15 +10,17 @@ using Xunit;
 
 namespace End2EndTests.Scenarios
 {
-    public class NodeStartupScenario : IClassFixture<TestableGateway>
+    public class NodeStartupScenario : IClassFixture<TestableGateway>, IDisposable
     {
+        private readonly TestableGateway _testableGateway;
         private readonly HelloHomeDbContext _dbCtx;
         private readonly Mock<INodeMessageChannel> _msgChannel;
         private readonly NodeGateway _gtw;
 
         public NodeStartupScenario(TestableGateway testableGateway)
         {
-            _dbCtx = testableGateway.DbContext;
+            _testableGateway = testableGateway;
+            _dbCtx = testableGateway.CreateDbContext();
             _msgChannel = testableGateway.MessageReader;
             _gtw = testableGateway.Gateway;
             _dbCtx.Database.Delete();
@@ -72,6 +75,11 @@ namespace End2EndTests.Scenarios
 
             //Assert
             _msgChannel.Verify(_ => _.SendAsync(It.Is<NodeConfigCommand>(c => c.NewRfAddress != 12), It.IsAny<CancellationToken>()));
+        }
+
+        public void Dispose()
+        {
+            _testableGateway.ReleaseDbContext(_dbCtx);
         }
     }
 }

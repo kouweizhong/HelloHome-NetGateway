@@ -8,8 +8,11 @@ namespace HelloHome.Common.Entities.Configuration
         {
             ToTable("CommunicationHistory");
             HasKey(_ => _.Id);
-
+            Property(_ => _.Id).HasColumnName("communicationHistoryId");
+            Property(_ => _.Type).HasColumnName("type").HasMaxLength(1).IsRequired();
             Property(_ => _.Timestamp).HasColumnName("time");
+            Property(_ => _.NodeId).HasColumnName("nodeId");
+            Property(_ => _.Rssi).HasColumnName("rssi");
         }
     }
 

@@ -15,8 +15,6 @@ namespace End2EndTests
 	    public Mock<INodeMessageChannel> MessageReader;
 		public NodeGateway Gateway;
 
-		public readonly HelloHomeDbContext DbContext;
-
 		readonly WindsorContainer _ioCcontainer;
 
 		public TestableGateway ()
@@ -34,10 +32,19 @@ namespace End2EndTests
 			);
 
 			Gateway = _ioCcontainer.Resolve<NodeGateway> ();
-			DbContext = _ioCcontainer.Resolve<HelloHomeDbContext> ("TransientDbContext");
 		}
 
-		public Mock<T> Mock<T> () where T : class
+	    public HelloHomeDbContext CreateDbContext()
+	    {
+	        return _ioCcontainer.Resolve<HelloHomeDbContext> ("TransientDbContext");
+	    }
+
+	    public void ReleaseDbContext(HelloHomeDbContext ctx)
+	    {
+	        _ioCcontainer.Release(ctx);
+	    }
+
+	    public Mock<T> Mock<T> () where T : class
 		{			
 			var mock = new Mock<T> ();
 			_ioCcontainer.Register (
@@ -52,7 +59,6 @@ namespace End2EndTests
 		public void Dispose ()
 		{
 			_ioCcontainer.Release (Gateway);
-			_ioCcontainer.Release (DbContext);
 			_ioCcontainer.Dispose ();
 		}
 	}

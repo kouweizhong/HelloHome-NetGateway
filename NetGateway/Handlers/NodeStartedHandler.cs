@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using HelloHome.Common;
 using HelloHome.Common.Entities;
 using HelloHome.Common.Entities.Includes;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;

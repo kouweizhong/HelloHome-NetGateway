@@ -89,6 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Scenarios\NodeStartupScenario.cs" />
+    <Compile Include="Scenarios\ScenarioBase.cs" />
     <Compile Include="TestableGateway.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

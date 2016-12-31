@@ -16,6 +16,13 @@ namespace HelloHome.Common.Entities
 		public virtual IList<NodeLog> Logs { get; set; }
 		public virtual IList<NodePort> Ports { get; set; }
 		public virtual IList<CommunicationHistory> CommunicationHistory { get; set; }
+
+	    public void AddLog(string type, string data = null)
+	    {
+	        if(Logs == null)
+	            Logs = new List<NodeLog>();
+	        Logs.Add(new NodeLog { Time = TimeProvider.Current.UtcNow, NodeId = this.Id, Type = type, Data = data });
+	    }
 	}
 
 	

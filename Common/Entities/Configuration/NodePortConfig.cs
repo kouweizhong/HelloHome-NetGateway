@@ -27,4 +27,27 @@ namespace HelloHome.Common.Entities.Configuration
 			Property (_ => _.PulseCount).HasColumnName ("pulseCount");			
 		}
 	}
+
+    public class SwithSensorConfig : EntityTypeConfiguration<SwitchPort>
+    {
+        public SwithSensorConfig()
+        {
+            Property(_ => _.State).HasColumnName("state");
+        }
+    }
+
+    public class VarioSensorConfig : EntityTypeConfiguration<VarioPort>
+    {
+        public VarioSensorConfig()
+        {
+            Property(_ => _.Value).HasColumnName("value");
+        }
+    }
+
+    public class RelayActuatorConfig : EntityTypeConfiguration<RelayPort>
+    {
+        public RelayActuatorConfig()
+        {
+        }
+    }
 }

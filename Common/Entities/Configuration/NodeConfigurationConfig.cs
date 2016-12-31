@@ -14,11 +14,14 @@ namespace HelloHome.Common.Entities.Configuration
 				.HasColumnName ("nodeId")
 				.IsRequired ();
 			Property (x => x.Name)
-				.HasColumnName ("Name")
+				.HasColumnName ("name")
 				.IsOptional ();
-			Property (x => x.EmonCmsNodeId)
-				.HasColumnName ("EmonCmsNodeId")
-				.IsOptional();
+		    Property (x => x.EmonCmsNodeId)
+		        .HasColumnName ("emonCmsNodeId")
+		        .IsOptional();
+		    Property (x => x.Version)
+		        .HasColumnName ("version")
+		        .IsOptional();
 		}
 	}
 }

@@ -102,6 +102,7 @@
     <Compile Include="FluentMigration\2016-12\M09_RemovePortDirection.cs" />
     <Compile Include="FluentMigration\2016-12\M10_AddNodeSignature.cs" />
     <Compile Include="TaskQueue.cs" />
+    <Compile Include="TimeProvider.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup />

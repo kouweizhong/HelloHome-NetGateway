@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HelloHome.NetGateway.Commands
+namespace HelloHome.Common
 {
     public interface ITimeProvider
     {
@@ -10,5 +10,7 @@ namespace HelloHome.NetGateway.Commands
     public class TimeProvider : ITimeProvider
     {
         public DateTime UtcNow => DateTime.UtcNow;
+
+        public static ITimeProvider Current { get; set; }
     }
 }

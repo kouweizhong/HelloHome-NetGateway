@@ -1,4 +1,5 @@
-﻿using System.Data.Entity.ModelConfiguration;
+﻿using System.ComponentModel.DataAnnotations.Schema;
+using System.Data.Entity.ModelConfiguration;
 
 namespace HelloHome.Common.Entities.Configuration
 {
@@ -10,7 +11,8 @@ namespace HelloHome.Common.Entities.Configuration
 			HasKey (_ => _.Id);
 			Property (_ => _.Id)
 				.HasColumnName ("nodeId")
-				.IsRequired ();
+				.IsRequired ()
+			    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
 			Property (_ => _.Signature)
 				.HasColumnName ("signature")
 				.IsRequired ();

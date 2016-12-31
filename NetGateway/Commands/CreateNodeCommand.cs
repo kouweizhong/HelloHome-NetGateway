@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using HelloHome.Common;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy;
 using HelloHome.NetGateway.Queries;
@@ -50,6 +51,7 @@ namespace HelloHome.NetGateway.Commands
 					MaxUpTime = TimeSpan.Zero,
 				}
             };
+            node.AddLog("STRT");
             _ctx.Nodes.Add(node);
 
             return node;

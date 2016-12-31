@@ -13,6 +13,7 @@ using HelloHome.NetGateway.Handlers;
 using HelloHome.NetGateway.Queries;
 using HelloHome.NetGateway.Commands;
 using System;
+using HelloHome.Common;
 using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 
 namespace HelloHome.NetGateway.WindsorInstallers
@@ -76,9 +77,10 @@ namespace HelloHome.NetGateway.WindsorInstallers
 
 			//Logic
 			container.Register (
-				Component.For<ITimeProvider> ().ImplementedBy<TimeProvider> ().LifestyleBoundTo<IMessageHandler> (),
+				Component.For<ITimeProvider> ().ImplementedBy<TimeProvider> (),
 				Component.For<IRfIdGenerationStrategy> ().ImplementedBy<FindHoleRfIdGenerationStrategy> ().LifestyleBoundTo<IMessageHandler> ()
 			);
+		    TimeProvider.Current = container.Resolve<ITimeProvider>();
 		}
 
 		#endregion
