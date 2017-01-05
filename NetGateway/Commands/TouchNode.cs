@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Threading.Tasks;
 using HelloHome.Common;
 using HelloHome.Common.Entities;
+using NLog;
 
 namespace HelloHome.NetGateway.Commands
 {
@@ -13,6 +14,8 @@ namespace HelloHome.NetGateway.Commands
 
     public class TouchNode : ITouchNode
     {
+        private static readonly Logger Logger = LogManager.GetCurrentClassLogger ();
+
         private readonly ITimeProvider _timeProvider;
 
         public TouchNode(ITimeProvider timeProvider)
@@ -33,6 +36,7 @@ namespace HelloHome.NetGateway.Commands
                         (_timeProvider.UtcNow - node.LatestValues.StartupTime).TotalDays
                     )
                 );
+            Logger.Debug("Node with signature {0} was touched", node.Signature);
             await Task.Yield();
         }
     }

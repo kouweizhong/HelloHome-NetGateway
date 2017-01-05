@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Data.Entity;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.Common.Entities;
 
@@ -8,8 +9,8 @@ namespace HelloHome.NetGateway.Queries
 {
     public interface IListRfIdsQuery : IQuery
     {
-        IList<byte> Execute();
         Task<IList<byte>> ExecuteAsync();
+        Task<IList<byte>> ExecuteAsync(byte network, CancellationToken cToken);
     }
 
     public class ListRfIdsQuery : IListRfIdsQuery
@@ -21,14 +22,17 @@ namespace HelloHome.NetGateway.Queries
             _ctx = ctx;
         }
 
-        public IList<byte> Execute()
-        {
-            return _ctx.Nodes.Select(x => x.RfAddress).ToList();
-        }
-
         public async Task<IList<byte>> ExecuteAsync()
         {
             return await _ctx.Nodes.Select(x => x.RfAddress).ToListAsync();
+        }
+
+        public async Task<IList<byte>> ExecuteAsync(byte network, CancellationToken cToken)
+        {
+            return await _ctx.Nodes
+                .Where(x => x.RfNetwork == network)
+                .Select(x => x.RfAddress)
+                .ToListAsync(cToken);
         }
     }
 }

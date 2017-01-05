@@ -47,12 +47,14 @@ namespace HelloHome.NetGateway
         private async Task ProcessAsync(IncomingMessage msg, CancellationToken cToken)
         {
             var handler = _handlerFactory.Create(msg);
+            Logger.Debug("Handler {0} found for request {1}", handler.GetType().Name, msg.GetType().Name);
             try
             {
-                var responses = await handler.HandleAsync(msg);
+                var responses = await handler.HandleAsync(msg, cToken);
                 if (responses == null)
                     return;
 
+                Logger.Debug("{0} messages to send back", responses.Count);
                 foreach (var r in responses)
                     await _nodeMessageChannel.SendAsync(r, cToken);
             }

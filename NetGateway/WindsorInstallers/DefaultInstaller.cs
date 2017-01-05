@@ -5,7 +5,6 @@ using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
-using HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy;
 using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Agents.EmonCms;
 using Castle.Facilities.TypedFactory;

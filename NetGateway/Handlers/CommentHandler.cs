@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 using Castle.Components.DictionaryAdapter;
 using HelloHome.Common.Entities;
@@ -19,7 +20,7 @@ namespace HelloHome.NetGateway.Handlers
 
 		}
 
-		protected override async Task HandleAsync(CommentReport request, IList<OutgoingMessage> outgoingMessages)
+		protected override async Task HandleAsync(CommentReport request, IList<OutgoingMessage> outgoingMessages, CancellationToken cToken)
         {
             Logger.Info(request.Comment);
             await Task.Yield();

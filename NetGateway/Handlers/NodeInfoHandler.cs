@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.Common.Entities;
 using HelloHome.Common.Exceptions;
@@ -22,7 +23,7 @@ namespace HelloHome.NetGateway.Handlers
             _touchNode = touchNode;
         }
 
-        protected override async Task HandleAsync(NodeInfoReport request, IList<OutgoingMessage> outgoingMessages)
+        protected override async Task HandleAsync(NodeInfoReport request, IList<OutgoingMessage> outgoingMessages, CancellationToken cToken)
         {
             var node = await _findNodeQuery.ByRfIdAsync(request.FromNodeId);
             if (node == null)

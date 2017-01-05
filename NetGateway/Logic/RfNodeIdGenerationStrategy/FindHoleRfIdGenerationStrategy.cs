@@ -1,16 +1,20 @@
 ﻿using System;
 using System.Linq;
-using HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy;
+using System.Threading;
+using System.Threading.Tasks;
+using HelloHome.NetGateway.Queries;
 
 namespace HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy
 {
 	public class FindHoleRfIdGenerationStrategy : IRfIdGenerationStrategy
 	{
+	    private readonly IListRfIdsQuery _listRfIdQuery;
 	    readonly Random _rnd;
 
-		public FindHoleRfIdGenerationStrategy ()
+		public FindHoleRfIdGenerationStrategy (IListRfIdsQuery listRfIdQuery)
 		{
-			MaxSupportedConcurrentRequest = 5;
+		    _listRfIdQuery = listRfIdQuery;
+		    MaxSupportedConcurrentRequest = 5;
 			_rnd = new Random ();
 		}
 
@@ -30,7 +34,24 @@ namespace HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy
 			return (byte)(_rnd.Next(maxExisting+1, Math.Min(maxExisting+1+MaxSupportedConcurrentRequest, 250)));
 		}
 
-		#endregion	
+	    public async Task<byte> FindAvailableRfAddressAsync(byte network, CancellationToken cToken, byte suggestion = 0)
+	    {
+	        var exisitingIds = await _listRfIdQuery.ExecuteAsync(network, cToken);
+	        if (!exisitingIds.Any ())
+	            return 1;
+	        if (suggestion != 0 && !exisitingIds.Contains(suggestion))
+	            return suggestion;
+
+	        var maxExisting = exisitingIds.Max ();
+
+	        var holes = Enumerable.Range(1, maxExisting).Select(i => (byte)i).Where (i => !exisitingIds.Contains(i)).ToList ();
+	        if (holes.Count >= MaxSupportedConcurrentRequest) {
+	            return holes [_rnd.Next(holes.Count - 1)];
+	        }
+	        return (byte)(_rnd.Next(maxExisting+1, Math.Min(maxExisting+1+MaxSupportedConcurrentRequest, 250)));
+	    }
+
+	    #endregion
 
 	}
 }
