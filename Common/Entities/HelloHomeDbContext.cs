@@ -19,7 +19,7 @@ namespace HelloHome.Common.Entities
 
         public HelloHomeDbContext ()
         {
-            Database.Log = Logger.Debug;
+            //Database.Log = Logger.Debug;
         }
 
 		protected override void OnModelCreating (DbModelBuilder modelBuilder)

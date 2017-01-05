@@ -34,13 +34,14 @@ namespace HelloHome.NetGateway
 					var gateway  = container.Resolve<NodeGateway> ();
 				    var cts = new CancellationTokenSource();
 				    gateway.RunLoopAsync(cts.Token).Wait(cts.Token);
-				} catch (Exception ex) { 
+				}
+				catch (Exception ex) {
 					Logger.Error (ex.Message);
 				}
 			}
 		    catch (Exception e)
 		    {
-		        Logger.Fatal(e);		        
+		        Logger.Fatal(e);
 		    }
 		    finally
 		    {

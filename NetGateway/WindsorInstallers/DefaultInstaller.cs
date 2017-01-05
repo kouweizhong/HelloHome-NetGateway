@@ -36,9 +36,10 @@ namespace HelloHome.NetGateway.WindsorInstallers
 
 			//dbContext
 			container.Register (Component.For<IHelloHomeDbContext> ().ImplementedBy<HelloHomeDbContext> ().LifestyleBoundTo<IMessageHandler> ());
-			container.Register (Component.For<HelloHomeDbContext> ().LifestyleTransient().Named("TransientDbContext"));
+		    container.Register (Component.For<HelloHomeDbContext> ().LifestyleTransient().Named("TransientDbContext"));
+		    container.Register (Component.For<HelloHomeDbContext> ().LifestyleSingleton().Named("SingletonDbContext"));
 
-			//Agents
+		    //Agents
 			container.Register (Component.For<INodeGatewayAgent> ()
 									.ImplementedBy<NodeGatewayAgent> ()
 									.LifestyleSingleton ());
@@ -57,9 +58,10 @@ namespace HelloHome.NetGateway.WindsorInstallers
 
 			//HelloHomeGateway
 			container.Register (Component.For<NodeGateway> ());
-		    container.Register(Component.For<NodeMessageSerialChannel>());
+		    container.Register(Component.For<INodeMessageChannel>().ImplementedBy<NodeMessageSerialChannel>());
+		    container.Register(Component.For<IByteStream>().ImplementedBy<SerialPortByteStream>());
 
-			//MessageHandlers
+		    //MessageHandlers
 			container.Register (
 				Classes.FromAssemblyContaining<IMessageHandler> ()
 					.BasedOn (typeof (MessageHandler<>))

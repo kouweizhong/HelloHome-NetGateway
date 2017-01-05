@@ -35,7 +35,7 @@ namespace HelloHome.NetGateway.Handlers
 
 		protected override async Task HandleAsync (NodeStartedReport request, IList<OutgoingMessage> outgoingMessages)
 		{
-			var node = await _findNodeQuery.BySignatureAsync (request.Signature, NodeInclude.Facts);
+			var node = await _findNodeQuery.BySignatureAsync (request.Signature, NodeInclude.Facts | NodeInclude.Config);
 			if (node == default (Node)) {
 				node = await _createNodeCommand.ExecuteAsync (request.Signature, request.NeedNewRfAddress ? (byte)0 : request.FromNodeId);
 				if (node.RfAddress != request.FromNodeId)
@@ -47,7 +47,6 @@ namespace HelloHome.NetGateway.Handlers
 			node.Configuration.Version = $"{request.Major}.{request.Minor}";
 			node.LatestValues.StartupTime = _timeProvider.UtcNow;
 			await _touchNode.TouchAsync (node, request.Rssi);
-
 		}
 	}
 }
