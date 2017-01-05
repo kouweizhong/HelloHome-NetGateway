@@ -1,6 +1,7 @@
-﻿using HelloHome.NetGateway.Commands.RfNodeIdGenerationStrategy;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
+using HelloHome.NetGateway.Queries;
+using Moq;
 using Xunit;
 
 namespace UnitTests.Logic.RfNodeIdGenerationStrategy
@@ -8,10 +9,12 @@ namespace UnitTests.Logic.RfNodeIdGenerationStrategy
 	public class FindHoleRfNodeIdGeneratorStrategyTests
 	{
 		readonly FindHoleRfIdGenerationStrategy _sut;
+	    private readonly Mock<IListRfIdsQuery> _findExisiting;
 
-		public FindHoleRfNodeIdGeneratorStrategyTests()
+	    public FindHoleRfNodeIdGeneratorStrategyTests()
 		{
-			_sut = new FindHoleRfIdGenerationStrategy();
+		    _findExisiting = new Mock<IListRfIdsQuery>();
+			_sut = new FindHoleRfIdGenerationStrategy(_findExisiting.Object);
 			_sut.MaxSupportedConcurrentRequest = 3;
 		}
 
