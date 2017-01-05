@@ -29,11 +29,14 @@ namespace End2EndTests.Scenarios
             _msgChannel = new Mock<INodeMessageChannel>();
             _gtw = testableGateway.CreateGateway(_msgChannel.Object);
             Logger.Debug("Gateway created with channel {0}", _msgChannel.GetHashCode());
+            _dbCtx.Database.Delete();
+            _dbCtx.Database.Create();
         }
 
         [Fact]
         public async Task nodes_are_created_the_first_time_they_startup()
         {
+            Logger.Debug("Start test {0}", nameof(nodes_are_created_the_first_time_they_startup));
             //Arrange
             var rfId = _testableGateway.GetNextRfId();
             var cts = new CancellationTokenSource();
@@ -52,6 +55,8 @@ namespace End2EndTests.Scenarios
         [Fact]
         public async Task no_config_command_if_node_has_unique_rfAddress()
         {
+            Logger.Debug("Start test {0}", nameof(no_config_command_if_node_has_unique_rfAddress));
+
             //Arrange
             var rfId = _testableGateway.GetNextRfId();
             var cts = new CancellationTokenSource();
@@ -69,6 +74,8 @@ namespace End2EndTests.Scenarios
         [Fact]
         public async Task new_rfaddress_is_suggested_if_already_in_use()
         {
+            Logger.Debug("Start test {0}", nameof(new_rfaddress_is_suggested_if_already_in_use));
+
             //Arrange
             var rfId = _testableGateway.GetNextRfId();
             _dbCtx.Nodes.Add(new Node {RfAddress = rfId, Signature = 3, Configuration = new NodeConfiguration(), LatestValues = new LatestValues()});
