@@ -11,8 +11,8 @@ namespace HelloHome.Common.Entities.Configuration
 			HasKey (_ => _.Id);
 			Property (_ => _.Id)
 				.HasColumnName ("nodeId")
-				.IsRequired ()
-			    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity);
+			    .HasDatabaseGeneratedOption(DatabaseGeneratedOption.Identity)
+			    .IsRequired ();
 			Property (_ => _.Signature)
 				.HasColumnName ("signature")
 				.IsRequired ();

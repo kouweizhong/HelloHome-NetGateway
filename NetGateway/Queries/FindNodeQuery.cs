@@ -27,14 +27,14 @@ namespace HelloHome.NetGateway.Queries
         {
             return _ctx.Nodes
                 .Include(includes)
-                .FirstOrDefault(x => x.Id == signature);
+                .FirstOrDefault(x => x.Signature == signature);
         }
 
         public async Task<Node> BySignatureAsync(long signature, NodeInclude includes = NodeInclude.None)
         {
             return await _ctx.Nodes
                 .Include(includes)
-                .FirstOrDefaultAsync(x => x.Id == signature);
+                .FirstOrDefaultAsync(x => x.Signature == signature);
         }
 
         public Node ByRfId(int rfId, NodeInclude includes = NodeInclude.None)

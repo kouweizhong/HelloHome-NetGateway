@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Data.Entity;
 using System.Data.Entity.Migrations.History;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using NLog;
 
@@ -8,8 +9,15 @@ namespace HelloHome.Common.Entities
 {
     public interface IHelloHomeDbContext
     {
+        Guid ContextId { get; }
+
         IDbSet<Node> Nodes { get; }
-		int Commit ();
+        IDbSet<Port> Ports { get; set; }
+        IDbSet<PortGroup> PortGroups { get; set; }
+        IDbSet<PulseHistory> PulseData { get; set; }
+        IDbSet<Trigger> Triggers { get; set; }
+
+        int Commit ();
         Task<int> CommitAsync();
     }
 
@@ -19,7 +27,7 @@ namespace HelloHome.Common.Entities
 
         public HelloHomeDbContext ()
         {
-            Database.Log = Logger.Debug;
+            //Database.Log = Logger.Debug;
         }
 
 		protected override void OnModelCreating (DbModelBuilder modelBuilder)
@@ -31,7 +39,8 @@ namespace HelloHome.Common.Entities
 		public int Commit ()
 		{
 			try {
-				return SaveChanges ();
+			    Logger.Debug("Commiting in context {0}", ContextId);
+			    return SaveChanges ();
 			} catch (Exception e) {
 				throw e;
 			}
@@ -40,6 +49,7 @@ namespace HelloHome.Common.Entities
         public async Task<int> CommitAsync()
         {
             try {
+                Logger.Debug("Commiting in context {0}", ContextId);
                 return await SaveChangesAsync();
             } catch (Exception e) {
                 throw e;
@@ -50,7 +60,7 @@ namespace HelloHome.Common.Entities
 
 		public IDbSet<Node> Nodes { get; set; }
 		public IDbSet<Port> Ports { get; set; }
-        public DbSet<PortGroup> PortGroups { get; set; }
+        public IDbSet<PortGroup> PortGroups { get; set; }
         public IDbSet<PulseHistory> PulseData { get; set; }
         public IDbSet<Trigger> Triggers { get; set; }
     }

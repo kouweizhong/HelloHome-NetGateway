@@ -12,6 +12,7 @@ namespace HelloHome.NetGateway
     public class NodeGateway
     {
         private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
+        private static readonly Logger MessageLog = LogManager.GetLogger("MessageLog");
         private readonly INodeMessageChannel _nodeMessageChannel;
         private readonly IMessageHandlerFactory _handlerFactory;
 
@@ -33,6 +34,7 @@ namespace HelloHome.NetGateway
             var msg = await _nodeMessageChannel.ReadAsync(cToken);
             if (msg != null)
             {
+                MessageLog.Debug("IN:{0}", msg);
                 Logger.Debug("Message of type {0} received from node {1} on channel {2}", msg.GetType().Name, msg.FromNodeId, _nodeMessageChannel.GetHashCode());
                 var pt = ProcessAsync(msg, cToken);
                 if (awaitProcess)
@@ -56,7 +58,10 @@ namespace HelloHome.NetGateway
 
                 Logger.Debug("{0} messages to send back", responses.Count);
                 foreach (var r in responses)
+                {
                     await _nodeMessageChannel.SendAsync(r, cToken);
+                    MessageLog.Debug("OUT:{0}", r);
+                }
             }
             catch (Exception e)
             {

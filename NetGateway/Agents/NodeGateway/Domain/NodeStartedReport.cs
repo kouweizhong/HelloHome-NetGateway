@@ -19,7 +19,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
 
 		public override string ToString ()
 		{
-			return $"[NodeStartedReport: {Major}, Minor={Minor}, OldSignature={OldSignature}, Signature={Signature}, NeedNewRfAddress={NeedNewRfAddress}]";
+			return $"[NodeStartedReport: From={FromNodeId}, Major={Major}, Minor={Minor}, OldSignature={OldSignature}, Signature={Signature}, NeedNewRfAddress={NeedNewRfAddress}]";
 		}
 	}
 }

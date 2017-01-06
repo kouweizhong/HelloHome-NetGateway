@@ -3,11 +3,13 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.NetGateway.Queries;
+using NLog;
 
 namespace HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy
 {
 	public class FindHoleRfIdGenerationStrategy : IRfIdGenerationStrategy
 	{
+	    private static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 	    private readonly IListRfIdsQuery _listRfIdQuery;
 	    readonly Random _rnd;
 
@@ -37,10 +39,13 @@ namespace HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy
 	    public async Task<byte> FindAvailableRfAddressAsync(byte network, CancellationToken cToken, byte suggestion = 0)
 	    {
 	        var exisitingIds = await _listRfIdQuery.ExecuteAsync(network, cToken);
+	        if (suggestion != 0 && !exisitingIds.Contains(suggestion))
+	        {
+	            Logger.Debug("Suggestion {0} accepted", suggestion);
+	            return suggestion;
+	        }
 	        if (!exisitingIds.Any ())
 	            return 1;
-	        if (suggestion != 0 && !exisitingIds.Contains(suggestion))
-	            return suggestion;
 
 	        var maxExisting = exisitingIds.Max ();
 

@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
+using HelloHome.Common;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway;
 using HelloHome.NetGateway.Agents.NodeGateway;
@@ -29,8 +30,6 @@ namespace End2EndTests.Scenarios
             _msgChannel = new Mock<INodeMessageChannel>();
             _gtw = testableGateway.CreateGateway(_msgChannel.Object);
             Logger.Debug("Gateway created with channel {0}", _msgChannel.GetHashCode());
-            _dbCtx.Database.Delete();
-            _dbCtx.Database.Create();
         }
 
         [Fact]
@@ -78,7 +77,7 @@ namespace End2EndTests.Scenarios
 
             //Arrange
             var rfId = _testableGateway.GetNextRfId();
-            _dbCtx.Nodes.Add(new Node {RfAddress = rfId, Signature = 3, Configuration = new NodeConfiguration(), LatestValues = new LatestValues()});
+            _dbCtx.Nodes.Add(new Node {RfAddress = rfId, RfNetwork = Constants.NetworkId,  Signature = 3, Configuration = new NodeConfiguration(), LatestValues = new LatestValues()});
             _dbCtx.Commit();
 
             var cts = new CancellationTokenSource();

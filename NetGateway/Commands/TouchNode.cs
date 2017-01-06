@@ -37,7 +37,6 @@ namespace HelloHome.NetGateway.Commands
                     )
                 );
             Logger.Debug("Node with signature {0} was touched", node.Signature);
-            await Task.Yield();
         }
     }
 }

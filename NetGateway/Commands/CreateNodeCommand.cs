@@ -34,6 +34,7 @@ namespace HelloHome.NetGateway.Commands
             {
                 Signature = signature,
                 RfAddress = rfId,
+                RfNetwork = Constants.NetworkId,
                 Configuration = new NodeConfiguration
                 {
                     Name = "Newly created",

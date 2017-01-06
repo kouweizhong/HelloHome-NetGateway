@@ -22,13 +22,12 @@ namespace End2EndTests
             Database.SetInitializer<HelloHomeDbContext>(null);
 
             _ioCcontainer = new WindsorContainer();
-            _ioCcontainer.Install(new DefaultInstaller());
-            //Overrides some registration
-            _ioCcontainer.Register(
-                Component.For<IEMonCmsUpdater>().Instance(new Mock<IEMonCmsUpdater>().Object).IsDefault()
-            );
+            _ioCcontainer.Install(new DefaultInstaller(
+                Component.For<IEMonCmsUpdater>().Instance(new Mock<IEMonCmsUpdater>().Object),
+                Component.For<IHelloHomeDbContext>().ImplementedBy<HelloHomeDbContext>().LifestyleSingleton()
+            ));
 
-            DbCtx = _ioCcontainer.Resolve<HelloHomeDbContext>("SingletonDbContext");
+            DbCtx = (HelloHomeDbContext)_ioCcontainer.Resolve<IHelloHomeDbContext>();
             DbCtx.Database.Delete();
             DbCtx.Database.Create();
         }
