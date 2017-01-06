@@ -14,7 +14,7 @@ namespace HelloHome.Common.Entities.Configuration
 			Property (_ => _.Number).HasColumnName ("number").IsRequired ();
 			Property (_ => _.Name).HasColumnName ("name");
 		    HasRequired(_ => _.Node).WithMany(_ => _.Ports).HasForeignKey(_ => _.NodeId);
-			Map<PulsePort> (m => m.Requires ("type").HasValue ("P"));
+			Map<PulsePort> (m => m.Requires ("type").HasValue ("P").HasColumnType("CHAR").HasMaxLength(1));
 			Map<SwitchPort> (m => m.Requires ("type").HasValue ("S"));
 			Map<VarioPort> (m => m.Requires ("type").HasValue ("V"));
 			Map<RelayPort> (m => m.Requires ("type").HasValue ("R"));

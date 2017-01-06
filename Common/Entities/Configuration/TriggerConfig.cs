@@ -12,7 +12,7 @@ namespace HelloHome.Common.Entities.Configuration
 
             Property(x => x.Id).HasColumnName("triggerId").IsRequired();
 
-            Map<CronTrigger>(x => x.Requires("type").HasValue("C"));
+            Map<CronTrigger>(x => x.Requires("type").HasValue("C").HasColumnType("CHAR").HasMaxLength(1));
             Map<DelayTrigger>(x => x.Requires("type").HasValue("D"));
             Map<PulseTrigger>(x => x.Requires("type").HasValue("P"));
             Map<SwitchTrigger>(x => x.Requires("type").HasValue("S"));
@@ -24,7 +24,11 @@ namespace HelloHome.Common.Entities.Configuration
     {
         public CronTriggerConfig()
         {
-            Property(x => x.CronExpression).HasColumnName("cronExpression").IsRequired();
+            Property(x => x.CronExpression)
+                .HasColumnName("cronExpression")
+                .HasColumnType("VARCHAR")
+                .HasMaxLength(100)
+                .IsRequired();
         }
     }
 
