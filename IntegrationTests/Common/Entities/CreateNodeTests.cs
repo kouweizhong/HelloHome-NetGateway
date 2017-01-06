@@ -10,13 +10,13 @@ using Xunit.Abstractions;
 
 namespace IntegrationTests.Common.Entities
 {
-    public class CreateNodeTestsFixture : IClassFixture<EntityTestFixture>
+    public class CreateNodeTests : IClassFixture<EntityTestFixture>
     {
         private readonly EntityTestFixture _fixture;
         private readonly HelloHomeDbContext _dbCtx;
-        const byte Adr = 254;
+        const byte Adr = 255;
 
-        public CreateNodeTestsFixture(EntityTestFixture fixture)
+        public CreateNodeTests(EntityTestFixture fixture)
         {
             _fixture = fixture;
             _dbCtx = fixture.DbCtx;
@@ -134,7 +134,7 @@ namespace IntegrationTests.Common.Entities
                 RfNetwork = 2,
                 Signature = Int64.MaxValue,
                 LastSeen = DateTime.Now,
-                Ports = new List<NodePort>
+                Ports = new List<Port>
                 {
                     new PulsePort { Name = "Gaz", Number = 1, PulseCount = 12 },
                     new RelayPort { Name = "Hall", Number = 2 },

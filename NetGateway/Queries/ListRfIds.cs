@@ -24,14 +24,14 @@ namespace HelloHome.NetGateway.Queries
 
         public async Task<IList<byte>> ExecuteAsync()
         {
-            return await _ctx.Nodes.Select(x => x.RfAddress).ToListAsync();
+            return await _ctx.Nodes.Select(x => (byte)x.RfAddress).ToListAsync();
         }
 
         public async Task<IList<byte>> ExecuteAsync(byte network, CancellationToken cToken)
         {
             return await _ctx.Nodes
                 .Where(x => x.RfNetwork == network)
-                .Select(x => x.RfAddress)
+                .Select(x => (byte)x.RfAddress)
                 .ToListAsync(cToken);
         }
     }

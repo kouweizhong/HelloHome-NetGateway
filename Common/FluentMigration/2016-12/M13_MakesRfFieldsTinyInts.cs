@@ -8,6 +8,8 @@ namespace HelloHome.Common.FluentMigration
         public override void Up()
         {
             Rename.Column("RfAddress").OnTable("Node").To("rfAddress");
+            Alter.Column("rfAddress").OnTable("Node").AsByte().NotNullable();
+            Alter.Column("rfNetwork").OnTable("Node").AsByte().NotNullable();
         }
     }
 }

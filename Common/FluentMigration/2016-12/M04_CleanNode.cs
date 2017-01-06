@@ -11,7 +11,7 @@ namespace HelloHome.Common.FluentMigration
 			Alter.Table ("Node")
 				 .AddColumn ("networkId").AsInt16 ().Nullable ();
 			Update.Table ("Node").Set (new { networkId=256 }).AllRows ();
-			Alter.Column ("networkId").OnTable ("Node").AsInt16 ().NotNullable ();
+			Alter.Column ("networkId").OnTable ("Node").AsInt16().NotNullable ();
 			Delete.Column ("validConfig").FromTable ("Node");
 			Delete.Column ("upTime").FromTable ("Node");
 			Delete.Column ("confHal1").FromTable ("Node");

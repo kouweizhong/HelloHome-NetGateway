@@ -60,7 +60,7 @@ namespace HelloHome.NetGateway.Handlers
 		        Logger.Debug("Node received a new rfAddress ({0}). Therefore a configCommand should be sent.", node.RfAddress);
 		        outgoingMessages.Add (new NodeConfigCommand {
 		            signature = request.Signature,
-		            NewRfAddress = node.RfAddress
+		            NewRfAddress = (byte)node.RfAddress
 		        });
 		    }
 		    node.Configuration.Version = $"{request.Major}.{request.Minor}";

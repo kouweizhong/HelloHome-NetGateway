@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace HelloHome.Common.Entities
 {
-	public abstract class NodePort
+	public abstract class Port
 	{
 		public virtual int NodePortId { get; set; }
 		public virtual Node Node { get; set; }
@@ -12,11 +12,11 @@ namespace HelloHome.Common.Entities
 		public virtual string Name { get; set; }
 	}
 
-	public abstract class SensorPort : NodePort
+	public abstract class SensorPort : Port
 	{ 
 	}
 
-	public abstract class ActuatorPort : NodePort
+	public abstract class ActuatorPort : Port
 	{ 
 	}
 

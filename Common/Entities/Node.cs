@@ -14,7 +14,7 @@ namespace HelloHome.Common.Entities
 	    public virtual NodeConfiguration Configuration { get; set; }
 		public virtual LatestValues LatestValues { get; set; }
 		public virtual IList<NodeLog> Logs { get; set; }
-		public virtual IList<NodePort> Ports { get; set; }
+		public virtual IList<Port> Ports { get; set; }
 		public virtual IList<CommunicationHistory> CommunicationHistory { get; set; }
 
 	    public void AddLog(string type, string data = null)

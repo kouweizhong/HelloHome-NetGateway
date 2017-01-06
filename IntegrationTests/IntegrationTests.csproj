@@ -98,7 +98,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Common\Entities\CreateNodeTestsFixture.cs" />
+    <Compile Include="Common\Entities\CreateNodeTests.cs" />
+    <Compile Include="Common\Entities\CreatePortGroupTests.cs" />
+    <Compile Include="Common\Entities\CreateTriggerTests.cs" />
     <Compile Include="Common\Entities\EntityTestFixture.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

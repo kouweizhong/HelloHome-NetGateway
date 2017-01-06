@@ -3,9 +3,9 @@ using System.Data.Entity.ModelConfiguration;
 
 namespace HelloHome.Common.Entities.Configuration
 {
-	public class NodePortConfig : EntityTypeConfiguration<NodePort>
+	public class PortConfig : EntityTypeConfiguration<Port>
 	{
-		public NodePortConfig ()
+		public PortConfig ()
 		{
 			ToTable ("Port");
 			HasKey (_ => _.NodePortId);
@@ -13,6 +13,7 @@ namespace HelloHome.Common.Entities.Configuration
 			Property (_ => _.NodeId).HasColumnName ("nodeId").IsRequired ();
 			Property (_ => _.Number).HasColumnName ("number").IsRequired ();
 			Property (_ => _.Name).HasColumnName ("name");
+		    HasRequired(_ => _.Node).WithMany(_ => _.Ports).HasForeignKey(_ => _.NodeId);
 			Map<PulsePort> (m => m.Requires ("type").HasValue ("P"));
 			Map<SwitchPort> (m => m.Requires ("type").HasValue ("S"));
 			Map<VarioPort> (m => m.Requires ("type").HasValue ("V"));
