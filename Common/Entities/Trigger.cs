@@ -12,11 +12,6 @@ namespace HelloHome.Common.Entities
         public string CronExpression { get; set; }
     }
 
-    public class DelayTrigger : Trigger
-    {
-        public int DelayMs { get; set; }
-    }
-
     public abstract class NodePortBasedTrigger : Trigger
     {
         public virtual int NodePortGroupId { get; set; }

@@ -39,7 +39,7 @@ namespace HelloHome.NetGateway
                         node.LatestValues.Humidity ?? 0,
                         node.LastSeen.HasValue ? (float) (DateTime.Now - node.LastSeen.Value).TotalDays : 0
                     };
-                    foreach (var port in node.Ports.OfType<PulsePort>() .OrderBy(_ => _.Number))
+                    foreach (var port in node.Ports.OfType<PulseSensor>() .OrderBy(_ => _.Number))
                     {
                         values.Add(port.PulseCount);
                     }

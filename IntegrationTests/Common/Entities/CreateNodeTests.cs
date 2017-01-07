@@ -136,20 +136,20 @@ namespace IntegrationTests.Common.Entities
                 LastSeen = DateTime.Now,
                 Ports = new List<Port>
                 {
-                    new PulsePort { Name = "Gaz", Number = 1, PulseCount = 12 },
-                    new RelayPort { Name = "Hall", Number = 2 },
-                    new SwitchPort { Name = "HallGround", Number = 3, State = true },
-                    new VarioPort { Name = "LeavingRoom", Number = 4, Value = 24 }
+                    new PulseSensor { Name = "Gaz", Number = 1, PulseCount = 12 },
+                    new RelayActuator { Name = "Hall", Number = 2 },
+                    new SwitchSensor { Name = "HallGround", Number = 3, State = true },
+                    new VarioSensor { Name = "LeavingRoom", Number = 4, Value = 24 }
                 }
             });
             _dbCtx.SaveChanges();
             _fixture.DetachAll();
             var node = _dbCtx.Nodes.Include(_ => _.Ports).Single(_ => _.RfAddress == Adr);
 
-            Assert.Contains(node.Ports.OfType<PulsePort>(), _=> _.Number == 1);
-            Assert.Contains(node.Ports.OfType<RelayPort>(), _=> _.Number == 2);
-            Assert.Contains(node.Ports.OfType<SwitchPort>(), _=> _.Number == 3);
-            Assert.Contains(node.Ports.OfType<VarioPort>(), _=> _.Number == 4);
+            Assert.Contains(node.Ports.OfType<PulseSensor>(), _=> _.Number == 1);
+            Assert.Contains(node.Ports.OfType<RelayActuator>(), _=> _.Number == 2);
+            Assert.Contains(node.Ports.OfType<SwitchSensor>(), _=> _.Number == 3);
+            Assert.Contains(node.Ports.OfType<VarioSensor>(), _=> _.Number == 4);
 
             _dbCtx.Nodes.Remove(node);
             _dbCtx.SaveChanges();

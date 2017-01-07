@@ -9,7 +9,7 @@ namespace HelloHome.Common.Entities
 	    {
 	        Type = "P";
 	    }
-		public virtual PulsePort Port { get; set; }
+		public virtual PulseSensor Sensor { get; set; }
 	    public virtual int PortId { get; set; }
 		public virtual int NewPulses { get; set; }
 		public virtual int Total { get; set; }

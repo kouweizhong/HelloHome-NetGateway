@@ -13,7 +13,6 @@ namespace HelloHome.Common.Entities.Configuration
             Property(x => x.Id).HasColumnName("triggerId").IsRequired();
 
             Map<CronTrigger>(x => x.Requires("type").HasValue("C").HasColumnType("CHAR").HasMaxLength(1));
-            Map<DelayTrigger>(x => x.Requires("type").HasValue("D"));
             Map<PulseTrigger>(x => x.Requires("type").HasValue("P"));
             Map<SwitchTrigger>(x => x.Requires("type").HasValue("S"));
             Map<VarioTrigger>(x => x.Requires("type").HasValue("V"));
@@ -29,14 +28,6 @@ namespace HelloHome.Common.Entities.Configuration
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(100)
                 .IsRequired();
-        }
-    }
-
-    public class DelayTriggerConfig : EntityTypeConfiguration<DelayTrigger>
-    {
-        public DelayTriggerConfig()
-        {
-            Property(x => x.DelayMs).HasColumnName("delayMs").IsRequired();
         }
     }
 

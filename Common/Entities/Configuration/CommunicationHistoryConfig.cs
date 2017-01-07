@@ -46,7 +46,7 @@ namespace HelloHome.Common.Entities.Configuration
             Property(_ => _.NewPulses).HasColumnName("newPulses");
             Property(_ => _.Total).HasColumnName("total");
             Property(_ => _.IsOffset).HasColumnName("isOffset");
-            HasRequired(_ => _.Port).WithMany().HasForeignKey(_ => _.PortId);
+            HasRequired(_ => _.Sensor).WithMany().HasForeignKey(_ => _.PortId);
         }
     }
 }

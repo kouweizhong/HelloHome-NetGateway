@@ -14,8 +14,10 @@ namespace UnitTests.Logic.RfNodeIdGenerationStrategy
 	    public FindHoleRfNodeIdGeneratorStrategyTests()
 		{
 		    _findExisiting = new Mock<IListRfIdsQuery>();
-			_sut = new FindHoleRfIdGenerationStrategy(_findExisiting.Object);
-			_sut.MaxSupportedConcurrentRequest = 3;
+		    _sut = new FindHoleRfIdGenerationStrategy(_findExisiting.Object)
+		    {
+		        MaxSupportedConcurrentRequest = 3
+		    };
 		}
 
 		[Fact]

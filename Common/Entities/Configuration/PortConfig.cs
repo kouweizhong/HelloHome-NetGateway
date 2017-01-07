@@ -14,14 +14,15 @@ namespace HelloHome.Common.Entities.Configuration
 			Property (_ => _.Number).HasColumnName ("number").IsRequired ();
 			Property (_ => _.Name).HasColumnName ("name");
 		    HasRequired(_ => _.Node).WithMany(_ => _.Ports).HasForeignKey(_ => _.NodeId);
-			Map<PulsePort> (m => m.Requires ("type").HasValue ("P").HasColumnType("CHAR").HasMaxLength(1));
-			Map<SwitchPort> (m => m.Requires ("type").HasValue ("S"));
-			Map<VarioPort> (m => m.Requires ("type").HasValue ("V"));
-			Map<RelayPort> (m => m.Requires ("type").HasValue ("R"));
+			Map<PulseSensor> (m => m.Requires ("type").HasValue ("P").HasColumnType("CHAR").HasMaxLength(1));
+		    Map<PushSensor> (m => m.Requires ("type").HasValue ("H"));
+		    Map<SwitchSensor> (m => m.Requires ("type").HasValue ("S"));
+		    Map<VarioSensor> (m => m.Requires ("type").HasValue ("V"));
+			Map<RelayActuator> (m => m.Requires ("type").HasValue ("R"));
 		}
 	}
 
-	public class PulseSensorConfig : EntityTypeConfiguration<PulsePort>
+	public class PulseSensorConfig : EntityTypeConfiguration<PulseSensor>
 	{ 
 		public PulseSensorConfig ()
 		{
@@ -29,7 +30,7 @@ namespace HelloHome.Common.Entities.Configuration
 		}
 	}
 
-    public class SwithSensorConfig : EntityTypeConfiguration<SwitchPort>
+    public class SwithSensorConfig : EntityTypeConfiguration<SwitchSensor>
     {
         public SwithSensorConfig()
         {
@@ -37,7 +38,7 @@ namespace HelloHome.Common.Entities.Configuration
         }
     }
 
-    public class VarioSensorConfig : EntityTypeConfiguration<VarioPort>
+    public class VarioSensorConfig : EntityTypeConfiguration<VarioSensor>
     {
         public VarioSensorConfig()
         {
@@ -45,7 +46,7 @@ namespace HelloHome.Common.Entities.Configuration
         }
     }
 
-    public class RelayActuatorConfig : EntityTypeConfiguration<RelayPort>
+    public class RelayActuatorConfig : EntityTypeConfiguration<RelayActuator>
     {
         public RelayActuatorConfig()
         {

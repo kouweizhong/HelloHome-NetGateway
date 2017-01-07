@@ -2,10 +2,24 @@
 
 namespace HelloHome.Common.Entities
 {
-    public class PortGroup
+    public abstract class PortGroup
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public List<Port> Ports { get; set; }
+    }
+
+    public class SwitchSensorGroup : PortGroup
+    {
+        public List<SwitchSensor> Ports { get; set; }
+    }
+
+    public class PushSensorGroup : PortGroup
+    {
+        public List<PushSensor> Ports { get; set; }
+    }
+
+    public class RelayActuatorGroup : PortGroup
+    {
+        public List<RelayActuator> Ports { get; set; }
     }
 }

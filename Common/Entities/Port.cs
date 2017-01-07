@@ -20,23 +20,27 @@ namespace HelloHome.Common.Entities
 	{ 
 	}
 
-	public class PulsePort : SensorPort 
+	public class PulseSensor : SensorPort
 	{ 
 		public virtual int PulseCount { get; set; }
 		public virtual IList<PulseHistory> PulseData { get; set; }
 	}
 
-	public class SwitchPort : SensorPort 
+    public class PushSensor : SensorPort
+    {
+    }
+
+    public class SwitchSensor : SensorPort
 	{ 
 		public virtual bool State { get; set; }
 	}
 
-	public class VarioPort : SensorPort 
+	public class VarioSensor : SensorPort
 	{
 		public virtual int Value { get; set; }
 	}
 
-	public class RelayPort : ActuatorPort 
+	public class RelayActuator : ActuatorPort
 	{ 
 	}
 }

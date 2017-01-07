@@ -76,7 +76,8 @@
     <Compile Include="FluentMigration\2016-12\M12_RenameNodeNetworkId.cs" />
     <Compile Include="FluentMigration\2016-12\M13_MakesRfFieldsTinyInts.cs" />
     <Compile Include="FluentMigration\2017-01\M14_AddRfNetAdrIndex.cs" />
-    <Compile Include="FluentMigration\2017-01\M15_AddTriggers.cs" />
+    <Compile Include="FluentMigration\2017-01\M15_AddPortGroups.cs" />
+    <Compile Include="FluentMigration\2017-01\M16_AddTriggers.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extentions\DateTimeExtentions.cs" />
     <Compile Include="Entities\Configuration\NodeConfig.cs" />

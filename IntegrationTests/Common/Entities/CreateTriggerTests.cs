@@ -18,7 +18,7 @@ namespace IntegrationTests.Common.Entities
         {
             _fixture = fixture;
             _dbCtx = fixture.DbCtx;
-            _portGroup = new PortGroup { Name = "Test", Ports = new List<Port>()};
+            _portGroup = new PushSensorGroup() { Name = "Test", Ports = new List<PushSensor>()};
             _dbCtx.PortGroups.Add(_portGroup);
             _dbCtx.SaveChanges();
         }
@@ -63,17 +63,6 @@ namespace IntegrationTests.Common.Entities
             var trigger  = new CronTrigger
             {
                 CronExpression = "* * * 8"
-            };
-            _dbCtx.Triggers.Add(trigger);
-            _dbCtx.SaveChanges();
-        }
-
-        [Fact]
-        public void create_delayTrigger()
-        {
-            var trigger  = new DelayTrigger
-            {
-                DelayMs = 12
             };
             _dbCtx.Triggers.Add(trigger);
             _dbCtx.SaveChanges();

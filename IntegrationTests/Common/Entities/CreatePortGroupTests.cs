@@ -24,27 +24,26 @@ namespace IntegrationTests.Common.Entities
             {
                 new Node { RfNetwork = TestNetwork, RfAddress = 1, Signature = BaseSignature + 1, Ports = new List<Port>
                 {
-                    new PulsePort { Number = 1 },
-                    new SwitchPort { Number = 2 }
+                    new PushSensor { Number = 1 },
+                    new SwitchSensor { Number = 2 }
 
                 }},
                 new Node { RfNetwork = TestNetwork, RfAddress = 2, Signature = BaseSignature + 2, Ports = new List<Port>
                 {
-                    new PulsePort { Number = 1 },
-                    new SwitchPort { Number = 2 }
+                    new PushSensor { Number = 1 },
+                    new SwitchSensor { Number = 2 }
                 }},
             };
             foreach (var n in nodes)
                 _dbCtx.Nodes.Add(n);
             _dbCtx.SaveChanges();
-            var portGroup = new PortGroup
+            var portGroup = new PushSensorGroup()
             {
                 Name = "TestGroup",
-                Ports = new List<Port>
+                Ports = new List<PushSensor>
                 {
-                    nodes[0].Ports[0],
-                    nodes[1].Ports[0],
-                    nodes[1].Ports[1],
+                    (PushSensor)nodes[0].Ports[0],
+                    (PushSensor)nodes[1].Ports[0],
                 }
             };
             _dbCtx.PortGroups.Add(portGroup);
