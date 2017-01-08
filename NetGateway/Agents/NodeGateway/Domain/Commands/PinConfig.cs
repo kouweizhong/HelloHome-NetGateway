@@ -1,6 +1,4 @@
-using System;
-
-namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
+namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands
 {
 
 	public class PinConfig 

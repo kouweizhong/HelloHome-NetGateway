@@ -26,7 +26,7 @@ namespace IntegrationTests.Common.Entities
         [Fact]
         public void create_pulsetrigger()
         {
-            var trigger  = new PulseTrigger
+            var trigger  = new PushTrigger
             {
                 PortGroup = _portGroup,
             };

@@ -7,6 +7,8 @@ using HelloHome.Common.Entities;
 using HelloHome.NetGateway;
 using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
 using Moq;
 using NLog;
 using Xunit;

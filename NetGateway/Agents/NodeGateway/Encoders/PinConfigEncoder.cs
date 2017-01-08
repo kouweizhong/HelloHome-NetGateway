@@ -1,5 +1,6 @@
 ﻿using System;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 {

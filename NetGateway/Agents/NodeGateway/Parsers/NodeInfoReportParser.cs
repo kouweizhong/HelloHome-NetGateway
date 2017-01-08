@@ -1,4 +1,6 @@
 ﻿using System;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 {
@@ -9,10 +11,10 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 		{
 			return record [3] == 0 + 0 << 2;
 		}
-		public Domain.Report Parse (byte[] record)
+		public Report Parse (byte[] record)
 		{
 			var voltage = ((float)BitConverter.ToInt16 (record, 8)) / 100.0f;
-			return new Domain.NodeInfoReport {
+			return new NodeInfoReport {
 				FromNodeId = record [0],
 				Rssi = (int)BitConverter.ToInt16(record,1),
 				SendErrorCount = BitConverter.ToInt16(record, 4),

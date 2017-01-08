@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.NetGateway.Agents.NodeGateway;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
 using HelloHome.NetGateway.Handlers;
 using NLog;
 

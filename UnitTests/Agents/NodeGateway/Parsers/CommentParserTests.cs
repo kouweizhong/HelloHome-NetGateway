@@ -1,6 +1,7 @@
 ﻿using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using System.Text;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
 using Xunit;
 
 namespace UnitTests.Agents.NodeGateway.Parsers

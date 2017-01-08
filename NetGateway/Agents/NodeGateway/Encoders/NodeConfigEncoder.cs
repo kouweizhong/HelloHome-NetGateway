@@ -1,6 +1,7 @@
 ﻿using System;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using System.Collections.Generic;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 {

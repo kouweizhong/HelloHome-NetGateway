@@ -10,6 +10,7 @@ using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using NLog;
 using System.IO;
 using System.Threading;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway
 {
@@ -30,11 +31,12 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 		{
 			_encoders = encoders.ToList();
 			_parsers = new List<IMessageParser> {
-				new CommentParser (),
-				new NodeStartedParser (),
-				new PulseReportParser (),
-				new EnvironmentReportParser (),
-				new NodeInfoReportParser (),
+			    new EnvironmentReportParser (),
+			    new PulseReportParser (),
+			    new NodeInfoReportParser (),
+			    new PushButtonPressedReportParser(),
+			    new NodeStartedParser (),
+			    new CommentParser (),
 				new ParseAllParser (),
 			};
 			_serial = new SerialPort(serialConfig.Port, 115200, Parity.None, 8, StopBits.One);

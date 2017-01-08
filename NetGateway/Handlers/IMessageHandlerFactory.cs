@@ -1,4 +1,5 @@
 ﻿using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
 
 namespace HelloHome.NetGateway.Handlers
 {

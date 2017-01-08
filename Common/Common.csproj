@@ -63,6 +63,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Constants.cs" />
+    <Compile Include="Entities\Action.cs" />
+    <Compile Include="Entities\Configuration\ActionConfig.cs" />
     <Compile Include="Entities\Configuration\CommunicationHistoryConfig.cs" />
     <Compile Include="Entities\Configuration\NodeLogConfig.cs" />
     <Compile Include="Entities\Configuration\PortGroupConfig.cs" />
@@ -78,6 +80,7 @@
     <Compile Include="FluentMigration\2017-01\M14_AddRfNetAdrIndex.cs" />
     <Compile Include="FluentMigration\2017-01\M15_AddPortGroups.cs" />
     <Compile Include="FluentMigration\2017-01\M16_AddTriggers.cs" />
+    <Compile Include="FluentMigration\2017-01\M17_AddActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extentions\DateTimeExtentions.cs" />
     <Compile Include="Entities\Configuration\NodeConfig.cs" />

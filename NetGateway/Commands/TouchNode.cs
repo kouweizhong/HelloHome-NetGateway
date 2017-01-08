@@ -23,7 +23,7 @@ namespace HelloHome.NetGateway.Commands
             _timeProvider = timeProvider;
         }
 
-        public async Task TouchAsync(Node node, int rssi)
+        public Task TouchAsync(Node node, int rssi)
         {
             if(node.LatestValues == default(LatestValues))
                 throw new ArgumentException("node entity should be loaded with its latestValues for Touch to work");
@@ -37,6 +37,7 @@ namespace HelloHome.NetGateway.Commands
                     )
                 );
             Logger.Debug("Node with signature {0} was touched", node.Signature);
+            return Task.FromResult(0);
         }
     }
 }

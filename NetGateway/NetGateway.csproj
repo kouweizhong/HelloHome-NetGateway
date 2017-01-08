@@ -77,9 +77,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agents\NodeGateway\Domain\Base\IncomingMessage.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Base\ISignedMessage.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Base\Message.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Base\OutgoingMessage.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Base\Report.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Commands\NodeConfigCommand.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Commands\PinConfig.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Commands\PinMode.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Commands\SwitchRelayCommand.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Reports\CommentReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Reports\EnvironmentalReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Reports\NodeInfoReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Reports\NodeStartedReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Reports\PulseReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Reports\PushButtonPressedReport.cs" />
+    <Compile Include="Agents\NodeGateway\Domain\Reports\RawReport.cs" />
     <Compile Include="Agents\NodeGateway\IByteStream.cs" />
     <Compile Include="Agents\NodeGateway\INodeMessageChannel.cs" />
     <Compile Include="Agents\NodeGateway\NodeMessageWcfChannel.cs" />
+    <Compile Include="Agents\NodeGateway\Parsers\PushButtonPressedReportParser.cs" />
     <Compile Include="Agents\NodeGateway\SerialPortByteStream.cs" />
     <Compile Include="Commands\CreateNodeCommand.cs" />
     <Compile Include="Handlers\CommentHandler.cs" />
@@ -92,11 +109,6 @@
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\ISerialConfigurationProvider.cs" />
     <Compile Include="Configuration\AppSettings\AppSettingsBasedConfiguration.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\CommentReport.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\NodeInfoReport.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\PulseReport.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\RawReport.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\Report.cs" />
     <Compile Include="Agents\NodeGateway\IncomingMessageEventArgs.cs" />
     <Compile Include="Agents\NodeGateway\INodeGatewayAgent.cs" />
     <Compile Include="Agents\NodeGateway\NodeGatewayAgent.cs" />
@@ -104,31 +116,22 @@
     <Compile Include="Agents\NodeGateway\Parsers\NodeInfoReportParser.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\ParseAllParser.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\PulseReportParser.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\Message.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\OutgoingMessage.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\NodeStartedReport.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\IncomingMessage.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\IMessageParser.cs" />
     <Compile Include="Queries\FindNodeQuery.cs" />
     <Compile Include="Queries\ListRfIds.cs" />
     <Compile Include="WindsorInstallers\DefaultInstaller.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\NodeConfigCommand.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\IMessageEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\MessageEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\NodeConfigEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\NodeStartedParser.cs" />
     <Compile Include="Logic\RfNodeIdGenerationStrategy\FindHoleRfIdGenerationStrategy.cs" />
     <Compile Include="Logic\RfNodeIdGenerationStrategy\IRfIdGenerationStrategy.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\PinConfig.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\PinMode.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\PinConfigEncoder.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\EnvironmentReportParser.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\EnvironmentalReport.cs" />
     <Compile Include="Agents\EmonCms\EmonCmsAgent.cs" />
     <Compile Include="Configuration\IEmonCmsConfiguration.cs" />
     <Compile Include="Agents\EmonCms\IEmonCmsAgent.cs" />
     <Compile Include="EmonCmsUpdater.cs" />
-    <Compile Include="Agents\NodeGateway\Domain\ISignedMessage.cs" />
     <Compile Include="HelloHomeGateway.cs" />
     <Compile Include="WindsorInstallers\MessageHandlerComponentSelector.cs" />
     <Compile Include="Queries\IQuery.cs" />
@@ -138,7 +141,6 @@
     <Compile Include="Agents\NodeGateway\NodeMessageSerialChannel.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
-  <ItemGroup />
   <ItemGroup>
     <None Include="app.config" />
     <Content Include="NLog.config">

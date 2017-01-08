@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using Castle.Facilities.TypedFactory;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway
 {

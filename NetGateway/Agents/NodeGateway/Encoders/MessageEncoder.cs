@@ -1,5 +1,6 @@
 ﻿using System;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 {
@@ -7,12 +8,12 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 	{
 		#region IMessageEncoder implementation
 
-		public bool CanEncode (HelloHome.NetGateway.Agents.NodeGateway.Domain.Message message)
+		public bool CanEncode (Message message)
 		{
 			return message is TMessage;
 		}
 
-		public byte[] Encode (HelloHome.NetGateway.Agents.NodeGateway.Domain.Message message)
+		public byte[] Encode (Message message)
 		{
 			return EncodeInternal (message as TMessage);
 		}

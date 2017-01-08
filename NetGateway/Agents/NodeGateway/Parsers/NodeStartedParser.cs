@@ -1,4 +1,6 @@
 ﻿using System;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 {
@@ -11,10 +13,10 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 			return record [3] == 0 + 3 << 2;
 		}
 
-		public HelloHome.NetGateway.Agents.NodeGateway.Domain.Report Parse (byte[] record)
+		public Report Parse (byte[] record)
 		{
 			if (record.Length > 13)
-				return new Domain.NodeStartedReport { 
+				return new NodeStartedReport { 
 					FromNodeId = record [0],
 					Rssi = (int)BitConverter.ToInt16 (record, 1),
 					Major = record [4],
@@ -23,7 +25,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 					Signature = BitConverter.ToInt64 (record, 10),
 					NeedNewRfAddress = BitConverter.ToBoolean (record, 18),
 				};
-			return new Domain.NodeStartedReport { 
+			return new NodeStartedReport { 
 				FromNodeId = record [0],
 				Rssi = (int)BitConverter.ToInt16 (record, 1),
 				Major = record [4],

@@ -5,6 +5,7 @@ namespace HelloHome.Common.Entities
     public abstract class Trigger
     {
         public int Id { get; set; }
+        public List<Action> Actions { get; set; }
     }
 
     public class CronTrigger : Trigger
@@ -18,7 +19,7 @@ namespace HelloHome.Common.Entities
         public virtual PortGroup PortGroup { get; set; }
     }
 
-    public class PulseTrigger : NodePortBasedTrigger
+    public class PushTrigger : NodePortBasedTrigger
     {
     }
 

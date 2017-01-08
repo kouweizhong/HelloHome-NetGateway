@@ -1,7 +1,6 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
+namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Base
 {
     [DataContract]
     public abstract class OutgoingMessage : Message

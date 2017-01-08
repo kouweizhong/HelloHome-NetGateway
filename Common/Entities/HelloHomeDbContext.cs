@@ -16,6 +16,7 @@ namespace HelloHome.Common.Entities
         IDbSet<PortGroup> PortGroups { get; set; }
         IDbSet<PulseHistory> PulseData { get; set; }
         IDbSet<Trigger> Triggers { get; set; }
+        IDbSet<Action> Actions { get; set; }
 
         int Commit ();
         Task<int> CommitAsync();
@@ -63,6 +64,7 @@ namespace HelloHome.Common.Entities
         public IDbSet<PortGroup> PortGroups { get; set; }
         public IDbSet<PulseHistory> PulseData { get; set; }
         public IDbSet<Trigger> Triggers { get; set; }
+        public IDbSet<Action> Actions { get; set; }
     }
 }
 

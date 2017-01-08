@@ -1,7 +1,7 @@
-﻿using System;
-using System.Runtime.Serialization;
+﻿using System.Runtime.Serialization;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Domain
+namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports
 {
     [DataContract]
     public class NodeStartedReport : Report, ISignedMessage

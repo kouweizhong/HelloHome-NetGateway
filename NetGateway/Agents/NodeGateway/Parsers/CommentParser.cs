@@ -1,5 +1,7 @@
 ﻿using System.Text;
 using System.Linq;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
 
 namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 {
@@ -12,9 +14,9 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 		{
 			return record [0] == '/' && record [1] == '/';
 		}
-		public Domain.Report Parse (byte[] record)
+		public Report Parse (byte[] record)
 		{
-			return new Domain.CommentReport (_encoding.GetString (record.Skip(2).ToArray()));
+			return new CommentReport (_encoding.GetString (record.Skip(2).ToArray()));
 		}
 		#endregion
 	}

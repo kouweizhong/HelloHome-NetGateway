@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
 using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
 using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using HelloHome.NetGateway.Configuration;

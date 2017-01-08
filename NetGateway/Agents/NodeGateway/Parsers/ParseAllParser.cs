@@ -1,4 +1,7 @@
 ﻿
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
+
 namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 {
 	public class ParseAllParser : IMessageParser
@@ -8,9 +11,9 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
 		{
 			return true;
 		}
-		public Domain.Report Parse (byte[] record)
+		public Report Parse (byte[] record)
 		{
-			return new Domain.RawReport (record);
+			return new RawReport (record);
 		}
 		#endregion
 	}

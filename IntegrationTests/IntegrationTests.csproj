@@ -98,6 +98,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\Entities\CreateActionTests.cs" />
     <Compile Include="Common\Entities\CreateNodeTests.cs" />
     <Compile Include="Common\Entities\CreatePortGroupTests.cs" />
     <Compile Include="Common\Entities\CreateTriggerTests.cs" />

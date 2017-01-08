@@ -13,7 +13,7 @@ namespace HelloHome.Common.Entities.Configuration
             Property(x => x.Id).HasColumnName("triggerId").IsRequired();
 
             Map<CronTrigger>(x => x.Requires("type").HasValue("C").HasColumnType("CHAR").HasMaxLength(1));
-            Map<PulseTrigger>(x => x.Requires("type").HasValue("P"));
+            Map<PushTrigger>(x => x.Requires("type").HasValue("P"));
             Map<SwitchTrigger>(x => x.Requires("type").HasValue("S"));
             Map<VarioTrigger>(x => x.Requires("type").HasValue("V"));
         }
@@ -40,7 +40,7 @@ namespace HelloHome.Common.Entities.Configuration
         }
     }
 
-    public class PulseTriggerConfig : EntityTypeConfiguration<PulseTrigger>
+    public class PulseTriggerConfig : EntityTypeConfiguration<PushTrigger>
     {
         public PulseTriggerConfig()
         {
