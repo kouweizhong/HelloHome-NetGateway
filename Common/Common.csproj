@@ -67,10 +67,9 @@
     <Compile Include="Entities\Configuration\ActionConfig.cs" />
     <Compile Include="Entities\Configuration\CommunicationHistoryConfig.cs" />
     <Compile Include="Entities\Configuration\NodeLogConfig.cs" />
-    <Compile Include="Entities\Configuration\PortGroupConfig.cs" />
     <Compile Include="Entities\Configuration\TriggerConfig.cs" />
+    <Compile Include="Entities\Includes\TriggerInclude.cs" />
     <Compile Include="Entities\LatestValues.cs" />
-    <Compile Include="Entities\PortGroup.cs" />
     <Compile Include="Entities\Trigger.cs" />
     <Compile Include="Exceptions\HelloHomeException.cs" />
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
@@ -78,7 +77,6 @@
     <Compile Include="FluentMigration\2016-12\M12_RenameNodeNetworkId.cs" />
     <Compile Include="FluentMigration\2016-12\M13_MakesRfFieldsTinyInts.cs" />
     <Compile Include="FluentMigration\2017-01\M14_AddRfNetAdrIndex.cs" />
-    <Compile Include="FluentMigration\2017-01\M15_AddPortGroups.cs" />
     <Compile Include="FluentMigration\2017-01\M16_AddTriggers.cs" />
     <Compile Include="FluentMigration\2017-01\M17_AddActions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

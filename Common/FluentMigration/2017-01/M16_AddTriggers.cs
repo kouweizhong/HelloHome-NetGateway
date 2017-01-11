@@ -10,12 +10,11 @@ namespace HelloHome.Common.FluentMigration
             Create.Table("Trigger")
                 .WithColumn("triggerId").AsInt32().PrimaryKey().Identity()
                 .WithColumn("type").AsFixedLengthAnsiString(1).NotNullable()
-                .WithColumn("portGroupId").AsInt32().Nullable()
                 .WithColumn("triggerOnState").AsBoolean().Nullable()
                 .WithColumn("cronExpression").AsFixedLengthAnsiString(100).Nullable();
-            Create.ForeignKey("FK_Trigger_PortGroup")
-                .FromTable("Trigger").ForeignColumn("portGroupId")
-                .ToTable("PortGroup").PrimaryColumn("portGroupId");
+            Create.Table("TriggerPort")
+                .WithColumn("triggerId").AsInt32().ForeignKey("FK_TriggerSensor_Trigger", "Trigger", "triggerId").PrimaryKey()
+                .WithColumn("portId").AsInt32().ForeignKey("FK_TriggerSensor_Port", "Port", "portId").PrimaryKey();
         }
 
         public override void Down()

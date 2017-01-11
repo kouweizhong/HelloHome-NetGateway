@@ -12,6 +12,10 @@ namespace HelloHome.Common.Entities.Configuration
 
             Property(x => x.Id).HasColumnName("triggerId").IsRequired();
 
+            HasMany(x => x.Sensors)
+                .WithMany(x => x.Triggers)
+                .Map(x => x.ToTable("TriggerPort").MapLeftKey("triggerId").MapRightKey("portId"));
+
             Map<CronTrigger>(x => x.Requires("type").HasValue("C").HasColumnType("CHAR").HasMaxLength(1));
             Map<PushTrigger>(x => x.Requires("type").HasValue("P"));
             Map<SwitchTrigger>(x => x.Requires("type").HasValue("S"));
@@ -28,15 +32,6 @@ namespace HelloHome.Common.Entities.Configuration
                 .HasColumnType("VARCHAR")
                 .HasMaxLength(100)
                 .IsRequired();
-        }
-    }
-
-    public class NodePortBasedTriggerConfig : EntityTypeConfiguration<NodePortBasedTrigger>
-    {
-        public NodePortBasedTriggerConfig()
-        {
-            Property(x => x.NodePortGroupId).HasColumnName("portGroupId").IsRequired();
-            HasRequired(x => x.PortGroup).WithMany().HasForeignKey(x => x.NodePortGroupId);
         }
     }
 

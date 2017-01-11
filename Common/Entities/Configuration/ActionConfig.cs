@@ -15,18 +15,12 @@ namespace HelloHome.Common.Entities.Configuration
             Property(x => x.Sequence).HasColumnName("sequence").IsRequired();
 
             HasRequired(x => x.Trigger).WithMany(x => x.Actions).HasForeignKey(x => x.TriggerId);
+            HasMany(x => x.Actuators)
+                .WithMany(x => x.Actions)
+                .Map(x => x.ToTable("ActionPort").MapLeftKey("actionId").MapRightKey("portId"));
 
             Map<TurnOnAction>(x => x.Requires("type").HasValue("N").HasColumnType("CHAR").HasMaxLength(1));
             Map<TurnOffAction>(x => x.Requires("type").HasValue("F"));
-        }
-    }
-
-    public class RelayActionConfig : EntityTypeConfiguration<RelayAction>
-    {
-        public RelayActionConfig()
-        {
-            Property(x => x.RelayActuatorGroupId).HasColumnName("portGroupId");
-            HasRequired(x => x.RelayActuatorGroup).WithMany().HasForeignKey(x => x.RelayActuatorGroupId);
         }
     }
 }

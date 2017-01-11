@@ -13,11 +13,13 @@ namespace HelloHome.Common.Entities
 	}
 
 	public abstract class SensorPort : Port
-	{ 
+	{
+	    public List<Trigger> Triggers { get; set; }
 	}
 
 	public abstract class ActuatorPort : Port
-	{ 
+	{
+	    public List<Action> Actions { get; set; }
 	}
 
 	public class PulseSensor : SensorPort

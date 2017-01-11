@@ -1,17 +1,16 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Transactions;
 using HelloHome.Common.Entities;
 
 namespace IntegrationTests.Common.Entities
 {
-    public class EntityTestFixture : IDisposable
+    public abstract class EntityTest : IDisposable
     {
 
-        public HelloHomeDbContext DbCtx;
+        protected HelloHomeDbContext DbCtx;
         private readonly DbContextTransaction _transact;
 
-        public EntityTestFixture()
+        protected EntityTest()
         {
            DbCtx = new HelloHomeDbContext();
            _transact = DbCtx.Database.BeginTransaction();
@@ -20,7 +19,7 @@ namespace IntegrationTests.Common.Entities
         public void DetachAll()
         {
             foreach (var e in DbCtx.ChangeTracker.Entries ())
-                e.State = System.Data.Entity.EntityState.Detached;
+                e.State = EntityState.Detached;
         }
 
         public void Dispose()

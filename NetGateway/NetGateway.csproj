@@ -118,6 +118,7 @@
     <Compile Include="Agents\NodeGateway\Parsers\PulseReportParser.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\IMessageParser.cs" />
     <Compile Include="Queries\FindNodeQuery.cs" />
+    <Compile Include="Queries\FindTriggersForPortQuery.cs" />
     <Compile Include="Queries\ListRfIds.cs" />
     <Compile Include="WindsorInstallers\DefaultInstaller.cs" />
     <Compile Include="Agents\NodeGateway\Encoders\IMessageEncoder.cs" />

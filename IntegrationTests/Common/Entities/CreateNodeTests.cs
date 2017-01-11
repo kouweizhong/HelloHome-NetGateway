@@ -10,36 +10,28 @@ using Xunit.Abstractions;
 
 namespace IntegrationTests.Common.Entities
 {
-    public class CreateNodeTests : IClassFixture<EntityTestFixture>
+    public class CreateNodeTests : EntityTest
     {
-        private readonly EntityTestFixture _fixture;
-        private readonly HelloHomeDbContext _dbCtx;
         const byte Adr = 255;
-
-        public CreateNodeTests(EntityTestFixture fixture)
-        {
-            _fixture = fixture;
-            _dbCtx = fixture.DbCtx;
-        }
 
 
         [Fact]
         public void create_simple_node()
         {
-            _dbCtx.Nodes.Add(new Node {RfAddress = Adr, RfNetwork = 2, Signature = Int64.MaxValue, LastSeen = DateTime.Now});
-            _dbCtx.SaveChanges();
-            _fixture.DetachAll();
-            var node = _dbCtx.Nodes.Single(_ => _.RfAddress == Adr);
+            DbCtx.Nodes.Add(new Node {RfAddress = Adr, RfNetwork = 2, Signature = Int64.MaxValue, LastSeen = DateTime.Now});
+            DbCtx.SaveChanges();
+            DetachAll();
+            var node = DbCtx.Nodes.Single(_ => _.RfAddress == Adr);
 
             Assert.Equal(Adr, node.RfAddress);
-            _dbCtx.Nodes.Remove(node);
-            _dbCtx.SaveChanges();
+            DbCtx.Nodes.Remove(node);
+            DbCtx.SaveChanges();
         }
 
         [Fact]
         public void Create_Node_With_Config()
         {
-            _dbCtx.Nodes.Add(new Node
+            DbCtx.Nodes.Add(new Node
             {
                 RfAddress = Adr,
                 RfNetwork = 2,
@@ -52,20 +44,20 @@ namespace IntegrationTests.Common.Entities
                     Version = "1.0"
                 }
             });
-            _dbCtx.SaveChanges();
-            _fixture.DetachAll();
-            var node = _dbCtx.Nodes.Include(_ => _.Configuration).Single(_ => _.RfAddress == Adr);
+            DbCtx.SaveChanges();
+            DetachAll();
+            var node = DbCtx.Nodes.Include(_ => _.Configuration).Single(_ => _.RfAddress == Adr);
 
             Assert.Equal(Adr, node.RfAddress);
             Assert.Equal("MyNode", node.Configuration.Name);
-            _dbCtx.Nodes.Remove(node);
-            _dbCtx.SaveChanges();
+            DbCtx.Nodes.Remove(node);
+            DbCtx.SaveChanges();
         }
 
         [Fact]
         public void Create_Node_With_Minimal_LatestValues()
         {
-            _dbCtx.Nodes.Add(new Node
+            DbCtx.Nodes.Add(new Node
             {
                 RfAddress = Adr,
                 RfNetwork = 2,
@@ -75,21 +67,21 @@ namespace IntegrationTests.Common.Entities
                 {
                 }
             });
-            _dbCtx.SaveChanges();
-            _fixture.DetachAll();
-            var node = _dbCtx.Nodes.Include(_ => _.LatestValues).Single(_ => _.RfAddress == Adr);
+            DbCtx.SaveChanges();
+            DetachAll();
+            var node = DbCtx.Nodes.Include(_ => _.LatestValues).Single(_ => _.RfAddress == Adr);
 
             Assert.Equal(Adr, node.RfAddress);
             Assert.Null(node.LatestValues.Temperature);
-            _dbCtx.Nodes.Remove(node);
-            _dbCtx.SaveChanges();
+            DbCtx.Nodes.Remove(node);
+            DbCtx.SaveChanges();
         }
 
         [Fact]
         public void Create_Node_With_values()
         {
             var now = DateTime.UtcNow.Round(TimeSpan.FromSeconds(1));
-            _dbCtx.Nodes.Add(new Node
+            DbCtx.Nodes.Add(new Node
             {
                 RfAddress = Adr,
                 RfNetwork = 2,
@@ -107,9 +99,9 @@ namespace IntegrationTests.Common.Entities
                     SendErrorCount = 23
                 }
             });
-            _dbCtx.SaveChanges();
-            _fixture.DetachAll();
-            var node = _dbCtx.Nodes.Include(_ => _.LatestValues).Single(_ => _.RfAddress == Adr);
+            DbCtx.SaveChanges();
+            DetachAll();
+            var node = DbCtx.Nodes.Include(_ => _.LatestValues).Single(_ => _.RfAddress == Adr);
 
             Assert.NotNull(node.LatestValues);
             Assert.Equal(12.4f, node.LatestValues.Humidity);
@@ -121,14 +113,14 @@ namespace IntegrationTests.Common.Entities
             Assert.Equal(3.7f, node.LatestValues.VIn);
             Assert.Equal(23, node.LatestValues.SendErrorCount);
 
-            _dbCtx.Nodes.Remove(node);
-            _dbCtx.SaveChanges();
+            DbCtx.Nodes.Remove(node);
+            DbCtx.SaveChanges();
         }
 
         [Fact]
         public void create_node_with_ports()
         {
-            _dbCtx.Nodes.Add(new Node
+            DbCtx.Nodes.Add(new Node
             {
                 RfAddress = Adr,
                 RfNetwork = 2,
@@ -142,17 +134,17 @@ namespace IntegrationTests.Common.Entities
                     new VarioSensor { Name = "LeavingRoom", Number = 4, Value = 24 }
                 }
             });
-            _dbCtx.SaveChanges();
-            _fixture.DetachAll();
-            var node = _dbCtx.Nodes.Include(_ => _.Ports).Single(_ => _.RfAddress == Adr);
+            DbCtx.SaveChanges();
+            DetachAll();
+            var node = DbCtx.Nodes.Include(_ => _.Ports).Single(_ => _.RfAddress == Adr);
 
             Assert.Contains(node.Ports.OfType<PulseSensor>(), _=> _.Number == 1);
             Assert.Contains(node.Ports.OfType<RelayActuator>(), _=> _.Number == 2);
             Assert.Contains(node.Ports.OfType<SwitchSensor>(), _=> _.Number == 3);
             Assert.Contains(node.Ports.OfType<VarioSensor>(), _=> _.Number == 4);
 
-            _dbCtx.Nodes.Remove(node);
-            _dbCtx.SaveChanges();
+            DbCtx.Nodes.Remove(node);
+            DbCtx.SaveChanges();
         }
     }
 }

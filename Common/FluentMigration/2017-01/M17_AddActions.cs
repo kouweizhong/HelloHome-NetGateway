@@ -12,8 +12,11 @@ namespace HelloHome.Common.FluentMigration
                 .WithColumn("triggerId").AsInt32().NotNullable().ForeignKey("FK_Action_Trigger", "Trigger", "triggerId")
                 .WithColumn("sequence").AsInt32().NotNullable()
                 .WithColumn("type").AsAnsiString(1).NotNullable()
-                .WithColumn("portGroupId").AsInt32().Nullable().ForeignKey("FK_Action_PortGroup", "PortGroup", "portGroupId")
                 .WithColumn("delayMs").AsInt32().Nullable();
+
+            Create.Table("ActionPort")
+                .WithColumn("actionId").AsInt32().ForeignKey("FK_ActionPort_Action", "Action", "actionId").PrimaryKey()
+                .WithColumn("portId").AsInt32().ForeignKey("FK_ActionPort_Port", "Port", "portId").PrimaryKey();
         }
     }
 }

@@ -5,22 +5,23 @@ using Xunit;
 
 namespace IntegrationTests.Common.Entities
 {
-    public class CreateTriggerTests : IClassFixture<EntityTestFixture>
+    public class CreateTriggerTests : EntityTest
     {
-        private EntityTestFixture _fixture;
-        private readonly HelloHomeDbContext _dbCtx;
-        private readonly PortGroup _portGroup;
+        private readonly List<SensorPort> _ports;
 
         private const long BaseSignature = 76587486538549;
         private const byte TestNetwork = 66;
 
-        public CreateTriggerTests(EntityTestFixture fixture)
+        public CreateTriggerTests()
         {
-            _fixture = fixture;
-            _dbCtx = fixture.DbCtx;
-            _portGroup = new PushSensorGroup() { Name = "Test", Ports = new List<PushSensor>()};
-            _dbCtx.PortGroups.Add(_portGroup);
-            _dbCtx.SaveChanges();
+            _ports = new List<SensorPort>
+            {
+                new PushSensor
+                {
+                    Number = 1,
+                    Node = new Node { Signature = BaseSignature +1,  }
+                }
+            };
         }
 
         [Fact]
@@ -28,10 +29,10 @@ namespace IntegrationTests.Common.Entities
         {
             var trigger  = new PushTrigger
             {
-                PortGroup = _portGroup,
+                Sensors = _ports
             };
-            _dbCtx.Triggers.Add(trigger);
-            _dbCtx.SaveChanges();
+            DbCtx.Triggers.Add(trigger);
+            DbCtx.SaveChanges();
         }
 
         [Fact]
@@ -39,11 +40,11 @@ namespace IntegrationTests.Common.Entities
         {
             var trigger  = new SwitchTrigger
             {
-                PortGroup = _portGroup,
+                Sensors = _ports,
                 TriggerOnState = true,
             };
-            _dbCtx.Triggers.Add(trigger);
-            _dbCtx.SaveChanges();
+            DbCtx.Triggers.Add(trigger);
+            DbCtx.SaveChanges();
         }
 
         [Fact]
@@ -51,10 +52,10 @@ namespace IntegrationTests.Common.Entities
         {
             var trigger  = new VarioTrigger
             {
-                PortGroup = _portGroup,
+                Sensors = _ports,
             };
-            _dbCtx.Triggers.Add(trigger);
-            _dbCtx.SaveChanges();
+            DbCtx.Triggers.Add(trigger);
+            DbCtx.SaveChanges();
         }
 
         [Fact]
@@ -62,10 +63,11 @@ namespace IntegrationTests.Common.Entities
         {
             var trigger  = new CronTrigger
             {
+                Sensors = _ports,
                 CronExpression = "* * * 8"
             };
-            _dbCtx.Triggers.Add(trigger);
-            _dbCtx.SaveChanges();
+            DbCtx.Triggers.Add(trigger);
+            DbCtx.SaveChanges();
         }
     }
 }

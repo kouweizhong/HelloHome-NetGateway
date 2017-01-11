@@ -13,7 +13,6 @@ namespace HelloHome.Common.Entities
 
         IDbSet<Node> Nodes { get; }
         IDbSet<Port> Ports { get; set; }
-        IDbSet<PortGroup> PortGroups { get; set; }
         IDbSet<PulseHistory> PulseData { get; set; }
         IDbSet<Trigger> Triggers { get; set; }
         IDbSet<Action> Actions { get; set; }
@@ -61,7 +60,6 @@ namespace HelloHome.Common.Entities
 
 		public IDbSet<Node> Nodes { get; set; }
 		public IDbSet<Port> Ports { get; set; }
-        public IDbSet<PortGroup> PortGroups { get; set; }
         public IDbSet<PulseHistory> PulseData { get; set; }
         public IDbSet<Trigger> Triggers { get; set; }
         public IDbSet<Action> Actions { get; set; }

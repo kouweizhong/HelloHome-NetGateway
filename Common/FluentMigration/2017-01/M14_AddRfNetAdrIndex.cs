@@ -8,6 +8,7 @@ namespace HelloHome.Common.FluentMigration
     {
         public override void Up()
         {
+            Delete.UniqueConstraint("UX_NodeId").FromTable("Node");
             Create.UniqueConstraint("UC_Node_RfNetworkAddress")
                 .OnTable("Node")
                 .Columns("rfAddress", "rfNetwork");
