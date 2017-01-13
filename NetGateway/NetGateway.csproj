@@ -97,6 +97,13 @@
     <Compile Include="Agents\NodeGateway\INodeMessageChannel.cs" />
     <Compile Include="Agents\NodeGateway\NodeMessageWcfChannel.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\PushButtonPressedReportParser.cs" />
+    <Compile Include="Agents\NodeGateway\Serializer\IMessageSerializer.cs" />
+    <Compile Include="Agents\NodeGateway\Serializer\IncomingMessageSerializer.cs" />
+    <Compile Include="Agents\NodeGateway\Serializer\ISerializerFactory.cs" />
+    <Compile Include="Agents\NodeGateway\Serializer\NodeStartedReportSerializer.cs" />
+    <Compile Include="Agents\NodeGateway\Serializer\OutgoingMessageSerializer.cs" />
+    <Compile Include="Agents\NodeGateway\Serializer\SerializerFactoryComponentSelector.cs" />
+    <Compile Include="Agents\NodeGateway\Serializer\SerializerForAttribute.cs" />
     <Compile Include="Agents\NodeGateway\SerialPortByteStream.cs" />
     <Compile Include="Commands\CreateNodeCommand.cs" />
     <Compile Include="Handlers\CommentHandler.cs" />
