@@ -19,6 +19,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Scheduler", "Scheduler\Sche
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "End2EndTests", "End2EndTests\End2EndTests.csproj", "{3EB4AE9C-6D8D-4DB3-8C37-B62A26FD43D7}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tools", "Tools", "{851597F0-D378-47EE-9BF0-880A118E611F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetGatewaySimulator", "NetGatewaySimulator\NetGatewaySimulator.csproj", "{D2C534B2-7317-442E-A7F2-FC93A624DDA4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86
@@ -53,6 +57,10 @@ Global
 		{3EB4AE9C-6D8D-4DB3-8C37-B62A26FD43D7}.Debug|x86.Build.0 = Debug|Any CPU
 		{3EB4AE9C-6D8D-4DB3-8C37-B62A26FD43D7}.Release|x86.ActiveCfg = Release|Any CPU
 		{3EB4AE9C-6D8D-4DB3-8C37-B62A26FD43D7}.Release|x86.Build.0 = Release|Any CPU
+		{D2C534B2-7317-442E-A7F2-FC93A624DDA4}.Debug|x86.ActiveCfg = Debug|x86
+		{D2C534B2-7317-442E-A7F2-FC93A624DDA4}.Debug|x86.Build.0 = Debug|x86
+		{D2C534B2-7317-442E-A7F2-FC93A624DDA4}.Release|x86.ActiveCfg = Release|x86
+		{D2C534B2-7317-442E-A7F2-FC93A624DDA4}.Release|x86.Build.0 = Release|x86
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -61,6 +69,7 @@ Global
 		{11E62618-0841-48E7-9A19-D54E956EBAE8} = {50F4B153-BF79-424F-A3DF-47AF5BD75676}
 		{29AF3F31-B3A7-4A9C-B7FD-D2C63A144D1D} = {50F4B153-BF79-424F-A3DF-47AF5BD75676}
 		{3EB4AE9C-6D8D-4DB3-8C37-B62A26FD43D7} = {50F4B153-BF79-424F-A3DF-47AF5BD75676}
+		{D2C534B2-7317-442E-A7F2-FC93A624DDA4} = {851597F0-D378-47EE-9BF0-880A118E611F}
 	EndGlobalSection
 	GlobalSection(MonoDevelopProperties) = preSolution
 		Policies = $0
