@@ -15,7 +15,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
             _serial = new Lazy<SerialPort>(() =>
                 {
                     var s = new SerialPort(serialConfig.Port, 115200, Parity.None, 8, StopBits.One);
-                    s.BaseStream.ReadTimeout = 10;
+                    s.ReadTimeout = 5000;
                     s.Open();
                     return s;
                 });
@@ -23,7 +23,15 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
 
         public async Task<int> ReadAsync(byte[] buffer, int offset, int cout, CancellationToken cToken)
         {
-            return await _serial.Value.BaseStream.ReadAsync(buffer, offset, cout, cToken);
+            try
+            {
+                return await _serial.Value.BaseStream.ReadAsync(buffer, offset, cout, cToken);
+
+            }
+            catch (Exception e)
+            {
+                return 0;
+            }
         }
 
         public async Task WriteAsync(byte[] buffer, int offset, int cout, CancellationToken cToken)
@@ -42,12 +50,12 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
         }
 
         public int ReadTimeout {
-            get { return _serial.Value.BaseStream.ReadTimeout; }
+            get { return _serial.Value.ReadTimeout; }
             set
             {
                 if(_serial.IsValueCreated)
                     throw new Exception("Cannot set readTimeout once the serial is in use");
-                _serial.Value.BaseStream.ReadTimeout = value;
+                _serial.Value.ReadTimeout = value;
             }
         }
     }

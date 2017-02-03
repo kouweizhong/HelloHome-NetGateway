@@ -43,6 +43,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway
             if (encoder == null)
                 throw new ApplicationException($"No encoder found for {message.GetType().Name}");
             var bytes = encoder.Encode(message);
+            await _byteStream.WriteAsync(new byte[] {message.ToNodeId}, 0, 1, cancellationToken);
             await _byteStream.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
             await _byteStream.WriteAsync(new byte[] {0x0D, 0x0A}, 0, 2, cancellationToken);
         }

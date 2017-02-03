@@ -35,10 +35,14 @@ namespace HelloHome.NetGateway
 				    var cts = new CancellationTokenSource();
 				    gateway.RunLoopAsync(cts.Token).Wait(cts.Token);
 				}
-				catch (Exception ex) {
-					Logger.Error (ex.Message);
-				}
-			}
+		        catch (AggregateException ex) {
+		            foreach(var ie in ex.InnerExceptions)
+		                Logger.Error (ie.Message);
+		        }
+		        catch (Exception ex) {
+		            Logger.Error (ex.Message);
+		        }
+		    }
 		    catch (Exception e)
 		    {
 		        Logger.Fatal(e);

@@ -18,7 +18,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports
 			var sb = new StringBuilder (Bytes.Length * 2);
 			foreach (var b in Bytes)
 				sb.Append(b.ToString("X2"));
-					return string.Format ("[RawMessage: Bytes={0}]", sb);
+					return $"[RawMessage: Bytes={sb}]";
 		}
 	}
 }

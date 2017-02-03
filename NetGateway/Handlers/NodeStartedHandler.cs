@@ -60,10 +60,20 @@ namespace HelloHome.NetGateway.Handlers
 
 		    if (node.RfAddress != request.FromNodeId)
 		    {
-		        Logger.Debug("Node with signature {1} received a new rfAddress ({0}). Therefore a configCommand should be sent.", node.RfAddress, node.Signature);
-		        outgoingMessages.Add (new NodeConfigCommand {
-		            signature = request.Signature,
-		            NewRfAddress = (byte)node.RfAddress
+		        Logger.Debug("Node with signature {1} received a new rfAddress ({0}).",node.RfAddress, node.Signature);
+		        outgoingMessages.Add(new NodeConfigCommand
+		        {
+		            ToNodeId = request.FromNodeId,
+		            Signature = request.Signature,
+		            NewRfAddress = node.RfAddress
+		        });
+		    }
+		    else
+		    {
+		        outgoingMessages.Add(new NodeConfigCommand
+		        {
+		            ToNodeId = request.FromNodeId,
+		            Signature = request.Signature,
 		        });
 		    }
 		    node.Configuration.Version = $"{request.Major}.{request.Minor}";

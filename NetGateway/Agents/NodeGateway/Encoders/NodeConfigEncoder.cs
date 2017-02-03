@@ -16,13 +16,18 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 
 		public override byte[] EncodeInternal (NodeConfigCommand message)
 		{
-			var bytes = new List<Byte> ();
-			bytes.Add (2 + 0 << 2);
+			var bytes = new List<byte> ();
+			bytes.Add (2 + (0 << 2));
+		    bytes.AddRange(BitConverter.GetBytes(message.Signature));
 			bytes.Add(message.NewRfAddress);
 			bytes.Add(_pinConfigEncoder.EncodePins(message.Hal1Pin, message.Hal2Pin));
 			bytes.Add(_pinConfigEncoder.EncodePins(message.DryPin));
-			bytes.Add(_pinConfigEncoder.EncodePins(message.vInTriggerPin, message.vInMeasurePin));
-			bytes.Add ((byte)((message.BmpEnable ? 1 : 0) << 1 + (message.SiEnable ? 1 : 0)));
+			bytes.Add(_pinConfigEncoder.EncodePins(message.VInTriggerPin, message.VInMeasurePin));
+
+		    var features = message.SiEnable ? 1 : 0;
+		    features += (message.BmpEnable ? 1 : 0) << 1;
+		    bytes.Add ((byte)features);
+
 			return bytes.ToArray ();
 		}
 	}

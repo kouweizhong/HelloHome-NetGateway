@@ -7,25 +7,25 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands
     public class NodeConfigCommand : OutgoingMessage
 	{
 		[DataMember]
-	    public long signature { get; set; }
+	    public long Signature { get; set; }
 
 	    [DataMember]
 	    public byte NewRfAddress { get; set; }
 
 	    [DataMember]
-	    public PinConfig Hal1Pin { get; set; }
+	    public byte Hal1Pin { get; set; }
 
 	    [DataMember]
-	    public PinConfig Hal2Pin { get; set; }
+	    public byte Hal2Pin { get; set; }
 
 	    [DataMember]
-	    public PinConfig DryPin { get; set; }
+	    public byte DryPin { get; set; }
 
 	    [DataMember]
-	    public PinConfig vInTriggerPin { get; set; }
+	    public byte VInTriggerPin { get; set; }
 
 	    [DataMember]
-	    public PinConfig vInMeasurePin { get; set; }
+	    public byte VInMeasurePin { get; set; }
 
 	    [DataMember]
 	    public bool SiEnable { get; set; }

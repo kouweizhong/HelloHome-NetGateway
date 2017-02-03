@@ -46,7 +46,7 @@ namespace End2EndTests.Scenarios
             _msgChannel.Setup(_ => _.ReadAsync(cts.Token)).ReturnsAsync(startupMessage);
 
             //Act
-            await _gtw.RunOnceAsync(cts.Token, true);
+            await _gtw.RunOnceAsync(cts.Token);
 
             //Assert
             var expectedNode = _dbCtx.Nodes.SingleOrDefault(_ => _.Signature == 1);
@@ -66,7 +66,7 @@ namespace End2EndTests.Scenarios
             _msgChannel.Setup(_ => _.ReadAsync(cts.Token)).ReturnsAsync(startupMessage);
 
             //Act
-            await _gtw.RunOnceAsync(cts.Token, true);
+            await _gtw.RunOnceAsync(cts.Token);
 
             //Assert
             _msgChannel.Verify(_ => _.SendAsync(It.IsAny<NodeConfigCommand>(), It.IsAny<CancellationToken>()), Times.Never);
@@ -87,10 +87,10 @@ namespace End2EndTests.Scenarios
             _msgChannel.Setup(_ => _.ReadAsync(cts.Token)).ReturnsAsync(startupMessage);
 
             //Act
-            await _gtw.RunOnceAsync(cts.Token, true);
+            await _gtw.RunOnceAsync(cts.Token);
 
             //Assert
-            _msgChannel.Verify(_ => _.SendAsync(It.Is<NodeConfigCommand>(c => c.signature == 4 && c.NewRfAddress != rfId), It.IsAny<CancellationToken>()));
+            _msgChannel.Verify(_ => _.SendAsync(It.Is<NodeConfigCommand>(c => c.Signature == 4 && c.NewRfAddress != rfId), It.IsAny<CancellationToken>()));
         }
     }
 }

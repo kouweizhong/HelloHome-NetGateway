@@ -10,7 +10,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports
 
 		public override string ToString ()
 		{
-			return string.Format ("[NodeInfoReport: NodeId={2}, SendErrorCount={0}, Voltage={1}]", SendErrorCount, Voltage, FromNodeId);
+			return $"[NodeInfoReport: NodeId={FromNodeId}, SendErrorCount={SendErrorCount}, Voltage={Voltage}]";
 		}
 	}
 }

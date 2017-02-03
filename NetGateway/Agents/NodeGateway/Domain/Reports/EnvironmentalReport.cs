@@ -12,7 +12,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports
 
 		public override string ToString ()
 		{
-			return string.Format ("[EnvironmentalInfoReport: NodeId={3}, Temperature={0}, Humidity={1}, Pressure={2}]", Temperature, Humidity, Pressure, FromNodeId);
+			return $"[EnvironmentalInfoReport: NodeId={FromNodeId}, Temperature={Temperature}, Humidity={Humidity}, Pressure={Pressure}]";
 		}
 	}
 }

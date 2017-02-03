@@ -95,7 +95,6 @@
     <Compile Include="Agents\NodeGateway\Domain\Reports\RawReport.cs" />
     <Compile Include="Agents\NodeGateway\IByteStream.cs" />
     <Compile Include="Agents\NodeGateway\INodeMessageChannel.cs" />
-    <Compile Include="Agents\NodeGateway\NodeMessageWcfChannel.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\PushButtonPressedReportParser.cs" />
     <Compile Include="Agents\NodeGateway\Serializer\IMessageSerializer.cs" />
     <Compile Include="Agents\NodeGateway\Serializer\IncomingMessageSerializer.cs" />
@@ -116,9 +115,6 @@
     <Compile Include="Configuration\IConfigurationProvider.cs" />
     <Compile Include="Configuration\ISerialConfigurationProvider.cs" />
     <Compile Include="Configuration\AppSettings\AppSettingsBasedConfiguration.cs" />
-    <Compile Include="Agents\NodeGateway\IncomingMessageEventArgs.cs" />
-    <Compile Include="Agents\NodeGateway\INodeGatewayAgent.cs" />
-    <Compile Include="Agents\NodeGateway\NodeGatewayAgent.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\CommentParser.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\NodeInfoReportParser.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\ParseAllParser.cs" />

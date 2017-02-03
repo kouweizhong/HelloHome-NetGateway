@@ -13,7 +13,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports
 
 		public override string ToString ()
 		{
-			return string.Format ("[CommentReport: Comment={0}]", Comment);
+			return $"[CommentReport: Comment={Comment}]";
 		}
 	}
 }

@@ -9,7 +9,7 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports
 
 		public override string ToString ()
 		{
-			return string.Format ("[PulseReport: Node={2}, SubNode={0}, NewPulses={1}]", SubNode, NewPulses, FromNodeId);
+			return $"[PulseReport: Node={FromNodeId}, SubNode={SubNode}, NewPulses={NewPulses}]";
 		}
 	}
 }

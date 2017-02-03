@@ -52,9 +52,8 @@ namespace HelloHome.NetGateway.WindsorInstallers
             container.Register(Component.For<HelloHomeDbContext>().LifestyleSingleton().Named("SingletonDbContext"));
 
             //Agents
-            container.Register(Component.For<INodeGatewayAgent>()
-                .ImplementedBy<NodeGatewayAgent>()
-                .LifestyleSingleton());
+            container.Register(Component.For<INodeMessageChannel>().ImplementedBy<NodeMessageSerialChannel>());
+            container.Register(Component.For<IByteStream>().ImplementedBy<SerialPortByteStream>());
 
             container.Register(Component.For<IEmonCmsAgent>().ImplementedBy<EmonCmsAgent>());
 
@@ -74,8 +73,6 @@ namespace HelloHome.NetGateway.WindsorInstallers
 
             //HelloHomeGateway
             container.Register(Component.For<NodeGateway>());
-            container.Register(Component.For<INodeMessageChannel>().ImplementedBy<NodeMessageSerialChannel>());
-            container.Register(Component.For<IByteStream>().ImplementedBy<SerialPortByteStream>());
 
             //MessageHandlers
             container.Register(

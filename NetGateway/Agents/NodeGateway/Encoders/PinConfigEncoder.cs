@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands;
 
@@ -6,33 +7,21 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
 {
 	public class PinConfigEncoder
 	{
-		public PinConfigEncoder ()
+		public byte EncodePins(byte pin1, byte pin2)
 		{
+		    return (byte)((EncodePins(pin1) << 4) + EncodePins(pin2));
 		}
 
-		public byte EncodePins(PinConfig pin1, PinConfig pin2)
+		public byte EncodePins(byte pin)
 		{
-			byte e = 0;
-			e += (byte)(pin1.Mode == PinMode.Digital ? 0 : 1);
-			if (pin1.PinNumber > 7)
-				throw new ApplicationException ("Pin number cannot exceed 7");
-			e += (byte)(pin1.PinNumber << 1);
-			e += (byte)((pin2.Mode == PinMode.Digital ? 0 : 1) << 4);
-			if (pin2.PinNumber > 7)
-				throw new ApplicationException ("Pin number cannot exceed 7");
-			e += (byte)(pin2.PinNumber << 5);
-			return e;
+		    if (pin == 0) return 0;
+		    if(pin >= _map.Length || _map[pin] == 0)
+		        throw new Exception($"Pin {pin} is unavailable.");
+		    return _map[pin];
 		}
 
-		public byte EncodePins(PinConfig pin1)
-		{
-			byte e = 0;
-			e += (byte)(pin1.Mode == PinMode.Digital ? 0 : 1);
-			if (pin1.PinNumber > 7)
-				throw new ApplicationException ("Pin number cannot exceed 7");
-			e += (byte)(pin1.PinNumber << 1);
-			return e;
-		}
+	    //Only D4-D7, D14-D17 and A6-A7 are availble. That is 10 Pins in total
+	    private readonly byte[] _map = {0, 0, 0, 0, 1, 2, 3, 4, 0, 0, 0, 0, 0, 0, 5, 6, 7, 8, 0, 0, 9, 10};
 	}
 }
 
