@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
+namespace HelloHome.NetGateway.MessageChannel.Encoders
 {
 	public class PinConfigEncoder
 	{

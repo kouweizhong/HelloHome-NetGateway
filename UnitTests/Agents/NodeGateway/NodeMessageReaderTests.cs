@@ -5,12 +5,12 @@ using System.ComponentModel;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
-using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
 using HelloHome.NetGateway.Configuration;
 using HelloHome.NetGateway.Configuration.AppSettings;
+using HelloHome.NetGateway.MessageChannel;
+using HelloHome.NetGateway.MessageChannel.Domain.Reports;
+using HelloHome.NetGateway.MessageChannel.Encoders;
 using Moq;
 using Xunit;
 

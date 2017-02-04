@@ -4,7 +4,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.NetGateway.Configuration;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway
+namespace HelloHome.NetGateway.MessageChannel
 {
     public class SerialPortByteStream : IByteStream, IDisposable
     {

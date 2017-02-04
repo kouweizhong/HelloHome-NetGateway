@@ -1,6 +1,6 @@
-﻿using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+﻿using HelloHome.NetGateway.MessageChannel.Domain.Base;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports
+namespace HelloHome.NetGateway.MessageChannel.Domain.Reports
 {
 	public class EnvironmentalReport : Report
 	{

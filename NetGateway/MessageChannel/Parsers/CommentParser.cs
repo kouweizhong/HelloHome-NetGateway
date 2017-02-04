@@ -1,9 +1,9 @@
-﻿using System.Text;
-using System.Linq;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
+﻿using System.Linq;
+using System.Text;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Domain.Reports;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
+namespace HelloHome.NetGateway.MessageChannel.Parsers
 {
 	public class CommentParser : IMessageParser
 	{

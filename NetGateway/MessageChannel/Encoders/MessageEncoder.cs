@@ -1,8 +1,6 @@
-﻿using System;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+﻿using HelloHome.NetGateway.MessageChannel.Domain.Base;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Encoders
+namespace HelloHome.NetGateway.MessageChannel.Encoders
 {
 	public abstract class MessageEncoder<TMessage> : IMessageEncoder where TMessage : OutgoingMessage
 	{

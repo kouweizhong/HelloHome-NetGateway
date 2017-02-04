@@ -6,7 +6,7 @@ using System.Reflection;
 using Castle.Core.Internal;
 using Castle.Facilities.TypedFactory;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer
+namespace HelloHome.NetGateway.MessageChannel.Serializer
 {
     public class SerializerFactoryComponentSelector : DefaultTypedFactoryComponentSelector
     {

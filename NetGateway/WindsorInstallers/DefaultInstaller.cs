@@ -1,11 +1,8 @@
 ﻿using Castle.MicroKernel.Registration;
 using HelloHome.NetGateway.Configuration;
 using HelloHome.NetGateway.Configuration.AppSettings;
-using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
 using Castle.MicroKernel.Resolvers.SpecializedResolvers;
 using HelloHome.Common.Entities;
-using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
-using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Agents.EmonCms;
 using Castle.Facilities.TypedFactory;
 using HelloHome.NetGateway.Handlers;
@@ -15,6 +12,9 @@ using System;
 using System.Linq;
 using HelloHome.Common;
 using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
+using HelloHome.NetGateway.MessageChannel;
+using HelloHome.NetGateway.MessageChannel.Encoders;
+using HelloHome.NetGateway.MessageChannel.Parsers;
 
 namespace HelloHome.NetGateway.WindsorInstallers
 {

@@ -1,8 +1,8 @@
 ﻿using System;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Domain.Reports;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
+namespace HelloHome.NetGateway.MessageChannel.Parsers
 {
 	public class EnvironmentReportParser : IMessageParser
 	{

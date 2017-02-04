@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
+using HelloHome.NetGateway.MessageChannel.Domain.Reports;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer
+namespace HelloHome.NetGateway.MessageChannel.Serializer
 {
     [SerializerFor(typeof(NodeStartedReport), MessageIdentifier)]
     public class NodeStartedReportSerializer : IncomingMessageSerializer<NodeStartedReport>

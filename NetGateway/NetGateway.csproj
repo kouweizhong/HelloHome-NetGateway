@@ -99,6 +99,7 @@
     <Compile Include="MessageChannel\Domain\Reports\PulseReport.cs" />
     <Compile Include="MessageChannel\Domain\Reports\PushButtonPressedReport.cs" />
     <Compile Include="MessageChannel\Domain\Reports\RawReport.cs" />
+    <Compile Include="MessageChannel\Encoders\EncoderForAttribute.cs" />
     <Compile Include="MessageChannel\Encoders\IMessageEncoder.cs" />
     <Compile Include="MessageChannel\Encoders\MessageEncoder.cs" />
     <Compile Include="MessageChannel\Encoders\NodeConfigEncoder.cs" />

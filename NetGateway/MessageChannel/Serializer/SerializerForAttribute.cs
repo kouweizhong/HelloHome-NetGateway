@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer
+namespace HelloHome.NetGateway.MessageChannel.Serializer
 {
     public class SerializerForAttribute : Attribute
     {

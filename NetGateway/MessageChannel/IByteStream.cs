@@ -1,7 +1,7 @@
 ﻿using System.Threading;
 using System.Threading.Tasks;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway
+namespace HelloHome.NetGateway.MessageChannel
 {
     public interface IByteStream
     {

@@ -5,11 +5,11 @@ using HelloHome.Common;
 using HelloHome.Common.Entities;
 using HelloHome.Common.Entities.Includes;
 using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
 using HelloHome.NetGateway.Commands;
 using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Domain.Commands;
+using HelloHome.NetGateway.MessageChannel.Domain.Reports;
 using HelloHome.NetGateway.Queries;
 using NLog;
 

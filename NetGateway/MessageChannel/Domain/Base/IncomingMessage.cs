@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Base
+namespace HelloHome.NetGateway.MessageChannel.Domain.Base
 {
     [DataContract]
 	public class IncomingMessage : Message

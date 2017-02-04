@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer
+namespace HelloHome.NetGateway.MessageChannel.Serializer
 {
     public abstract class OutgoingMessageSerializer<T> : IMessageSerializer where T : OutgoingMessage
     {

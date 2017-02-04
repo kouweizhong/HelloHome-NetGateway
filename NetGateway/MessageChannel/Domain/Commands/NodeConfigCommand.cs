@@ -1,7 +1,7 @@
 ﻿using System.Runtime.Serialization;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands
+namespace HelloHome.NetGateway.MessageChannel.Domain.Commands
 {
 	[DataContract]
     public class NodeConfigCommand : OutgoingMessage

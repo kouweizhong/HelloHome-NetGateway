@@ -1,4 +1,4 @@
-﻿namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Base
+﻿namespace HelloHome.NetGateway.MessageChannel.Domain.Base
 {
 	public interface ISignedMessage
 	{

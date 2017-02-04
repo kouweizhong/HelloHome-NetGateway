@@ -1,4 +1,4 @@
-namespace HelloHome.NetGateway.Agents.NodeGateway.Domain.Commands
+namespace HelloHome.NetGateway.MessageChannel.Domain.Commands
 {
 
 	public enum PinMode

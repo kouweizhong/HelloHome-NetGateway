@@ -1,18 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity.Migrations.Sql;
-using System.IO.Ports;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
-using HelloHome.NetGateway.Agents.NodeGateway.Encoders;
-using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
-using HelloHome.NetGateway.Configuration;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Encoders;
+using HelloHome.NetGateway.MessageChannel.Parsers;
 using NLog;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway
+namespace HelloHome.NetGateway.MessageChannel
 {
     public class NodeMessageSerialChannel : INodeMessageChannel
     {

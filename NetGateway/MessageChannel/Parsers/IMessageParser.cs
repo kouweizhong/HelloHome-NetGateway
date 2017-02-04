@@ -1,7 +1,7 @@
 ﻿
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Parsers
+namespace HelloHome.NetGateway.MessageChannel.Parsers
 {
 	public interface IMessageParser
 	{

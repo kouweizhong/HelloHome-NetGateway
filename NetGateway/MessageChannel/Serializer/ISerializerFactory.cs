@@ -1,6 +1,6 @@
-﻿using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+﻿using HelloHome.NetGateway.MessageChannel.Domain.Base;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer
+namespace HelloHome.NetGateway.MessageChannel.Serializer
 {
     public interface ISerializerFactory
     {
