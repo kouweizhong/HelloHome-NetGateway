@@ -1,10 +1,12 @@
 ﻿using System;
 using HelloHome.NetGateway.MessageChannel.Domain.Base;
 using HelloHome.NetGateway.MessageChannel.Domain.Reports;
+using HelloHome.NetGateway.MessageChannel.Parsers.Factory;
 
 namespace HelloHome.NetGateway.MessageChannel.Parsers
 {
-	public class PulseReportParser : IMessageParser
+    [ParserFor(0 + (1 << 2))]
+    public class PulseReportParser : IMessageParser
 	{
 		public PulseReportParser ()
 		{
@@ -12,12 +14,7 @@ namespace HelloHome.NetGateway.MessageChannel.Parsers
 
 		#region IReportParser implementation
 
-		public bool CanParse (byte[] record)
-		{
-			return record [3] == 0 + 1 << 2;
-		}
-
-		public Report Parse (byte[] record)
+	    public Report Parse (byte[] record)
 		{
 			return new PulseReport {
 				FromNodeId = record [0],

@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using HelloHome.NetGateway.MessageChannel.Domain.Commands;
+using HelloHome.NetGateway.MessageChannel.Encoders.Factory;
 
 namespace HelloHome.NetGateway.MessageChannel.Encoders
 {
+    [EncoderFor(typeof(NodeConfigCommand))]
 	public class NodeConfigEncoder : MessageEncoder<NodeConfigCommand>
 	{
 		readonly PinConfigEncoder _pinConfigEncoder;

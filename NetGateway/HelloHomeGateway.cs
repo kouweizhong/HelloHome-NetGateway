@@ -1,9 +1,8 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
-using Castle.Components.DictionaryAdapter;
 using HelloHome.NetGateway.Handlers;
+using HelloHome.NetGateway.Handlers.Factory;
 using HelloHome.NetGateway.MessageChannel;
 using HelloHome.NetGateway.MessageChannel.Domain.Base;
 using NLog;

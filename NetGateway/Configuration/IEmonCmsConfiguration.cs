@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HelloHome.NetGateway.Configuration
+﻿namespace HelloHome.NetGateway.Configuration
 {
 	public interface IEmonCmsConfiguration
 	{

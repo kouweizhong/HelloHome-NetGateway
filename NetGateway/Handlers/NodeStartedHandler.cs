@@ -4,7 +4,6 @@ using System.Threading.Tasks;
 using HelloHome.Common;
 using HelloHome.Common.Entities;
 using HelloHome.Common.Entities.Includes;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using HelloHome.NetGateway.Commands;
 using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 using HelloHome.NetGateway.MessageChannel.Domain.Base;

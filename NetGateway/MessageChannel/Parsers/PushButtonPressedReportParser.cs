@@ -1,16 +1,13 @@
 ﻿using System;
 using HelloHome.NetGateway.MessageChannel.Domain.Base;
 using HelloHome.NetGateway.MessageChannel.Domain.Reports;
+using HelloHome.NetGateway.MessageChannel.Parsers.Factory;
 
 namespace HelloHome.NetGateway.MessageChannel.Parsers
 {
+    [ParserFor(0 + (4 << 2))]
     public class PushButtonPressedReportParser : IMessageParser
     {
-        public bool CanParse(byte[] record)
-        {
-            return record [3] == 0 + 4 << 2;
-        }
-
         public Report Parse(byte[] record)
         {
             return new PushButtonPressedReport {

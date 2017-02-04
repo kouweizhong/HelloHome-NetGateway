@@ -1,11 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.NetGateway.MessageChannel.Domain.Base;
-using HelloHome.NetGateway.MessageChannel.Encoders;
+using HelloHome.NetGateway.MessageChannel.Encoders.Factory;
 using HelloHome.NetGateway.MessageChannel.Parsers;
+using HelloHome.NetGateway.MessageChannel.Parsers.Factory;
 using NLog;
 
 namespace HelloHome.NetGateway.MessageChannel
@@ -13,31 +13,20 @@ namespace HelloHome.NetGateway.MessageChannel
     public class NodeMessageSerialChannel : INodeMessageChannel
     {
         private readonly IByteStream _byteStream;
+        private readonly IMessageParserFactory _parserFactory;
+        private readonly IEncoderFactory _encoderFactory;
         static readonly Logger Logger = LogManager.GetCurrentClassLogger();
 
-        readonly List<IMessageParser> _parsers;
-        readonly List<IMessageEncoder> _encoders;
-
-        public NodeMessageSerialChannel(IByteStream byteStream, IEnumerable<IMessageEncoder> encoders)
+        public NodeMessageSerialChannel(IByteStream byteStream, IMessageParserFactory parserFactory, IEncoderFactory encoderFactory)
         {
             _byteStream = byteStream;
-            _encoders = encoders.ToList();
-            _parsers = new List<IMessageParser>
-            {
-                new CommentParser(),
-                new NodeStartedParser(),
-                new PulseReportParser(),
-                new EnvironmentReportParser(),
-                new NodeInfoReportParser(),
-                new ParseAllParser(),
-            };
+            _parserFactory = parserFactory;
+            _encoderFactory = encoderFactory;
         }
 
         public async Task SendAsync(OutgoingMessage message, CancellationToken cancellationToken)
         {
-            var encoder = _encoders.FirstOrDefault(_ => _.CanEncode(message));
-            if (encoder == null)
-                throw new ApplicationException($"No encoder found for {message.GetType().Name}");
+            var encoder = _encoderFactory.Create(message);
             var bytes = encoder.Encode(message);
             await _byteStream.WriteAsync(new byte[] {message.ToNodeId}, 0, 1, cancellationToken);
             await _byteStream.WriteAsync(bytes, 0, bytes.Length, cancellationToken);
@@ -83,7 +72,7 @@ namespace HelloHome.NetGateway.MessageChannel
                 for (var i = 0; i < _currentBufferIndex - byteCount; i++)
                     msgBytes[i] = _buffer[i];
 
-                var parser = _parsers.FirstOrDefault(_ => _.CanParse(msgBytes));
+                var parser = _parserFactory.Create(msgBytes);
                 var msg = parser.Parse(msgBytes);
                 for (var i = 0; i < byteCount; i++)
                     _buffer[i] = _buffer[_currentBufferIndex - byteCount + i];

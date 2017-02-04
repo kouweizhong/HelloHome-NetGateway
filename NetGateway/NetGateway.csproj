@@ -79,7 +79,8 @@
   <ItemGroup>
     <Compile Include="Commands\CreateNodeCommand.cs" />
     <Compile Include="Handlers\CommentHandler.cs" />
-    <Compile Include="Handlers\IMessageHandlerFactory.cs" />
+    <Compile Include="Handlers\Factory\IMessageHandlerFactory.cs" />
+    <Compile Include="Handlers\Factory\MessageHandlerComponentSelector.cs" />
     <Compile Include="Handlers\MessageHandler.cs" />
     <Compile Include="Handlers\NodeInfoHandler.cs" />
     <Compile Include="Handlers\NodeStartedHandler.cs" />
@@ -99,7 +100,9 @@
     <Compile Include="MessageChannel\Domain\Reports\PulseReport.cs" />
     <Compile Include="MessageChannel\Domain\Reports\PushButtonPressedReport.cs" />
     <Compile Include="MessageChannel\Domain\Reports\RawReport.cs" />
-    <Compile Include="MessageChannel\Encoders\EncoderForAttribute.cs" />
+    <Compile Include="MessageChannel\Encoders\Factory\EncoderFactoryComponentSelector.cs" />
+    <Compile Include="MessageChannel\Encoders\Factory\EncoderForAttribute.cs" />
+    <Compile Include="MessageChannel\Encoders\Factory\IEncoderFactory.cs" />
     <Compile Include="MessageChannel\Encoders\IMessageEncoder.cs" />
     <Compile Include="MessageChannel\Encoders\MessageEncoder.cs" />
     <Compile Include="MessageChannel\Encoders\NodeConfigEncoder.cs" />
@@ -109,6 +112,9 @@
     <Compile Include="MessageChannel\NodeMessageSerialChannel.cs" />
     <Compile Include="MessageChannel\Parsers\CommentParser.cs" />
     <Compile Include="MessageChannel\Parsers\EnvironmentReportParser.cs" />
+    <Compile Include="MessageChannel\Parsers\Factory\IMessageParserFactory.cs" />
+    <Compile Include="MessageChannel\Parsers\Factory\MessageParserComponentSelector.cs" />
+    <Compile Include="MessageChannel\Parsers\Factory\ParserForAttribute.cs" />
     <Compile Include="MessageChannel\Parsers\IMessageParser.cs" />
     <Compile Include="MessageChannel\Parsers\NodeInfoReportParser.cs" />
     <Compile Include="MessageChannel\Parsers\NodeStartedParser.cs" />
@@ -139,7 +145,6 @@
     <Compile Include="Agents\EmonCms\IEmonCmsAgent.cs" />
     <Compile Include="EmonCmsUpdater.cs" />
     <Compile Include="HelloHomeGateway.cs" />
-    <Compile Include="WindsorInstallers\MessageHandlerComponentSelector.cs" />
     <Compile Include="Queries\IQuery.cs" />
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Handlers\PulseHandler.cs" />

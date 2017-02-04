@@ -10,11 +10,8 @@ namespace HelloHome.NetGateway.MessageChannel.Parsers
 		private readonly Encoding _encoding = Encoding.ASCII;
 
 		#region IMessageParser implementation
-		public bool CanParse (byte[] record)
-		{
-			return record [0] == '/' && record [1] == '/';
-		}
-		public Report Parse (byte[] record)
+
+	    public Report Parse (byte[] record)
 		{
 			return new CommentReport (_encoding.GetString (record.Skip(2).ToArray()));
 		}

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Linq;
+﻿using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.Common;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
 using HelloHome.NetGateway.MessageChannel;
 using HelloHome.NetGateway.MessageChannel.Domain.Commands;
 using HelloHome.NetGateway.MessageChannel.Domain.Reports;

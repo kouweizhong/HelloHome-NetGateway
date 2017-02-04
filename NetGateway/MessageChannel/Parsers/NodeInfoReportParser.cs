@@ -1,17 +1,16 @@
 ﻿using System;
 using HelloHome.NetGateway.MessageChannel.Domain.Base;
 using HelloHome.NetGateway.MessageChannel.Domain.Reports;
+using HelloHome.NetGateway.MessageChannel.Parsers.Factory;
 
 namespace HelloHome.NetGateway.MessageChannel.Parsers
 {
-	public class NodeInfoReportParser : IMessageParser
+    [ParserFor(0 + (0 << 2))]
+    public class NodeInfoReportParser : IMessageParser
 	{
 		#region IMessageParser implementation
-		public bool CanParse (byte[] record)
-		{
-			return record [3] == 0 + 0 << 2;
-		}
-		public Report Parse (byte[] record)
+
+	    public Report Parse (byte[] record)
 		{
 			var voltage = ((float)BitConverter.ToInt16 (record, 8)) / 100.0f;
 			return new NodeInfoReport {

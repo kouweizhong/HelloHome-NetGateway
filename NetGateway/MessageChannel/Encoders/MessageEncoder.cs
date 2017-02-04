@@ -6,12 +6,7 @@ namespace HelloHome.NetGateway.MessageChannel.Encoders
 	{
 		#region IMessageEncoder implementation
 
-		public bool CanEncode (Message message)
-		{
-			return message is TMessage;
-		}
-
-		public byte[] Encode (Message message)
+	    public byte[] Encode (Message message)
 		{
 			return EncodeInternal (message as TMessage);
 		}

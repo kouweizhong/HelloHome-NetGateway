@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace HelloHome.Common.Entities
+﻿namespace HelloHome.Common.Entities
 {
 	public class EnvironmentDataHistory : CommunicationHistory
 	{

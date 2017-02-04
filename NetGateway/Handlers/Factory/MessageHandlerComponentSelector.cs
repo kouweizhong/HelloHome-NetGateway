@@ -1,20 +1,20 @@
 ﻿using System;
 using System.Linq;
 using Castle.Facilities.TypedFactory;
-using HelloHome.NetGateway.Handlers;
+using Common.Extentions;
 
-namespace HelloHome.NetGateway.WindsorInstallers
+namespace HelloHome.NetGateway.Handlers.Factory
 {
 	public class MessageHandlerComponentSelector : DefaultTypedFactoryComponentSelector
 	{
-		ILookup<Type, Type> typeLookup = null;
+	    readonly ILookup<Type, Type> typeLookup = null;
 
 		public MessageHandlerComponentSelector ()
 		{
 			var types = typeof (MessageHandler<>)
 				.Assembly
 				.GetTypes ()
-				.Where (x => IsSubclassOfRawGeneric(typeof(MessageHandler<>), x) && x != typeof(MessageHandler<>))
+				.Where (x => x.IsSubclassOfRawGeneric(typeof(MessageHandler<>)) && x != typeof(MessageHandler<>))
 				.ToList ();
 			typeLookup = types.ToLookup (x => x.BaseType.GetGenericArguments ().Single (), x => x);
 		}
@@ -25,18 +25,6 @@ namespace HelloHome.NetGateway.WindsorInstallers
 			if (type == null)
 				throw new Exception ($"No message handler found for {arguments[0].GetType().Name}");
 			return type;
-		}
-
-		static bool IsSubclassOfRawGeneric (Type generic, Type toCheck)
-		{
-			while (toCheck != null && toCheck != typeof (object)) {
-				var cur = toCheck.IsGenericType ? toCheck.GetGenericTypeDefinition () : toCheck;
-				if (generic == cur) {
-					return true;
-				}
-				toCheck = toCheck.BaseType;
-			}
-			return false;
 		}
 	}
 }

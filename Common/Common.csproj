@@ -73,6 +73,7 @@
     <Compile Include="Entities\Trigger.cs" />
     <Compile Include="Exceptions\HelloHomeException.cs" />
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
+    <Compile Include="Extentions\TypeExtentions.cs" />
     <Compile Include="FluentMigration\2016-12\M11_AddCascadeUpdateToFk.cs" />
     <Compile Include="FluentMigration\2016-12\M12_RenameNodeNetworkId.cs" />
     <Compile Include="FluentMigration\2016-12\M13_MakesRfFieldsTinyInts.cs" />

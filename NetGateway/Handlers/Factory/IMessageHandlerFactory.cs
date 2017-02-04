@@ -1,7 +1,6 @@
-﻿using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.MessageChannel.Domain.Base;
+﻿using HelloHome.NetGateway.MessageChannel.Domain.Base;
 
-namespace HelloHome.NetGateway.Handlers
+namespace HelloHome.NetGateway.Handlers.Factory
 {
     public interface IMessageHandlerFactory
     {

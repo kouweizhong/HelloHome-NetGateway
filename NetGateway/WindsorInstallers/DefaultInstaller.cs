@@ -8,13 +8,15 @@ using Castle.Facilities.TypedFactory;
 using HelloHome.NetGateway.Handlers;
 using HelloHome.NetGateway.Queries;
 using HelloHome.NetGateway.Commands;
-using System;
 using System.Linq;
 using HelloHome.Common;
+using HelloHome.NetGateway.Handlers.Factory;
 using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
 using HelloHome.NetGateway.MessageChannel;
 using HelloHome.NetGateway.MessageChannel.Encoders;
+using HelloHome.NetGateway.MessageChannel.Encoders.Factory;
 using HelloHome.NetGateway.MessageChannel.Parsers;
+using HelloHome.NetGateway.MessageChannel.Parsers.Factory;
 
 namespace HelloHome.NetGateway.WindsorInstallers
 {
@@ -58,11 +60,16 @@ namespace HelloHome.NetGateway.WindsorInstallers
             container.Register(Component.For<IEmonCmsAgent>().ImplementedBy<EmonCmsAgent>());
 
             //Parsers & encoders
-            container.Register(Classes.FromAssemblyContaining<IMessageParser>()
-                .BasedOn<IMessageParser>()
-                .WithServiceBase());
             container.Register(
-                Classes.FromAssemblyContaining<IMessageEncoder>().BasedOn<IMessageEncoder>().WithServiceBase(),
+                Component.For<MessageParserComponentSelector>(),
+                Component.For<IMessageParserFactory>().AsFactory(typeof(MessageParserComponentSelector)),
+                Classes.FromAssemblyContaining<IMessageParser>()
+                .BasedOn<IMessageParser>()
+                .WithServiceSelf());
+            container.Register(
+                Component.For<EncoderFactoryComponentSelector>(),
+                Component.For<IEncoderFactory>().AsFactory(typeof(EncoderFactoryComponentSelector)),
+                Classes.FromAssemblyContaining<IMessageEncoder>().BasedOn<IMessageEncoder>().WithServiceSelf(),
                 Component.For<PinConfigEncoder>()
             );
 
