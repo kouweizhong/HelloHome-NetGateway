@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Data.Entity;
-using System.Data.Entity.Migrations.History;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using NLog;
 

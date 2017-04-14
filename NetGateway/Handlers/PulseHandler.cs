@@ -1,13 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.Common.Entities;
 using HelloHome.Common.Exceptions;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
 using HelloHome.NetGateway.Commands;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Domain.Reports;
 using HelloHome.NetGateway.Queries;
 
 namespace HelloHome.NetGateway.Handlers

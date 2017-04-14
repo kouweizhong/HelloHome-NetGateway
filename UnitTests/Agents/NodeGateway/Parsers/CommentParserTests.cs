@@ -1,7 +1,6 @@
-﻿using HelloHome.NetGateway.Agents.NodeGateway.Parsers;
-using System.Text;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Reports;
+﻿using System.Text;
+using HelloHome.NetGateway.MessageChannel.Domain.Reports;
+using HelloHome.NetGateway.MessageChannel.Parsers;
 using Xunit;
 
 namespace UnitTests.Agents.NodeGateway.Parsers
@@ -15,18 +14,6 @@ namespace UnitTests.Agents.NodeGateway.Parsers
 			_sut = new CommentParser();
 		}
 
-		[Fact]
-		public void detect_comments_based_on_two_slashes()
-		{
-			//Arrange
-			var bytes = Encoding.ASCII.GetBytes("//Hello");
-
-			//Act
-			var canParse = _sut.CanParse(bytes);
-
-			//Assert
-			Assert.True(canParse);
-		}
 
 		[Fact]
 		public void returns_CommentReport()

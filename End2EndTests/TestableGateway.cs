@@ -4,8 +4,9 @@ using Castle.MicroKernel.Registration;
 using Castle.Windsor;
 using HelloHome.Common.Entities;
 using HelloHome.NetGateway;
-using HelloHome.NetGateway.Agents.NodeGateway;
 using HelloHome.NetGateway.Handlers;
+using HelloHome.NetGateway.Handlers.Factory;
+using HelloHome.NetGateway.MessageChannel;
 using HelloHome.NetGateway.WindsorInstallers;
 using Moq;
 

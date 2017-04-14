@@ -1,7 +1,4 @@
-﻿using System;
-using System.Runtime.Remoting;
-
-namespace HelloHome.Common.Entities
+﻿namespace HelloHome.Common.Entities
 {
 	public class NodeHealthHistory : CommunicationHistory
 	{

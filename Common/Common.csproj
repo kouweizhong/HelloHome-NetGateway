@@ -73,12 +73,14 @@
     <Compile Include="Entities\Trigger.cs" />
     <Compile Include="Exceptions\HelloHomeException.cs" />
     <Compile Include="Exceptions\NodeNotFoundException.cs" />
+    <Compile Include="Extentions\TypeExtentions.cs" />
     <Compile Include="FluentMigration\2016-12\M11_AddCascadeUpdateToFk.cs" />
     <Compile Include="FluentMigration\2016-12\M12_RenameNodeNetworkId.cs" />
     <Compile Include="FluentMigration\2016-12\M13_MakesRfFieldsTinyInts.cs" />
     <Compile Include="FluentMigration\2017-01\M14_AddRfNetAdrIndex.cs" />
     <Compile Include="FluentMigration\2017-01\M16_AddTriggers.cs" />
     <Compile Include="FluentMigration\2017-01\M17_AddActions.cs" />
+    <Compile Include="FluentMigration\2017-01\M18_LogDataCanBeNull.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Extentions\DateTimeExtentions.cs" />
     <Compile Include="Entities\Configuration\NodeConfig.cs" />
@@ -125,5 +127,6 @@
     <Folder Include="Entities\Includes\" />
     <Folder Include="FluentMigration\" />
     <Folder Include="FluentMigration\2016-12\" />
+    <Folder Include="FluentMigration\2017-02" />
   </ItemGroup>
 </Project>

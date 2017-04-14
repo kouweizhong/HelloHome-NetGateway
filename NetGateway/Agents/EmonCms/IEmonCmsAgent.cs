@@ -1,11 +1,5 @@
 using System;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using Common.Extentions;
-using System.Linq;
-using HelloHome.NetGateway.Configuration;
-using System.Net;
-using System.IO;
 
 namespace HelloHome.NetGateway.Agents.EmonCms
 {

@@ -1,5 +1,4 @@
-﻿using System.CodeDom;
-using System.Data.Entity.ModelConfiguration;
+﻿using System.Data.Entity.ModelConfiguration;
 
 namespace HelloHome.Common.Entities.Configuration
 {

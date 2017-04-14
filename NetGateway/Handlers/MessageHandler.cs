@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 using HelloHome.Common.Entities;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
 using NLog;
-using NLog.Fluent;
 
 namespace HelloHome.NetGateway.Handlers
 {

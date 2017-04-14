@@ -1,5 +1,4 @@
 ﻿using FluentMigrator;
-using FluentMigrator.Expressions;
 
 namespace HelloHome.Common.FluentMigration
 {

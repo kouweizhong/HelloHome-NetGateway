@@ -2,8 +2,6 @@
 using System.Threading.Tasks;
 using HelloHome.Common;
 using HelloHome.Common.Entities;
-using HelloHome.NetGateway.Logic.RfNodeIdGenerationStrategy;
-using HelloHome.NetGateway.Queries;
 using NLog;
 
 namespace HelloHome.NetGateway.Commands

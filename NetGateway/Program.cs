@@ -6,8 +6,6 @@ using System.Threading;
 using Castle.Windsor;
 using HelloHome.NetGateway.WindsorInstallers;
 using NLog;
-using Timer = System.Timers.Timer;
-using System.Collections.Generic;
 
 namespace HelloHome.NetGateway
 {
@@ -35,10 +33,14 @@ namespace HelloHome.NetGateway
 				    var cts = new CancellationTokenSource();
 				    gateway.RunLoopAsync(cts.Token).Wait(cts.Token);
 				}
-				catch (Exception ex) {
-					Logger.Error (ex.Message);
-				}
-			}
+		        catch (AggregateException aex) {
+		            foreach(var ie in aex.InnerExceptions)
+		                Logger.Error (ie.Message);
+		        }
+		        catch (Exception ex) {
+		            Logger.Error (ex);
+		        }
+		    }
 		    catch (Exception e)
 		    {
 		        Logger.Fatal(e);

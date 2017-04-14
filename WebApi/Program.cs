@@ -1,6 +1,4 @@
 ﻿using System;
-using Owin;
-using System.Web.Http;
 using Microsoft.Owin.Hosting;
 using System.Data.Entity;
 using HelloHome.Common.Entities;

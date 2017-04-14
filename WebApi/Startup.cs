@@ -1,5 +1,4 @@
-﻿using System;
-using Owin;
+﻿using Owin;
 using System.Web.Http;
 
 namespace WebApi

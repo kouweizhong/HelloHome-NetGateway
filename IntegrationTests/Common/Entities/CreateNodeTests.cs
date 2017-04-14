@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data.Entity;
-using System.Data.Entity.Infrastructure;
 using System.Linq;
 using Common.Extentions;
 using HelloHome.Common.Entities;
 using Xunit;
-using Xunit.Abstractions;
 
 namespace IntegrationTests.Common.Entities
 {

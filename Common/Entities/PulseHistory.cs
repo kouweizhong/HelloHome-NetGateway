@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection;
-
-namespace HelloHome.Common.Entities
+﻿namespace HelloHome.Common.Entities
 {
 	public class PulseHistory : CommunicationHistory
 	{

@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
-using HelloHome.NetGateway.Agents.NodeGateway;
-using HelloHome.NetGateway.Agents.NodeGateway.Domain.Base;
 using HelloHome.NetGateway.Handlers;
+using HelloHome.NetGateway.Handlers.Factory;
+using HelloHome.NetGateway.MessageChannel;
+using HelloHome.NetGateway.MessageChannel.Domain.Base;
 using NLog;
 
 namespace HelloHome.NetGateway
@@ -23,11 +24,18 @@ namespace HelloHome.NetGateway
 
         public async Task RunLoopAsync(CancellationToken cToken)
         {
+            //var tasks = new List<Task>(10);
             while (!cToken.IsCancellationRequested)
+            {
+                //while(tasks.Count > 10)
+                //    await Task.WhenAny(tasks);
+                //tasks.Add(RunOnceAsync(cToken));
                 await RunOnceAsync(cToken);
+            }
+            //await Task.WhenAll(tasks);
         }
 
-        public async Task RunOnceAsync(CancellationToken cToken, bool awaitProcess = false)
+        public async Task RunOnceAsync(CancellationToken cToken)
         {
             Logger.Debug("Will read from channel {0}", _nodeMessageChannel.GetHashCode());
             var msg = await _nodeMessageChannel.ReadAsync(cToken);
@@ -35,9 +43,7 @@ namespace HelloHome.NetGateway
             {
                 MessageLog.Debug("IN:{0}", msg);
                 Logger.Debug("Message of type {0} received from node {1} on channel {2}", msg.GetType().Name, msg.FromNodeId, _nodeMessageChannel.GetHashCode());
-                var pt = ProcessAsync(msg, cToken);
-                if (awaitProcess)
-                    await pt;
+                await ProcessAsync(msg, cToken);
             }
             else
             {
@@ -47,10 +53,11 @@ namespace HelloHome.NetGateway
 
         private async Task ProcessAsync(IncomingMessage msg, CancellationToken cToken)
         {
-            var handler = _handlerFactory.Create(msg);
-            Logger.Debug("Handler {0} found for request {1}", handler.GetType().Name, msg.GetType().Name);
+            IMessageHandler handler = null;
             try
             {
+                handler = _handlerFactory.Create(msg);
+                Logger.Debug("Handler {0} found for request {1}", handler.GetType().Name, msg.GetType().Name);
                 var responses = await handler.HandleAsync(msg, cToken);
                 if (responses == null)
                     return;
@@ -65,11 +72,11 @@ namespace HelloHome.NetGateway
             catch (Exception e)
             {
                 Logger.Error(e);
-                throw;
             }
             finally
             {
-                _handlerFactory.Release(handler);
+                if(handler != null)
+                    _handlerFactory.Release(handler);
             }
         }
     }
