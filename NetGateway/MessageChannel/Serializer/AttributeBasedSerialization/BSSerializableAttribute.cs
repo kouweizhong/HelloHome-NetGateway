@@ -1,14 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Runtime.Remoting.Messaging;
-using System.ServiceModel.Configuration;
 using System.Text;
-using Castle.MicroKernel.ModelBuilder.Inspectors;
-using HelloHome.NetGateway.Commands;
 
-namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer.AttributeBasedSerialization
+namespace HelloHome.NetGateway.MessageChannel.Serializer.AttributeBasedSerialization
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class BsSerializableAttribute : Attribute
@@ -51,13 +46,30 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer.AttributeBasedSeria
 
     public class BsSerializer<T> where T : class
     {
-        public BsSerializer()
-        {
-        }
-
         public byte[] Serialize(T o)
         {
+            var type = o.GetType();
+            var bsAttr = type.GetCustomAttribute<BsSerializableAttribute>();
+            if(bsAttr == null) throw new Exception($"{type.FullName} is not BsSerializable");
+            var bytes = new byte[bsAttr.MessageLenght];
+            for (var i = 0; i < bsAttr.Header.Length; i++)
+                bytes[i] = bsAttr.Header[i];
 
+
+            var fields = type.GetProperties()
+                .Select(_ => new {Property = _, bsAttr = _.GetCustomAttribute<BsPart>()})
+                .OrderBy(_ => _.bsAttr.Start)
+                .Select(_ => new {_.Property, _.bsAttr.Start, _.bsAttr.Lenght})
+                .ToList();
+            foreach (var f in fields)
+            {
+                var v = f.Property.GetValue(o);
+                var b = Write(v);
+                var byteToCopy = Math.Min(Math.Min(f.Lenght, f.Start + bytes.Length), b.Length);
+                for (var i = 0; i < byteToCopy; i++)
+                    bytes[f.Start + i] = b[i];
+            }
+            return bytes;
         }
 
         public T Deserialize(byte[] bytes)
@@ -140,6 +152,19 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer.AttributeBasedSeria
                 return Encoding.ASCII.GetString(bytes.Skip(start).Take(lenght).ToArray());
 
             throw new NotImplementedException($"Reading {type.Name} from byte[] is not yet implemented.");
+        }
+
+        public byte[] Write(object value)
+        {
+            var t = value.GetType();
+            if(t == typeof(byte))
+                return new[] { (byte)value};
+            if (t == typeof(Int32))
+                return BitConverter.GetBytes((Int32) value);
+            if (t == typeof(String))
+                return Encoding.ASCII.GetBytes((string) value);
+
+            throw new NotImplementedException($"Writing {t.Name} to byte[] is not yet implemented.");
         }
     }
 }

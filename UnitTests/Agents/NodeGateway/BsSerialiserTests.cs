@@ -1,4 +1,5 @@
-﻿using HelloHome.NetGateway.Agents.NodeGateway.Serializer.AttributeBasedSerialization;
+﻿using System;
+using HelloHome.NetGateway.MessageChannel.Serializer.AttributeBasedSerialization;
 using Xunit;
 
 namespace UnitTests.Agents.NodeGateway
@@ -27,15 +28,17 @@ namespace UnitTests.Agents.NodeGateway
             _sut = new BsSerializer<Geometry>();
         }
 
-        [Fact]
-        public void SimplePass()
+        [Fact(Skip = "NotImpl")]
+        public void KnownTypeMustInheritsDeclaringType()
         {
-            var c = _sut.Deserialize(new byte[] {0x02, 0x10, 25});
+        }
 
-            Assert.NotNull(c);
-            Assert.True(c is Square);
-            Assert.Equal(0x10, c.Value);
-            Assert.Equal(25, (c as Square).SideLenght);
+        [Fact]
+        public void CanSerializeByte()
+        {
+            var g = new Geometry();
+            var bytes = _sut.Serialize(g);
+            Assert.Equal(0x01, bytes[0]);
         }
     }
 }
