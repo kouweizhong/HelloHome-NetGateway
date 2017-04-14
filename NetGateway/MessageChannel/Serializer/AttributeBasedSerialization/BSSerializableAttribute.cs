@@ -55,6 +55,11 @@ namespace HelloHome.NetGateway.Agents.NodeGateway.Serializer.AttributeBasedSeria
         {
         }
 
+        public byte[] Serialize(T o)
+        {
+
+        }
+
         public T Deserialize(byte[] bytes)
         {
             var knownTypes = typeof(T).GetCustomAttributes<BsKnownChildAttribute>().Select(_ => _.Type).ToList();
