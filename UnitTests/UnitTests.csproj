@@ -66,6 +66,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Agents\NodeGateway\BsSerialiserTests.cs" />
     <Compile Include="Agents\NodeGateway\NodeMessageReaderTests.cs" />
     <Compile Include="Agents\NodeGateway\Parsers\CommentParserTests.cs" />
     <Compile Include="Logic\RfNodeIdGenerationStrategy\FindHoleRfNodeIdGeneratorStrategy.cs" />

@@ -121,6 +121,7 @@
     <Compile Include="MessageChannel\Parsers\ParseAllParser.cs" />
     <Compile Include="MessageChannel\Parsers\PulseReportParser.cs" />
     <Compile Include="MessageChannel\Parsers\PushButtonPressedReportParser.cs" />
+    <Compile Include="MessageChannel\Serializer\AttributeBasedSerialization\BSSerializableAttribute.cs" />
     <Compile Include="MessageChannel\Serializer\IMessageSerializer.cs" />
     <Compile Include="MessageChannel\Serializer\IncomingMessageSerializer.cs" />
     <Compile Include="MessageChannel\Serializer\ISerializerFactory.cs" />
